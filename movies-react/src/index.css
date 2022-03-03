@@ -66,7 +66,7 @@ header{
 }
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
-  height: 2px;
+  height: 3px;
 }
 .movies > .row::-webkit-scrollbar-thumb{
   background-color: white;
@@ -80,6 +80,13 @@ font-size: 38px;
 margin-left: 20px;
 border-bottom: 1px solid white;
 }
+.movie-title{
+  font-size: 17px;
+  font-weight: bold;
+}
+.year {
+  font-size: 13px;
+}
 .image-container {
   position: relative;
   transition: transform 0.2s;
@@ -89,7 +96,7 @@ border-bottom: 1px solid white;
   transform: scale(1.1);
 }
 .image-container:hover .overlay {
-  opacity: 1;
+  opacity: .8;
 }
 .overlay {
   position: absolute;
@@ -98,7 +105,26 @@ border-bottom: 1px solid white;
   transition: 0.5s ease;
   opacity: 0;
   bottom:0;
-  font-size: 20px;
   padding: 20px;
-  text-align: center;
+}
+.icon:hover{
+  transform: scale(1.2);
+}
+.heart-icon:hover{
+  color: pink;
+}
+.heart-icon:active{
+  color:red;
+}
+.plus-icon:hover{
+  color: lightblue;
+}
+.plus-icon:active{
+  color:blue;
+}
+.check-icon:hover{
+  color: lightyellow;
+}
+.check-icon:active{
+  color:yellow;
 }
