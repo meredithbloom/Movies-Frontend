@@ -11,13 +11,11 @@ import MovieType from './components/headingTitle'
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
+  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
-  const [image, setImage] = useState([])
-  const [pageNum, setPageNum] = useState([])
-
 
 
 
@@ -48,6 +46,8 @@ const getUpcomingMovies = () => {
     setUpcomingMovies(response.data.results)
   })
 };
+
+
 
 // const Home = () => {
 //   return(
