@@ -78,7 +78,7 @@ const getUpcomingMovies = () => {
 // }
 
 useEffect(() => {
-  getTrendingMovies() 
+  getTrendingMovies()
   getUpcomingMovies()
 }, [])
 
@@ -88,7 +88,7 @@ useEffect(() => {
   return(
     <>
     <header>
-      <h2 className="title">Cinema Wave</h2>
+      <h2 className="title">Seen</h2>
       <div className='head-button-container'>
         <button className="signup">Sign Up</button>
         <button className="login">Log In</button>
@@ -97,15 +97,22 @@ useEffect(() => {
       <div className="row mt-4 mb-4">
         <MovieType heading='Trending Movies'/>
       </div>
-      <div className="container-fluid trending-movies">
+      <div className="container-fluid movies">
         <div className="row">
           <TrendingMovies trendingMovies={trendingMovies}/>
         </div>
       </div>
-      <h1>Upcoming Movies</h1>
-      <div className="upcoming-movies-div">
-        <UpcomingMovies upcomingMovies={upcomingMovies}/>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Upcoming Movies'/>
       </div>
+<<<<<<< HEAD
+=======
+      <div className="container-fluid movies">
+        <div className="row">
+          <UpcomingMovies upcomingMovies={upcomingMovies}/>
+        </div>
+      </div>
+>>>>>>> f59cc801c4eb7c2b22e06b561fd3f30014f13790
     </>
   )
 }

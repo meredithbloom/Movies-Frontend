@@ -64,17 +64,28 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+<<<<<<< HEAD
 
 .trending-movies > .row::-webkit-scrollbar {
   background-color: #222;
 }
 
 .trending-movies > .row {
+=======
+.movies > .row::-webkit-scrollbar{
+  background-color: #222;
+  height: 2px;
+}
+.movies > .row::-webkit-scrollbar-thumb{
+  background-color: white;
+}
+.movies > .row {
+>>>>>>> f59cc801c4eb7c2b22e06b561fd3f30014f13790
   overflow-x: auto;
   flex-wrap: nowrap;
 }
 .movie-heading {
-font-size: 45px;
+font-size: 38px;
 margin-left: 20px;
 border-bottom: 1px solid white;
 }
