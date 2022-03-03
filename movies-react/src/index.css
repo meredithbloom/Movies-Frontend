@@ -64,3 +64,34 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+.trending-movies > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+.movie-heading {
+font-size: 45px;
+margin-left: 20px;
+border-bottom: 1px solid white;
+}
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+  cursor:pointer;
+}
+.image-container:hover{
+  transform: scale(1.1);
+}
+.image-container:hover .overlay {
+  opacity: 1;
+}
+.overlay {
+  position: absolute;
+  background: rgb(0 0 0 / .9);
+  width: 90%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom:0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
