@@ -64,6 +64,7 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
   height: 3px;

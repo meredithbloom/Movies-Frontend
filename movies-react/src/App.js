@@ -19,8 +19,6 @@ const App = () => {
 
 
 
-
-
 const getTrendingMovies = () => {
   axios({
     url: '/trending/movie/week',
@@ -48,6 +46,8 @@ const getUpcomingMovies = () => {
     setUpcomingMovies(response.data.results)
   })
 };
+
+
 
 // const Home = () => {
 //   return(
