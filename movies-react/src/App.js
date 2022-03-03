@@ -4,7 +4,7 @@ import axios from 'axios'
 import './App.css'
 import TrendingMovies from './components/trendingmovies'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import MovieType from './components/headingTitle'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -77,11 +77,14 @@ useEffect(() => {
         <button className="login">Log In</button>
         </div>
       </header>
-      <h1>Trending Movies</h1>
-      <div className="trending-movies-div">
-        <TrendingMovies trendingMovies={trendingMovies}/>
-    </div>
-
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Trending Movies'/>
+      </div>
+      <div className="container-fluid trending-movies">
+        <div className="row">
+          <TrendingMovies trendingMovies={trendingMovies}/>
+        </div>
+      </div>
     </>
   )
 }
