@@ -11,12 +11,12 @@ import MovieType from './components/headingTitle'
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
+  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
-  const [image, setImage] = useState([])
-  const [pageNum, setPageNum] = useState([])
+
 
 
 
@@ -88,7 +88,7 @@ useEffect(() => {
   return(
     <>
     <header>
-      <h2 className="title">Seen</h2>
+      <h2 className="title"><img className='logo' src='/SeenLogo.png' /></h2>
       <div className='head-button-container'>
         <button className="signup">Sign Up</button>
         <button className="login">Log In</button>
