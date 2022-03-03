@@ -49,7 +49,7 @@ header{
 }
 .login {
   border: 3px solid;
-  border-image: linear-gradient(51deg, #FF00CC,#6800FF) 1;
+  border-image: linear-gradient(51deg, #FF0000,#6800FF) 1;
   background: transparent;
   padding: 5px;
 }
@@ -58,7 +58,7 @@ header{
 }
 .signup{
   background: rgb(255,0,204);
-  background: linear-gradient(51deg, rgba(255,0,204,1), rgba(104,0,255,1));
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
   border:none;
 }
 .signup:hover{
@@ -67,8 +67,16 @@ header{
 
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
+<<<<<<< HEAD
+<<<<<<< HEAD
   height: 5px;
   padding: 5px;
+=======
+  height: 3px;
+>>>>>>> e0e495b5bc6f6ec880bfd2965add02d07a9a7272
+=======
+  height: 3px;
+>>>>>>> 3f88a579e78f7c81bab44c60fff08df08eb20a9d
 }
 .movies > .row::-webkit-scrollbar-thumb{
   background-color: white;
@@ -78,9 +86,17 @@ header{
   flex-wrap: nowrap;
 }
 .movie-heading {
-font-size: 38px;
-margin-left: 20px;
-border-bottom: 1px solid white;
+  font-size: 35px;
+  margin-left: 20px;
+  border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
+}
+.movie-title{
+  font-size: 17px;
+  font-weight: bold;
+}
+.year {
+  font-size: 13px;
 }
 .image-container {
   position: relative;
@@ -91,7 +107,7 @@ border-bottom: 1px solid white;
   transform: scale(1.1);
 }
 .image-container:hover .overlay {
-  opacity: 1;
+  opacity: .8;
 }
 .overlay {
   position: absolute;
@@ -100,7 +116,34 @@ border-bottom: 1px solid white;
   transition: 0.5s ease;
   opacity: 0;
   bottom:0;
-  font-size: 20px;
   padding: 20px;
-  text-align: center;
+}
+.icon:hover{
+  transform: scale(1.2);
+}
+.heart-icon:hover{
+  color: pink;
+}
+.heart-icon:active{
+  color:red;
+}
+.plus-icon:hover{
+  color: lightblue;
+}
+.plus-icon:active{
+  color:blue;
+}
+.check-icon:hover{
+  color: lightyellow;
+}
+.check-icon:active{
+  color:yellow;
+}
+/* .img-width{
+  width: 100%;
+  opacity: .6;
+  max-height: 90vh;
+} */
+.logo{
+  width: 20rem;
 }
