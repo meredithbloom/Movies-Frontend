@@ -3,7 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import './App.css'
 import TrendingMovies from './components/trendingmovies'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const App = () => {
@@ -80,11 +80,7 @@ useEffect(() => {
       <h1>Trending Movies</h1>
       <div className="trending-movies-div">
         <TrendingMovies trendingMovies={trendingMovies}/>
-
-    <div>
-
     </div>
-      <h1>Movies/Shows</h1>
 
     </>
   )

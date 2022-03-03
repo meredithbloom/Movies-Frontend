@@ -5,7 +5,7 @@ const TrendingMovies = (props) => {
     return(
         props.trendingMovies.map((movie) => {
             let img = movie.poster_path
-            let full = 'http://image.tmdb.org/t/p/w500' + img;
+            let full = 'http://image.tmdb.org/t/p/w185' + img;
             return(
                 <div key={movie.id} className="trending-movie">
                     <h3>{movie.title}</h3>
@@ -14,7 +14,7 @@ const TrendingMovies = (props) => {
                 </div>
             )
         })
-    )   
+    )
 }
 
 export default TrendingMovies
