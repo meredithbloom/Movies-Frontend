@@ -106,10 +106,6 @@ useEffect(() => {
       <div className="upcoming-movies-div">
         <UpcomingMovies upcomingMovies={upcomingMovies}/>
       </div>
-      <h1>Upcoming Movies</h1>
-      <div className="upcoming-movies-div">
-        <UpcomingMovies upcomingMovies={upcomingMovies}/>
-      </div>
     </>
   )
 }

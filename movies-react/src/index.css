@@ -64,6 +64,11 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+
+.trending-movies > .row::-webkit-scrollbar {
+  background-color: #222;
+}
+
 .trending-movies > .row {
   overflow-x: auto;
   flex-wrap: nowrap;
