@@ -105,14 +105,11 @@ useEffect(() => {
       <div className="row mt-4 mb-4">
         <MovieType heading='Upcoming Movies'/>
       </div>
-<<<<<<< HEAD
-=======
       <div className="container-fluid movies">
         <div className="row">
           <UpcomingMovies upcomingMovies={upcomingMovies}/>
         </div>
       </div>
->>>>>>> f59cc801c4eb7c2b22e06b561fd3f30014f13790
     </>
   )
 }
