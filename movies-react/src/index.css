@@ -49,7 +49,7 @@ header{
 }
 .login {
   border: 3px solid;
-  border-image: linear-gradient(51deg, #FF00CC,#6800FF) 1;
+  border-image: linear-gradient(51deg, #FF0000,#6800FF) 1;
   background: transparent;
   padding: 5px;
 }
@@ -58,7 +58,7 @@ header{
 }
 .signup{
   background: rgb(255,0,204);
-  background: linear-gradient(51deg, rgba(255,0,204,1), rgba(104,0,255,1));
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
   border:none;
 }
 .signup:hover{
@@ -76,9 +76,10 @@ header{
   flex-wrap: nowrap;
 }
 .movie-heading {
-font-size: 38px;
-margin-left: 20px;
-border-bottom: 1px solid white;
+  font-size: 38px;
+  margin-left: 20px;
+  border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
 }
 .movie-title{
   font-size: 17px;
@@ -128,3 +129,8 @@ border-bottom: 1px solid white;
 .check-icon:active{
   color:yellow;
 }
+/* .img-width{
+  width: 100%;
+  opacity: .6;
+  max-height: 90vh;
+} */

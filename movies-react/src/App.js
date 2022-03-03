@@ -88,7 +88,7 @@ useEffect(() => {
   return(
     <>
     <header>
-      <h2 className="title">Seen</h2>
+      <h2 className="title"><img src='/SeenLogo.png' /></h2>
       <div className='head-button-container'>
         <button className="signup">Sign Up</button>
         <button className="login">Log In</button>
