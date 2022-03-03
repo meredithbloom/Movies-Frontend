@@ -1,3 +1,8 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,11 +10,57 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #223;
+  background-image:linear-gradient(to bottom, rgba(0,0,0,.98), rgba(10,10,10,.96)), url("https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
   color: white;
+  font-family: 'Montserrat', serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+header{
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+  font-size: 3rem;
+  font-family: 'Montserrat', serif;
+}
+.login, .signup{
+  font-size: 20px;
+  padding: 8px;
+  width: 10rem;
+  color:white;
+  font-family: 'Montserrat', serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease-out;
+}
+.head-button-container{
+  display: flex;
+  width: 25rem;
+  justify-content: space-around;
+}
+.login {
+  border: 3px solid;
+  border-image: linear-gradient(51deg, #FF00CC,#6800FF) 1;
+  background: transparent;
+  padding: 5px;
+}
+.login:hover{
+  transform: scale(1.08);
+}
+.signup{
+  background: rgb(255,0,204);
+  background: linear-gradient(51deg, rgba(255,0,204,1), rgba(104,0,255,1));
+  border:none;
+}
+.signup:hover{
+  transform: scale(1.08);
 }

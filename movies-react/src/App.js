@@ -2,35 +2,36 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const App = () => {
+  const [movies, setMovies] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
+  const [image, setImage] = useState([])
+  const [pageNum, setPageNum] = useState([])
 
-const getMovies = () => {
-  axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=dad5072890b975c25ff2358e550e5138&language=en-US&page=1').then((response) => {
-    setTopRated(response.data.results)
-  })
-}
+
+
 
 useEffect(() => {
-  getMovies()
+
 }, [])
 
+//Think about hardcoding the top movies and new releases
   return(
     <>
-      <h1>Movies</h1>
-      <div>
-      {
-      topRated.map((movie, index) => {
-        return(
-          <div key={movie.id}>
-          <p>Title: {movie.title} </p>
-          
-          </div>
-        )})
-    }
+    <header>
+      <h2 className="title">Cinema Wave</h2>
+      <div className='head-button-container'>
+        <button className="signup">Sign Up</button>
+        <button className="login">Log In</button>
       </div>
+    </header>
+    <div>
+
+    </div>
+      <h1>Movies/Shows</h1>
+
     </>
   )
 }
