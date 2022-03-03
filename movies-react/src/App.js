@@ -3,7 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import './App.css'
 import TrendingMovies from './components/trendingmovies'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const App = () => {
