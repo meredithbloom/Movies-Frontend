@@ -76,7 +76,7 @@ header{
   flex-wrap: nowrap;
 }
 .movie-heading {
-  font-size: 38px;
+  font-size: 35px;
   margin-left: 20px;
   border-bottom: 1px solid white;
   font-family: 'Montserrat', serif;
@@ -134,3 +134,6 @@ header{
   opacity: .6;
   max-height: 90vh;
 } */
+.logo{
+  width: 20rem;
+}
