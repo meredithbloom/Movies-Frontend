@@ -64,9 +64,19 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  height: 5px;
+  padding: 5px;
+=======
   height: 3px;
+>>>>>>> e0e495b5bc6f6ec880bfd2965add02d07a9a7272
+=======
+  height: 3px;
+>>>>>>> 3f88a579e78f7c81bab44c60fff08df08eb20a9d
 }
 .movies > .row::-webkit-scrollbar-thumb{
   background-color: white;
