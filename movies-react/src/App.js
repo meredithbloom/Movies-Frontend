@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
+import bootstrap from 'bootstrap'
 import './App.css'
 import TrendingMovies from './components/trendingmovies'
 import UpcomingMovies from './components/upcoming'
@@ -100,6 +101,10 @@ useEffect(() => {
         <div className="row">
           <TrendingMovies trendingMovies={trendingMovies}/>
         </div>
+      </div>
+      <h1>Upcoming Movies</h1>
+      <div className="upcoming-movies-div">
+        <UpcomingMovies upcomingMovies={upcomingMovies}/>
       </div>
       <h1>Upcoming Movies</h1>
       <div className="upcoming-movies-div">
