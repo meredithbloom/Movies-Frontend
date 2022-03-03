@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [movies, setMovies] = useState([])
@@ -17,7 +18,6 @@ useEffect(() => {
 
 }, [])
 
-//Think about hardcoding the top movies and new releases
   return(
     <>
     <header>
