@@ -1,10 +1,11 @@
 import {useState, useEffect} from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
-import bootstrap from 'bootstrap'
 import './App.css'
-import TrendingMovies from './components/trendingmovies.js'
-import UpcomingMovies from './components/upcoming.js'
+import TrendingMovies from './components/trendingmovies'
+import UpcomingMovies from './components/upcoming'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import MovieType from './components/headingTitle'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -13,6 +14,10 @@ const App = () => {
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
+  const [image, setImage] = useState([])
+  const [pageNum, setPageNum] = useState([])
+
+
 
 
 const getTrendingMovies = () => {
@@ -81,9 +86,20 @@ useEffect(() => {
 
   return(
     <>
-      <h1>Trending Movies</h1>
-      <div className="trending-movies-div">
-        <TrendingMovies trendingMovies={trendingMovies}/>
+    <header>
+      <h2 className="title">Cinema Wave</h2>
+      <div className='head-button-container'>
+        <button className="signup">Sign Up</button>
+        <button className="login">Log In</button>
+        </div>
+      </header>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Trending Movies'/>
+      </div>
+      <div className="container-fluid trending-movies">
+        <div className="row">
+          <TrendingMovies trendingMovies={trendingMovies}/>
+        </div>
       </div>
       <h1>Upcoming Movies</h1>
       <div className="upcoming-movies-div">
