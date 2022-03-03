@@ -4,12 +4,18 @@ import axios from 'axios'
 import './App.css'
 import TrendingMovies from './components/trendingmovies'
 
+
+
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
+  const [image, setImage] = useState([])
+  const [pageNum, setPageNum] = useState([])
+
+
 
 
 const getTrendingMovies = () => {
@@ -64,10 +70,22 @@ useEffect(() => {
 
   return(
     <>
+    <header>
+      <h2 className="title">Cinema Wave</h2>
+      <div className='head-button-container'>
+        <button className="signup">Sign Up</button>
+        <button className="login">Log In</button>
+        </div>
+      </header>
       <h1>Trending Movies</h1>
       <div className="trending-movies-div">
         <TrendingMovies trendingMovies={trendingMovies}/>
-      </div>
+
+    <div>
+
+    </div>
+      <h1>Movies/Shows</h1>
+
     </>
   )
 }
