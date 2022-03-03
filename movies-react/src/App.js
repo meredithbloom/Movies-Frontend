@@ -17,10 +17,13 @@ const App = () => {
   const [favorites, setFavorites] = useState([])
   const [wishList, setWishList] = useState([])
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> e0e495b5bc6f6ec880bfd2965add02d07a9a7272
+=======
+>>>>>>> 3f88a579e78f7c81bab44c60fff08df08eb20a9d
 
 
 
