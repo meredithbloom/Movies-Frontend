@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import MovieType from './components/headingTitle'
 import TopRated from './components/topRated'
 import PopularMovies from './components/popular'
-import MoviesByGenre from './components/movieByGenre'
+import MoviesByGenre from './components/moviesByGenre'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const App = () => {
@@ -143,15 +143,14 @@ const App = () => {
     })
   }
 
+  //event handler for genre buttons
   const setGenreHandler = (event, index) => {
-    //console.log(index)
     let selectedGenre = allGenres[index]
-    //console.log(selectedGenre.name)
     setGenre(selectedGenre)
-    //console.log(genre.id)
     searchByGenre()
   }
 
+  //searches database by genre id, sets movies sorted by genre
   const searchByGenre = () => {
     axios({
       url: '/discover/movie',
@@ -162,7 +161,8 @@ const App = () => {
         language: 'en-US',
         with_genres: genre.id
     }}).then((response) => {
-      console.log(response.data.results)
+      setMoviesByGenre(response.data.results)
+      //console.log(moviesByGenre)
     })
   }
 
@@ -225,6 +225,14 @@ const App = () => {
         <i class="bi bi-star-half yellow "></i>
       </div>
       <div className="row mt-4 mb-4">
+        <MovieType heading={genre.name}/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <MoviesByGenre moviesByGenre={moviesByGenre}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
         <MovieType heading='Trending Movies'/>
       </div>
       <div className="container-fluid movies">
@@ -256,14 +264,7 @@ const App = () => {
           <PopularMovies popularMovies={popularMovies}/>
         </div>
       </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='By Genre'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularMovies popularMovies={popularMovies}/>
-        </div>
-      </div>
+
     </>
   )
 }

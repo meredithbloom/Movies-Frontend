@@ -1,4 +1,4 @@
-const MovieByGenre = (props) => {
+const MoviesByGenre = (props) => {
     return(
         props.moviesByGenre.map((movie) => {
             let img = movie.poster_path
@@ -23,4 +23,4 @@ const MovieByGenre = (props) => {
     )
 }
 
-export default MovieByGenre
+export default MoviesByGenre
