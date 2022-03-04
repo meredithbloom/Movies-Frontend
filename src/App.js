@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
@@ -14,7 +14,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import PopularShows from './components/popularShows'
 import TopRatedShows from './components/topRatedShows'
 import DailyShows from './components/dailyShows'
-import Search from './components/search'
+import HomePage from './pages/home'
+import Comedy from './pages/comedy'
+import UserProfile from './pages/userProfile'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -187,121 +189,25 @@ useEffect(() => {
   getUpcomingMovies()
   getTopRated()
   getPopular()
+  getPopularShows()
+  getTopRatedShows()
+  getDailyShows()
 
 }, [])
-
-  useEffect(() => {
-    getPopularShows()
-    getTopRatedShows()
-    getDailyShows()
-  }, [])
 
 
   return(
     <>
+    <BrowserRouter>
+      <div ClassName="content">
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/comedy" element={<Comedy/>}/>
+        <Route path="/profile" element={<UserProfile/>}/>
+      </Routes>
+      </div>
 
-    <header>
-    <div>
-      <img className='logo' src='/SeenLogo.png' />
-    </div>
-      <div className='head-button-container'>
-        <button className="signup">Sign Up</button>
-        <button className="login">Log In</button>
-        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-        </div>
-      </header>
-      <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-      <form onSubmit={handleSearch}>
-      <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
-      <input type="submit" value="search" id="submit-button"/>
-      </form>
-      <h2>Search By Genre</h2>
-        <a href="#">Comedy</a>
-        <a href="#">Horror</a>
-        <a href="#">Romance</a>
-        <a href="#">Family</a>
-        <a href="#">Action</a>
-        <a href="#">Drama</a>
-        <a href="#">Adventure</a>
-        <a href="#">Documentary</a>
-        <a href="#">Fantasy</a>
-        <a href="#">Thriller</a>
-      </div>
-      <div className='start-image'>
-        <h3>Spider-Man</h3>
-        <p>No Way Home</p>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-half yellow "></i>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Searches'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <Search search={search}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Trending Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TrendingMovies trendingMovies={trendingMovies}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Upcoming Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <UpcomingMovies upcomingMovies={upcomingMovies}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TopRated topRated={topRated}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Popular Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularMovies popularMovies={popularMovies}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Popular Shows'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularShows popularShows={popularShows}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated Shows'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TopRatedShows topRatedShows={topRatedShows}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Shows Airing Today'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <DailyShows dailyShows={dailyShows}/>
-        </div>
-      </div>
+      </BrowserRouter>
     </>
   )
 }
