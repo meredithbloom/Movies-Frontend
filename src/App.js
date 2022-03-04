@@ -11,6 +11,9 @@ import MovieType from './components/headingTitle'
 import TopRated from './components/topRated'
 import PopularMovies from './components/popular'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import PopularShows from './components/popularShows'
+import TopRatedShows from './components/topRatedShows'
+import DailyShows from './components/dailyShows'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -24,6 +27,9 @@ const App = () => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [searchString, setSearchString] = useState('search')
+  const [popularShows, setPopularShows] = useState([])
+  const [topRatedShows, setTopRatedShows] = useState([])
+  const [dailyShows, setDailyShows] = useState([])
 
 
 const getTrendingMovies = () => {
@@ -94,6 +100,45 @@ const searchMovies = (event) => {
     }
   })
 }
+const getPopularShows = () => {
+  axios({
+    url: '/tv/popular',
+    method: 'get',
+    baseURL: 'https://api.themoviedb.org/3',
+    params: {
+      api_key: 'dad5072890b975c25ff2358e550e5138',
+      language: 'en-US'
+    }
+  }).then((response) => {
+    setPopularShows(response.data.results)
+  })
+};
+const getTopRatedShows = () => {
+  axios({
+    url: '/tv/top_rated',
+    method: 'get',
+    baseURL: 'https://api.themoviedb.org/3',
+    params: {
+      api_key: 'dad5072890b975c25ff2358e550e5138',
+      language: 'en-US'
+    }
+  }).then((response) => {
+    setTopRatedShows(response.data.results)
+  })
+};
+const getDailyShows = () => {
+  axios({
+    url: '/tv/airing_today',
+    method: 'get',
+    baseURL: 'https://api.themoviedb.org/3',
+    params: {
+      api_key: 'dad5072890b975c25ff2358e550e5138',
+      language: 'en-US'
+    }
+  }).then((response) => {
+    setDailyShows(response.data.results)
+  })
+};
 // const Home = () => {
 //   return(
 //     <>
@@ -137,8 +182,15 @@ useEffect(() => {
   getUpcomingMovies()
   getTopRated()
   getPopular()
-  searchMovies()
+
 }, [])
+
+  useEffect(() => {
+    searchMovies()
+    getPopularShows()
+    getTopRatedShows()
+    getDailyShows()
+  }, [])
 
 
   return(
@@ -196,7 +248,7 @@ useEffect(() => {
         </div>
       </div>
       <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated'/>
+        <MovieType heading='Top Rated Movies'/>
       </div>
       <div className="container-fluid movies">
         <div className="row">
@@ -204,13 +256,38 @@ useEffect(() => {
         </div>
       </div>
       <div className="row mt-4 mb-4">
-        <MovieType heading='Popular'/>
+        <MovieType heading='Popular Movies'/>
       </div>
       <div className="container-fluid movies">
         <div className="row">
           <PopularMovies popularMovies={popularMovies}/>
         </div>
       </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Popular Shows'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <PopularShows popularShows={popularShows}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Top Rated Shows'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <TopRatedShows topRatedShows={topRatedShows}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Shows Airing Today'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <DailyShows dailyShows={dailyShows}/>
+        </div>
+      </div>
+
     </>
   )
 }
