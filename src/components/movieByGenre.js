@@ -9,7 +9,7 @@ const MovieByGenre = (props) => {
                     <div className ='overlay d-flex flex-row align-items-start justify-content-between'>
                     <div>
                       <p className='movie-title text-left'>{movie.title}</p>
-                      <p className="year">Year:{movie.release_date.substring(0,4)}</p>
+                      <p className="year">{movie.release_date.substring(0,4)}</p>
                       </div>
                       <div className="d-flex flex-column justify-content-around">
                         <i class="bi bi-heart-fill heart-icon"></i>
