@@ -14,6 +14,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import PopularShows from './components/popularShows'
 import TopRatedShows from './components/topRatedShows'
 import DailyShows from './components/dailyShows'
+import Search from './components/search'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -26,10 +27,11 @@ const App = () => {
   const [popularMovies, setPopularMovies] = useState([])
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
-  const [searchString, setSearchString] = useState('search')
+  const [searchString, setSearchString] = useState('')
   const [popularShows, setPopularShows] = useState([])
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
+  const [search, setSearch] = useState([])
 
 const getTrendingMovies = () => {
   axios({
@@ -87,7 +89,9 @@ const getPopular = () => {
   })
 };
 
-const searchMovies = (event) => {
+const handleSearch = (event) => {
+  event.preventDefault()
+  // setSearchString(event.target.value);
   axios({
     url: '/search/movie',
     method: 'get',
@@ -98,9 +102,9 @@ const searchMovies = (event) => {
       query: searchString
     }
   }).then((response) => {
-    console.log(response.data.results);
-  })
-}
+    setSearch(response.data.results)
+  })}
+
 const getPopularShows = () => {
   axios({
     url: '/tv/popular',
@@ -187,7 +191,6 @@ useEffect(() => {
 }, [])
 
   useEffect(() => {
-    searchMovies()
     getPopularShows()
     getTopRatedShows()
     getDailyShows()
@@ -210,7 +213,10 @@ useEffect(() => {
         </div>
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-      <input onChange={(event) => setSearchString(event.target.value)} className='search-box' type='text' name='search' value={searchString}/>
+      <form onSubmit={handleSearch}>
+      <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
+      <input type="submit" value="search" id="submit-button"/>
+      </form>
       <h2>Search By Genre</h2>
         <a href="#">Comedy</a>
         <a href="#">Horror</a>
@@ -231,6 +237,14 @@ useEffect(() => {
         <i class="bi bi-star-fill yellow "></i>
         <i class="bi bi-star-fill yellow "></i>
         <i class="bi bi-star-half yellow "></i>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Searches'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <Search search={search}/>
+        </div>
       </div>
       <div className="row mt-4 mb-4">
         <MovieType heading='Trending Movies'/>
@@ -288,7 +302,6 @@ useEffect(() => {
           <DailyShows dailyShows={dailyShows}/>
         </div>
       </div>
-
     </>
   )
 }
