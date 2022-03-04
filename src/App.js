@@ -31,14 +31,13 @@ const App = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
 
-
 const getTrendingMovies = () => {
   axios({
     url: '/trending/movie/week',
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138'
+      api_key: process.env.REACT_APP_TMDB_KEY
     }
   }).then((response) => {
     setTrendingMovies(response.data.results)
@@ -51,7 +50,7 @@ const getUpcomingMovies = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US',
       region: 'US'
     }
@@ -66,7 +65,7 @@ const getTopRated = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US'
     }
   }).then((response) => {
@@ -80,7 +79,7 @@ const getPopular = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US'
     }
   }).then((response) => {
@@ -94,10 +93,12 @@ const searchMovies = (event) => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US',
       query: searchString
     }
+  }).then((response) => {
+    console.log(response.data.results);
   })
 }
 const getPopularShows = () => {
@@ -106,7 +107,7 @@ const getPopularShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US'
     }
   }).then((response) => {
@@ -119,7 +120,7 @@ const getTopRatedShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US'
     }
   }).then((response) => {
@@ -132,7 +133,7 @@ const getDailyShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: 'dad5072890b975c25ff2358e550e5138',
+      api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'en-US'
     }
   }).then((response) => {
