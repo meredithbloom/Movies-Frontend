@@ -14,6 +14,7 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
+import MoviesByGenre from '../components/moviesByGenre'
 
 
 const HomePage = () => {
@@ -32,6 +33,53 @@ const HomePage = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+  
+  //filtering by genre
+  const allGenres =[
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ]
+
+  const [genre, setGenre] = useState({})
+  const [moviesByGenre, setMoviesByGenre] = useState([])
 
   const getTrendingMovies = () => {
     axios({
@@ -39,7 +87,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY
+        api_key: "dad5072890b975c25ff2358e550e5138"
       }
     }).then((response) => {
       setTrendingMovies(response.data.results)
@@ -52,7 +100,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US',
         region: 'US'
       }
@@ -67,7 +115,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US'
       }
     }).then((response) => {
@@ -81,7 +129,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US'
       }
     }).then((response) => {
@@ -97,7 +145,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US',
         query: searchString
       }
@@ -111,7 +159,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US'
       }
     }).then((response) => {
@@ -124,7 +172,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US'
       }
     }).then((response) => {
@@ -137,40 +185,39 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
+        api_key: "dad5072890b975c25ff2358e550e5138",
         language: 'en-US'
       }
     }).then((response) => {
       setDailyShows(response.data.results)
     })
   };
-  // const Home = () => {
-  //   return(
-  //     <>
-  //       <main>
-  //         <h2>Welcome to the movie database</h2>
-  //         <p>We can do it!!!</p>
-  //       </main>
-  //       <nav>
-  //         <Link to="/about">About</Link>
-  //       </nav>
-  //     </>
-  //   )
-  // }
+  
+  //event handler for genre buttons
+  const setGenreHandler = (event, index) => {
+    let selectedGenre = allGenres[index]
+    setGenre(selectedGenre)
+    searchByGenre()
+  }
+
+  //searches database by genre id, sets movies sorted by genre
+  const searchByGenre = () => {
+    axios({
+      url: '/discover/movie',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: 'dad5072890b975c25ff2358e550e5138',
+        language: 'en-US',
+        with_genres: genre.id
+    }}).then((response) => {
+      setMoviesByGenre(response.data.results)
+      //console.log(moviesByGenre)
+    })
+  }
 
 
-  // const About = () => {
-  //   return (
-  //     <>
-  //       <main>
-  //         <h2>We are Heather and Meredith</h2>
-  //       </main>
-  //       <nav>
-  //         <Link to="/">Home</Link>
-  //       </nav>
-  //     </>
-  //   )
-  // }
+
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
@@ -217,15 +264,16 @@ const HomePage = () => {
       </form>
       <h2>Search By Genre</h2>
         <Link to="/comedy">Comedy</Link>
-        <a href="#">Horror</a>
-        <a href="#">Romance</a>
-        <a href="#">Family</a>
-        <a href="#">Action</a>
-        <a href="#">Drama</a>
-        <a href="#">Adventure</a>
-        <a href="#">Documentary</a>
-        <a href="#">Fantasy</a>
-        <a href="#">Thriller</a>
+        <button onClick={(event) => { setGenreHandler(event, 0) }}><a href="#">Action</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 1) }}><a href="#">Adventure</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 2) }}><a href="#">Comedy</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 3) }}><a href="#">Documentary</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 4) }}><a href="#">Drama</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 5) }}><a href="#">Family</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 6) }}><a href="#">Fantasy</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 7) } }><a href="#">Horror</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 8) } }><a href="#">Romance</a></button>
+        <button onClick={(event) => { setGenreHandler(event, 9) } }><a href="#">Thriller</a></button>
       </div>
     <div className='start-image'>
       <h3>Spider-Man</h3>
@@ -242,6 +290,14 @@ const HomePage = () => {
       <div className="container-fluid movies">
         <div className="row">
           <Search search={search}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+      <MovieType heading={genre.name}/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <MoviesByGenre moviesByGenre={moviesByGenre}/>
         </div>
       </div>
     <div className="row mt-4 mb-4">

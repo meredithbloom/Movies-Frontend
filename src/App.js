@@ -17,6 +17,7 @@ import DailyShows from './components/dailyShows'
 import HomePage from './pages/home'
 import Comedy from './pages/comedy'
 import UserProfile from './pages/userProfile'
+import MoviesByGenre from './components/moviesByGenre'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -41,7 +42,7 @@ const getTrendingMovies = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY
+      api_key: 'dad5072890b975c25ff2358e550e5138'
     }
   }).then((response) => {
     setTrendingMovies(response.data.results)
@@ -54,7 +55,7 @@ const getUpcomingMovies = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US',
       region: 'US'
     }
@@ -69,7 +70,7 @@ const getTopRated = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US'
     }
   }).then((response) => {
@@ -83,7 +84,7 @@ const getPopular = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US'
     }
   }).then((response) => {
@@ -99,7 +100,7 @@ const handleSearch = (event) => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US',
       query: searchString
     }
@@ -113,7 +114,7 @@ const getPopularShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US'
     }
   }).then((response) => {
@@ -126,7 +127,7 @@ const getTopRatedShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US'
     }
   }).then((response) => {
@@ -139,40 +140,14 @@ const getDailyShows = () => {
     method: 'get',
     baseURL: 'https://api.themoviedb.org/3',
     params: {
-      api_key: process.env.REACT_APP_TMDB_KEY,
+      api_key: 'dad5072890b975c25ff2358e550e5138',
       language: 'en-US'
     }
   }).then((response) => {
     setDailyShows(response.data.results)
   })
 };
-// const Home = () => {
-//   return(
-//     <>
-//       <main>
-//         <h2>Welcome to the movie database</h2>
-//         <p>We can do it!!!</p>
-//       </main>
-//       <nav>
-//         <Link to="/about">About</Link>
-//       </nav>
-//     </>
-//   )
-// }
 
-
-// const About = () => {
-//   return (
-//     <>
-//       <main>
-//         <h2>We are Heather and Meredith</h2>
-//       </main>
-//       <nav>
-//         <Link to="/">Home</Link>
-//       </nav>
-//     </>
-//   )
-// }
 const setMenuOpacity = (event) => {
   if (opacity == 1) {
     setOpacity(0)
