@@ -292,14 +292,6 @@ const HomePage = () => {
           <Search search={search}/>
         </div>
       </div>
-      <div className="row mt-4 mb-4">
-      <MovieType heading={genre.name}/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <MoviesByGenre moviesByGenre={moviesByGenre}/>
-        </div>
-      </div>
     <div className="row mt-4 mb-4">
       <MovieType heading='Trending Movies'/>
     </div>
