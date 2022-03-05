@@ -1,19 +1,17 @@
 import {Link} from 'react-router-dom'
 import {useState} from 'react'
+import MovieType from '../components/headingTitle'
+import DailyShows from '../components/dailyShows'
+import TrendingMovies from '../components/trendingmovies'
 
-const User = () => {
+const UserProfile = () => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
+  const [favorites, setFavorites] = useState([])
+  const [watchList, setWatchList] = useState([])
 
-  const setMenuOpacity = (event) => {
-    if (opacity == 1) {
-      setOpacity(0)
-      setzIndex(0)
-    }else if(opacity == 0){
-      setOpacity(1)
-      setzIndex(2)
-    }
-  }
+
+
 
   return(
     <>
@@ -26,10 +24,32 @@ const User = () => {
         <Link to="/"><i class="bi bi-house house"></i></Link>
         </div>
       </header>
-      <h1 className="text-center">Welcome To Your Profile!</h1>
-
+      <div className="profile-back-image">
+        <h1 className="text-center">Welcome To Your Profile!</h1>
+      </div>
+      <div className="container d-flex align-items-center justify-content-between">
+        <img className="user-image" src='/userimage.png'/>
+        <div className="content-box">
+        <p>UserName:</p>
+        <p>Favorite Genre:</p>
+        <p>Streaming Providers:</p>
+        <p>Favorite Movie:</p>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Favorites'/>
+      </div>
+      <div className="container-fluid movies">
+        {favorites}
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Want To Watch List'/>
+      </div>
+      <div className="container-fluid movies">
+        {watchList}
+      </div>
     </>
   )
 }
 
-export default User
+export default UserProfile
