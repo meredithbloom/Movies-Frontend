@@ -47,7 +47,7 @@ const Drama = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

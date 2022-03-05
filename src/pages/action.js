@@ -47,7 +47,7 @@ const Action = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

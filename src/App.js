@@ -27,6 +27,7 @@ import Romance from './pages/romance'
 import Thriller from './pages/thriller'
 import UserProfile from './pages/userProfile'
 import MoviesByGenre from './components/moviesByGenre'
+import AllMovies from './pages/all-movies'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -258,6 +259,7 @@ const App = () => {
       <div ClassName="content">
       <Routes>
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/movies" element={<AllMovies/>}/>
         <Route path="/action" element={<Action/>}/>
         <Route path="/adventure" element={<Adventure/>}/>
         <Route path="/comedy" element={<Comedy/>}/>

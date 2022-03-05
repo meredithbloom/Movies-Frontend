@@ -47,7 +47,7 @@ const Thriller = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

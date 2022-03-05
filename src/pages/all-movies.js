@@ -8,31 +8,25 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-const Comedy = () => {
+const AllMovies = () => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
   const [searchString, setSearchString] = useState('')
-  const [genre, setGenre] = useState({
-    "id": 35,
-    "name": "Comedy"
-  })
-  const [moviesByGenre, setMoviesByGenre] = useState([])
+  const [allMovies, setAllMovies] = useState([])
 
-  const searchByGenre = () => {
+  const getAllMovies = () => {
     axios({
-      url: '/discover/movie',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
-        language: 'en-US',
-        with_genres: genre.id
-    }}).then((response) => {
-      setMoviesByGenre(response.data.results)
-      //console.log(moviesByGenre)
-    })
-  }
+        url: '/movies',
+        method: 'get',
+        baseURL: 'https://powerful-garden-94854.herokuapp.com',
+        params: {
+          _limit: 25
+      }}).then((response) => {
+        //setAllMovies(response.data)
+        console.log(response.data)
+      })
+    }
 
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
@@ -44,9 +38,8 @@ const Comedy = () => {
     }
   }
 
-
   useEffect(() => {
-    searchByGenre()
+    getAllMovies()
   }, [])
 
   return (
@@ -64,18 +57,16 @@ const Comedy = () => {
           </svg>
           </div>
         </header>
-        <h1 className="movie-heading">{genre.name}</h1>
+        <h1 className="movie-heading">All Movies</h1>
         <div className="container d-flex flex-wrap">
-          {moviesByGenre.map((movie) => {
-          const img = movie.poster_path
-          const full = 'http://image.tmdb.org/t/p/w200' + img
+          {allMovies.map((movie) => {
           return (
-            <div key={movie.id} className="comedy-movie">
-              <img src={full}/>
+            <div key={movie.id} className="movie-index">
+              
               <div className ='overlay d-flex flex-row align-items-start justify-content-between'>
                 <div>
                   <p className='movie-title text-left'>{movie.title}</p>
-                  <p className="year">{movie.release_date.substring(0,4)}</p>
+                  <p className="year">{movie.year}</p>
                   </div>
                   <div className="d-flex flex-column justify-content-around">
                     <i className="bi bi-heart-fill heart-icon"></i>
@@ -91,4 +82,4 @@ const Comedy = () => {
   )
 }
 
-export default Comedy
+export default AllMovies
