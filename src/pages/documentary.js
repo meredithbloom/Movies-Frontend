@@ -8,14 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-const Comedy = () => {
+const Documentary = () => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
   const [searchString, setSearchString] = useState('')
   const [genre, setGenre] = useState({
-    "id": 35,
-    "name": "Comedy"
+    "id": 99,
+    "name": "Documentary"
   })
   const [moviesByGenre, setMoviesByGenre] = useState([])
 
@@ -91,4 +91,4 @@ const Comedy = () => {
   )
 }
 
-export default Comedy
+export default Documentary
