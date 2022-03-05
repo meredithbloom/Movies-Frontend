@@ -13,6 +13,7 @@ const Drama = () => {
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
   const [searchString, setSearchString] = useState('')
+  const [search, setSearch] = useState([])
   const [genre, setGenre] = useState({
     "id": 18,
     "name": "Drama"
@@ -33,6 +34,22 @@ const Drama = () => {
       //console.log(moviesByGenre)
     })
   }
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    // setSearchString(event.target.value);
+    axios({
+      url: '/search/movie',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US',
+        query: searchString
+      }
+    }).then((response) => {
+      setSearch(response.data.results)
+    })}
 
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
@@ -64,7 +81,24 @@ const Drama = () => {
           </svg>
           </div>
         </header>
-        <h1 className="movie-heading">{genre.name}</h1>
+        <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+        <form onSubmit={handleSearch}>
+        <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
+        <input type="submit" value="search" id="submit-button"/>
+        </form>
+        <h2>Search By Genre</h2>
+          <Link to="/action">Action</Link>
+          <Link to="/adventure">Adventure</Link>
+          <Link to="/comedy">Comedy</Link>
+          <Link to="/documentary">Documentary</Link>
+          <Link to="/drama">Drama</Link>
+          <Link to="/family">Family</Link>
+          <Link to="/fantasy">Fantasy</Link>
+          <Link to="/horror">Horror</Link>
+          <Link to="/romance">Romance</Link>
+          <Link to="/thriller">Thriller</Link>
+        </div>
+        <h1 className="movie-heading text-center">{genre.name}</h1>
         <div className="container d-flex flex-wrap">
           {moviesByGenre.map((movie) => {
           const img = movie.poster_path
