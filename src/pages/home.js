@@ -87,7 +87,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138"
+        api_key: process.env.REACT_APP_TMDB_KEY
       }
     }).then((response) => {
       setTrendingMovies(response.data.results)
@@ -100,7 +100,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US',
         region: 'US'
       }
@@ -115,7 +115,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US'
       }
     }).then((response) => {
@@ -129,7 +129,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US'
       }
     }).then((response) => {
@@ -145,7 +145,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US',
         query: searchString
       }
@@ -159,7 +159,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US'
       }
     }).then((response) => {
@@ -172,7 +172,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US'
       }
     }).then((response) => {
@@ -185,7 +185,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: "dad5072890b975c25ff2358e550e5138",
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US'
       }
     }).then((response) => {
@@ -207,7 +207,7 @@ const HomePage = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US',
         with_genres: genre.id
     }}).then((response) => {
@@ -237,6 +237,7 @@ const HomePage = () => {
     getPopularShows()
     getTopRatedShows()
     getDailyShows()
+    searchByGenre()
 
   }, [])
 
@@ -263,17 +264,16 @@ const HomePage = () => {
       <input type="submit" value="search" id="submit-button"/>
       </form>
       <h2>Search By Genre</h2>
+        <Link to="/action">Action</Link>
+        <Link to="/adventure">Adventure</Link>
         <Link to="/comedy">Comedy</Link>
-        <button onClick={(event) => { setGenreHandler(event, 0) }}><a href="#">Action</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 1) }}><a href="#">Adventure</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 2) }}><a href="#">Comedy</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 3) }}><a href="#">Documentary</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 4) }}><a href="#">Drama</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 5) }}><a href="#">Family</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 6) }}><a href="#">Fantasy</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 7) } }><a href="#">Horror</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 8) } }><a href="#">Romance</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 9) } }><a href="#">Thriller</a></button>
+        <Link to="/documentary">Documentary</Link>
+        <Link to="/drama">Drama</Link>
+        <Link to="/family">Family</Link>
+        <Link to="/fantasy">Fantasy</Link>
+        <Link to="/horror">Horror</Link>
+        <Link to="/romance">Romance</Link>
+        <Link to="/thriller">Thriller</Link>
       </div>
     <div className='start-image'>
       <h3>Spider-Man</h3>
