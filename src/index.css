@@ -3,6 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.comedy-box {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background:#111;
-  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 26%, rgba(0,0,0,0.7777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
+  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 36%, rgba(0,0,0,0.5777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
   height: 100%;
   color: white;
   font-family: 'Montserrat', serif;
@@ -61,7 +67,7 @@ header{
 }
 .head-button-container{
   display: flex;
-  width: 28rem;
+  width: 35rem;
   justify-content: space-around;
 }
 .login {
@@ -91,9 +97,13 @@ header{
   border-radius: 20px;
   padding: 5px;
   position: relative;
+  transition: all .3s ease-out;
 }
 .drop:hover{
   transform: scale(1.2);
+}
+.drop:active{
+  transform: scale(1);
 }
 .nav-list{
   padding: 40px;
@@ -110,8 +120,9 @@ header{
 }
 .nav-list > a {
   text-decoration: none;
-  color: rgba(104,0,255,.7);
-  font-size: 35px;
+  color: rgba(114,0,255,.9);
+  text-shadow: 0 3px 10px rgb(10 10 10 /1);
+  font-size: 45px;
   transition: all .8s ease-out;
 }
 .nav-list > a:hover{
@@ -125,6 +136,22 @@ header{
   border: 3px solid;
   border-image: linear-gradient(51deg, #FF0000,#6800FF) 1;
   background: transparent;
+}
+#submit-button {
+  background: rgb(255,0,204);
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
+  border:none;
+  padding: 2px 10px;
+  color: white;
+  font-family: 'Montserrat', serif;
+  border-radius: 39px;
+  transition: all .3s ease-out;
+}
+#submit-button:hover{
+  transform: scale(1.08);
+}
+#submit-button:active{
+  transform: scale(1);
 }
 .movies {
   margin-bottom: 5vh;
@@ -193,4 +220,8 @@ header{
 }
 .check-icon:active{
   color:#ffd000;
+}
+.user, .house {
+  font-size: 40px;
+  color: white;
 }

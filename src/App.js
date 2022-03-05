@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
@@ -12,6 +12,22 @@ import TopRated from './components/topRated'
 import PopularMovies from './components/popular'
 import MoviesByGenre from './components/moviesByGenre'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import PopularShows from './components/popularShows'
+import TopRatedShows from './components/topRatedShows'
+import DailyShows from './components/dailyShows'
+import HomePage from './pages/home'
+import Action from './pages/action'
+import Adventure from './pages/adventure'
+import Comedy from './pages/comedy'
+import Documentary from './pages/documentary'
+import Drama from './pages/drama'
+import Family from './pages/family'
+import Fantasy from './pages/fantasy'
+import Horror from './pages/horror'
+import Romance from './pages/romance'
+import Thriller from './pages/thriller'
+import UserProfile from './pages/userProfile'
+
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -24,7 +40,11 @@ const App = () => {
   const [popularMovies, setPopularMovies] = useState([])
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
-  const [searchString, setSearchString] = useState('search')
+  const [searchString, setSearchString] = useState('')
+  const [popularShows, setPopularShows] = useState([])
+  const [topRatedShows, setTopRatedShows] = useState([])
+  const [dailyShows, setDailyShows] = useState([])
+  const [search, setSearch] = useState([])
 
   //filtering by genre
   const allGenres =[
@@ -73,76 +93,6 @@ const App = () => {
   const [genre, setGenre] = useState({})
   const [moviesByGenre, setMoviesByGenre] = useState([])
 
-
-  const getTrendingMovies = () => {
-    axios({
-      url: '/trending/movie/week',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138'
-      }
-    }).then((response) => {
-      setTrendingMovies(response.data.results)
-    })
-  };
-
-  const getUpcomingMovies = () => {
-    axios({
-      url: '/movie/upcoming',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
-        language: 'en-US',
-        region: 'US'
-      }
-    }).then((response) => {
-      setUpcomingMovies(response.data.results)
-    })
-  };
-
-  const getTopRated = () => {
-    axios({
-      url: '/movie/top_rated',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
-        language: 'en-US'
-      }
-    }).then((response) => {
-      setTopRated(response.data.results)
-    })
-  };
-
-  const getPopular = () => {
-    axios({
-      url: '/movie/popular',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
-        language: 'en-US'
-      }
-    }).then((response) => {
-      setPopularMovies(response.data.results)
-    })
-  };
-
-  const searchMovies = (event) => {
-    axios({
-      url: '/search/movie',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
-        language: 'en-US',
-        query: searchString
-      }
-    })
-  }
-
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
@@ -157,7 +107,7 @@ const App = () => {
       method: 'get',
       baseURL: 'https://api.themoviedb.org/3',
       params: {
-        api_key: 'dad5072890b975c25ff2358e550e5138',
+        api_key: process.env.REACT_APP_TMDB_KEY,
         language: 'en-US',
         with_genres: genre.id
     }}).then((response) => {
@@ -166,6 +116,118 @@ const App = () => {
     })
   }
 
+  
+  const getTrendingMovies = () => {
+    axios({
+      url: '/trending/movie/week',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY
+      }
+    }).then((response) => {
+      setTrendingMovies(response.data.results)
+    })
+  };
+
+  const getUpcomingMovies = () => {
+    axios({
+      url: '/movie/upcoming',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US',
+        region: 'US'
+      }
+    }).then((response) => {
+      setUpcomingMovies(response.data.results)
+    })
+  };
+
+  const getTopRated = () => {
+    axios({
+      url: '/movie/top_rated',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US'
+      }
+    }).then((response) => {
+      setTopRated(response.data.results)
+    })
+  };
+
+  const getPopular = () => {
+    axios({
+      url: '/movie/popular',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US'
+      }
+    }).then((response) => {
+      setPopularMovies(response.data.results)
+    })
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    // setSearchString(event.target.value);
+    axios({
+      url: '/search/movie',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US',
+        query: searchString
+      }
+    }).then((response) => {
+      setSearch(response.data.results)
+    })}
+
+  const getPopularShows = () => {
+    axios({
+      url: '/tv/popular',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US'
+      }
+    }).then((response) => {
+      setPopularShows(response.data.results)
+    })
+  };
+  const getTopRatedShows = () => {
+    axios({
+      url: '/tv/top_rated',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US'
+      }
+    }).then((response) => {
+      setTopRatedShows(response.data.results)
+    })
+  };
+  const getDailyShows = () => {
+    axios({
+      url: '/tv/airing_today',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US'
+      }
+    }).then((response) => {
+      setDailyShows(response.data.results)
+    })
+  };
 
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
@@ -183,88 +245,35 @@ const App = () => {
     getUpcomingMovies()
     getTopRated()
     getPopular()
+    getPopularShows()
+    getTopRatedShows()
+    getDailyShows()
+    searchByGenre()
+
   }, [])
 
 
   return(
     <>
-
-    <header>
-    <div>
-      <img className='logo' src='/SeenLogo.png' />
-    </div>
-      <div className='head-button-container'>
-        <button className="signup">Sign Up</button>
-        <button className="login">Log In</button>
-        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-        </div>
-      </header>
-      <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-      <input onChange={(event) => setSearchString(event.target.value)} className='search-box' type='text' name='search' value={searchString}/>
-      <h2>Search By Genre</h2>
-        <button onClick={(event) => { setGenreHandler(event, 0) }}><a href="#">Action</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 1) }}><a href="#">Adventure</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 2) }}><a href="#">Comedy</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 3) }}><a href="#">Documentary</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 4) }}><a href="#">Drama</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 5) }}><a href="#">Family</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 6) }}><a href="#">Fantasy</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 7) } }><a href="#">Horror</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 8) } }><a href="#">Romance</a></button>
-        <button onClick={(event) => { setGenreHandler(event, 9) } }><a href="#">Thriller</a></button>
-      </div>
-      <div className='start-image'>
-        <h3>Spider-Man</h3>
-        <p>No Way Home</p>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-fill yellow "></i>
-        <i class="bi bi-star-half yellow "></i>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading={genre.name}/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <MoviesByGenre moviesByGenre={moviesByGenre}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Trending Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TrendingMovies trendingMovies={trendingMovies}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Upcoming Movies'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <UpcomingMovies upcomingMovies={upcomingMovies}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TopRated topRated={topRated}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Popular'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularMovies popularMovies={popularMovies}/>
-        </div>
+    <BrowserRouter>
+      <div ClassName="content">
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/action" element={<Action/>}/>
+        <Route path="/adventure" element={<Adventure/>}/>
+        <Route path="/comedy" element={<Comedy/>}/>
+        <Route path="/documentary" element={<Documentary/>}/>
+        <Route path="/drama" element={<Drama/>}/>
+        <Route path="/family" element={<Family/>}/>
+        <Route path="/fantasy" element={<Fantasy/>}/>
+        <Route path="/horror" element={<Horror/>}/>
+        <Route path="/romance" element={<Romance/>}/>
+        <Route path="/thriller" element={<Thriller/>}/>
+        <Route path="/profile" element={<UserProfile/>}/>
+      </Routes>
       </div>
 
+      </BrowserRouter>
     </>
   )
 }
