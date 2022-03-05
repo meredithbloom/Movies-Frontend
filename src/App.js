@@ -17,6 +17,7 @@ import DailyShows from './components/dailyShows'
 import HomePage from './pages/home'
 import Comedy from './pages/comedy'
 import UserProfile from './pages/userProfile'
+import MoviesByGenre from './components/moviesByGenre'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -146,33 +147,7 @@ const getDailyShows = () => {
     setDailyShows(response.data.results)
   })
 };
-// const Home = () => {
-//   return(
-//     <>
-//       <main>
-//         <h2>Welcome to the movie database</h2>
-//         <p>We can do it!!!</p>
-//       </main>
-//       <nav>
-//         <Link to="/about">About</Link>
-//       </nav>
-//     </>
-//   )
-// }
 
-
-// const About = () => {
-//   return (
-//     <>
-//       <main>
-//         <h2>We are Heather and Meredith</h2>
-//       </main>
-//       <nav>
-//         <Link to="/">Home</Link>
-//       </nav>
-//     </>
-//   )
-// }
 const setMenuOpacity = (event) => {
   if (opacity == 1) {
     setOpacity(0)
