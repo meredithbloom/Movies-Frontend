@@ -32,7 +32,7 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25vh;
+  margin-bottom: 15vh;
 }
 .start-image{
   /* background: black; */
@@ -224,4 +224,32 @@ header{
 .user, .house {
   font-size: 40px;
   color: white;
+}
+.profile-back-image{
+  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 46%, rgba(0,0,0,0.5777485994397759) 69%, rgba(0,0,0,1) 88%),url('https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top:0;
+  z-index: -1;
+}
+.profile-back-image > h1{
+  font-size: 50px;
+  margin-top: 12rem;
+  margin-bottom: 0;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
+}
+.user-image{
+  margin-top: 0;
+}
+.content-box{
+  background: rgb(0 0 0 /.5);
+  width: 50rem;
+  padding-left: 20px;
+  font-size: 30px;
+  font-family: 'Montserrat', serif;
+  box-shadow: 0 3px 8px rgb(0 0 0/.9);
 }

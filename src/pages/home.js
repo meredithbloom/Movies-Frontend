@@ -192,7 +192,8 @@ const HomePage = () => {
       setDailyShows(response.data.results)
     })
   };
-  
+
+
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
