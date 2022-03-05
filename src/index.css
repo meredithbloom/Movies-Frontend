@@ -3,6 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.comedy-box {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
