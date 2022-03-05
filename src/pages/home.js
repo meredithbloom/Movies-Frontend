@@ -193,9 +193,14 @@ const HomePage = () => {
     })
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   
+=======
+
+
+>>>>>>> 43569da1fb7e48c214579018d452aea36ab48034
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
@@ -221,7 +226,10 @@ const HomePage = () => {
 
 
 
+<<<<<<< HEAD
 >>>>>>> 68063d97d986303cb089daafeecc67a81fb05d60
+=======
+>>>>>>> 43569da1fb7e48c214579018d452aea36ab48034
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
