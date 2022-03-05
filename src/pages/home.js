@@ -14,6 +14,7 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
+import MoviesByGenre from '../components/moviesByGenre'
 
 
 const HomePage = () => {
@@ -32,6 +33,53 @@ const HomePage = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+  
+  //filtering by genre
+  const allGenres =[
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ]
+
+  const [genre, setGenre] = useState({})
+  const [moviesByGenre, setMoviesByGenre] = useState([])
 
   const getTrendingMovies = () => {
     axios({
@@ -145,6 +193,32 @@ const HomePage = () => {
     })
   };
 
+
+  //event handler for genre buttons
+  const setGenreHandler = (event, index) => {
+    let selectedGenre = allGenres[index]
+    setGenre(selectedGenre)
+    searchByGenre()
+  }
+
+  //searches database by genre id, sets movies sorted by genre
+  const searchByGenre = () => {
+    axios({
+      url: '/discover/movie',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US',
+        with_genres: genre.id
+    }}).then((response) => {
+      setMoviesByGenre(response.data.results)
+      //console.log(moviesByGenre)
+    })
+  }
+
+
+
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
@@ -164,6 +238,7 @@ const HomePage = () => {
     getPopularShows()
     getTopRatedShows()
     getDailyShows()
+    searchByGenre()
 
   }, [])
 
@@ -190,16 +265,16 @@ const HomePage = () => {
       <input type="submit" value="search" id="submit-button"/>
       </form>
       <h2>Search By Genre</h2>
+        <Link to="/action">Action</Link>
+        <Link to="/adventure">Adventure</Link>
         <Link to="/comedy">Comedy</Link>
-        <a href="#">Horror</a>
-        <a href="#">Romance</a>
-        <a href="#">Family</a>
-        <a href="#">Action</a>
-        <a href="#">Drama</a>
-        <a href="#">Adventure</a>
-        <a href="#">Documentary</a>
-        <a href="#">Fantasy</a>
-        <a href="#">Thriller</a>
+        <Link to="/documentary">Documentary</Link>
+        <Link to="/drama">Drama</Link>
+        <Link to="/family">Family</Link>
+        <Link to="/fantasy">Fantasy</Link>
+        <Link to="/horror">Horror</Link>
+        <Link to="/romance">Romance</Link>
+        <Link to="/thriller">Thriller</Link>
       </div>
     <div className='start-image'>
       <h3>Spider-Man</h3>
