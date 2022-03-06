@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const TrendingMovies = (props) => {
+
     return(
         props.trendingMovies.map((movie) => {
             let img = movie.poster_path

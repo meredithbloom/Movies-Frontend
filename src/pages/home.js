@@ -215,6 +215,7 @@ const HomePage = () => {
     })
   }
 
+
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
