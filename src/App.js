@@ -118,7 +118,7 @@ const App = () => {
     })
   }
 
-  
+
   const getTrendingMovies = () => {
     axios({
       url: '/trending/movie/week',
