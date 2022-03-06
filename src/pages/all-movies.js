@@ -17,12 +17,9 @@ const AllMovies = () => {
 
   const getAllMovies = () => {
     axios({
-        url: '/movies',
-        method: 'get',
-        baseURL: 'https://powerful-garden-94854.herokuapp.com',
-        params: {
-          _limit: 25
-      }}).then((response) => {
+        url: 'https://localhost:3003/movies',
+        method: 'get'
+      }).then((response) => {
         //setAllMovies(response.data)
         console.log(response.data)
       })

@@ -251,7 +251,7 @@ const HomePage = () => {
       <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
     </div>
       <div className='head-button-container d-flex align-items-center'>
-        <button className="signup">Sign Up</button>
+        <Link to="/newaccount">Sign Up</Link>
         <button className="login">Log In</button>
         <Link to="/profile"><i class="bi bi-person user"></i></Link>
         <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
