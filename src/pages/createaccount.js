@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { propTypes } from 'react-bootstrap/esm/Image'
+import MoviesByGenre from '../components/moviesByGenre'
 
 const CreateAccount = () => {
     const [username, setUsername] = useState('')
@@ -17,21 +18,20 @@ const CreateAccount = () => {
     const [currentUser, setCurrentUser] = useState({})
 
 
-
-    const triggerNewUser = (event) => {
+    const handleNewUser = (event) => {
         event.preventDefault()
-        let newUser = {
-            name: name,
-            email: email,
-            username: username,
-            password: password, 
-            profPic: profPic
-        }
-        handleNewUser(newUser)
-    }
-
-    const handleNewUser = (newUser) => {
-        axios.post('https://localhost:3003/users/createaccount', newUser)
+        axios({
+            method: 'post',
+            url: '/users/createaccount',
+            baseURL: 'http://localhost:3003',
+            data: {
+                name: name,
+                email: email,
+                username: username,
+                password: password, 
+                profPic: profPic
+            }
+        })
         .then((response) => {
             if (response.data.username) {
                 console.log(response)
@@ -48,7 +48,7 @@ const CreateAccount = () => {
     return (
         <div className="new-user-form formContainer">
             <h1 className="formTitle">Create an Account</h1>
-            <form onSubmit={triggerNewUser} className="input-form">
+            <form onSubmit={handleNewUser} className="input-form">
                 <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
                 <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
                 <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>

@@ -82,6 +82,7 @@ const Horror = () => {
           </div>
         </header>
         <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+        <Link to="/movies">All Movies</Link>
         <form onSubmit={handleSearch}>
         <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
         <input type="submit" value="search" id="submit-button"/>

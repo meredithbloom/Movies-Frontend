@@ -9,21 +9,23 @@ import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const AllMovies = () => {
-  const [opacity, setOpacity] = useState(0)
-  const [zIndex, setzIndex] = useState(0)
-  const [recommended, setRecommended] = useState([])
-  const [searchString, setSearchString] = useState('')
-  const [allMovies, setAllMovies] = useState([])
+    const [opacity, setOpacity] = useState(0)
+    const [zIndex, setzIndex] = useState(0)
+    const [recommended, setRecommended] = useState([])
+    const [searchString, setSearchString] = useState('')
+    const [allMovies, setAllMovies] = useState([])
 
-  const getAllMovies = () => {
-    axios({
-        url: 'https://localhost:3003/movies',
-        method: 'get'
-      }).then((response) => {
-        //setAllMovies(response.data)
-        console.log(response.data)
-      })
+    const getAllMovies = () => {
+        axios({
+            method: 'get',
+            url: '/movies',
+            baseURL:'http://localhost:3003'
+        }).then((response) => {
+            setAllMovies(response.data)
+        })
     }
+
+    console.log(allMovies)
 
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
@@ -39,44 +41,44 @@ const AllMovies = () => {
     getAllMovies()
   }, [])
 
-  return (
-    <>
-      <header>
-      <div>
-        <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
-      </div>
-        <div className='head-button-container d-flex align-items-center'>
-          <button className="signup">Sign Up</button>
-          <button className="login">Log In</button>
-          <Link to="/profile"><i class="bi bi-person user"></i></Link>
-          <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg>
-          </div>
-        </header>
-        <h1 className="movie-heading">All Movies</h1>
-        <div className="container d-flex flex-wrap">
-          {allMovies.map((movie) => {
-          return (
-            <div key={movie.id} className="movie-index">
-              
-              <div className ='overlay d-flex flex-row align-items-start justify-content-between'>
-                <div>
-                  <p className='movie-title text-left'>{movie.title}</p>
-                  <p className="year">{movie.year}</p>
-                  </div>
-                  <div className="d-flex flex-column justify-content-around">
-                    <i className="bi bi-heart-fill heart-icon"></i>
-                    <i className="bi bi-plus-circle-fill plus-icon"></i>
-                    <i className="bi bi-check-circle-fill check-icon"></i>
-                  </div>
-                </div>
+    return (
+        <>
+            <header>
+            <div>
+                <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
             </div>
-          )
-        })}
-      </div>
-    </>
-  )
+            <div className='head-button-container d-flex align-items-center'>
+            <button className="signup">Sign Up</button>
+            <button className="login">Log In</button>
+            <Link to="/profile"><i class="bi bi-person user"></i></Link>
+            <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            </div>
+            </header>
+            <h1 className="movie-heading2 text-center mb-5">All Movies</h1>
+            <div className="container d-flex flex-wrap justify-content-around p-1 align-items-start">
+            {allMovies.map((movie) => {
+            return (
+                <div key={movie.id} className="movie image-container mb-5">
+                <img src='http://image.tmdb.org/t/p/w300/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'/>
+                <div className ='overlay d-flex flex-row align-items-start justify-content-between' id='overlay-genres'>
+                    <div>
+                    <p className='movie-title text-left'>{movie.title}</p>
+                    <p className="year">{movie.year}</p>
+                    </div>
+                    <div className="d-flex flex-column justify-content-around">
+                        <i className="bi bi-heart-fill heart-icon"></i>
+                        <i className="bi bi-plus-circle-fill plus-icon"></i>
+                        <i className="bi bi-check-circle-fill check-icon"></i>
+                    </div>
+                    </div>
+                </div>
+            )
+            })}
+        </div>
+        </>
+    ) 
 }
 
 export default AllMovies
