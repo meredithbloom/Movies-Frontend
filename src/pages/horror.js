@@ -64,7 +64,7 @@ const Horror = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

@@ -64,7 +64,7 @@ const Romance = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>
