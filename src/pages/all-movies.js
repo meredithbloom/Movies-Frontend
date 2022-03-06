@@ -14,6 +14,8 @@ const AllMovies = () => {
     const [recommended, setRecommended] = useState([])
     const [searchString, setSearchString] = useState('')
     const [allMovies, setAllMovies] = useState([])
+    const [title, setTitle] = useState('')
+    const [year, setYear] = useState(0)
 
     const getAllMovies = () => {
         axios({
@@ -25,7 +27,18 @@ const AllMovies = () => {
         })
     }
 
-    console.log(allMovies)
+    const handleMovieAdd = (movie) => {
+      axios({
+        method: 'post',
+        url: '/favorites',
+        baseURL:'http://localhost:3000',
+        data:{
+
+      }
+      })
+      console.log(movie);
+    }
+
 
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
@@ -58,17 +71,17 @@ const AllMovies = () => {
             </header>
             <h1 className="movie-heading2 text-center mb-5">All Movies</h1>
             <div className="container d-flex flex-wrap justify-content-around p-1 align-items-start">
-            {allMovies.map((movie) => {
+            {allMovies.map((movie, index) => {
             return (
                 <div key={movie.id} className="movie image-container mb-5">
                 <img src='https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bW92aWV8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=300&q=60'/>
                 <div className ='overlay d-flex flex-row align-items-start justify-content-between' id='overlay-genres'>
                     <div>
                     <p className='movie-title text-left'>{movie.title}</p>
-                    <p className="year">{movie.year}</p>
+                    <p className="year"> {movie.year}</p>
                     </div>
                     <div className="d-flex flex-column justify-content-around">
-                        <i className="bi bi-heart-fill heart-icon"></i>
+                        <i onClick={event => handleMovieAdd(movie)} className="bi bi-heart-fill heart-icon"></i>
                         <i className="bi bi-plus-circle-fill plus-icon"></i>
                         <i className="bi bi-check-circle-fill check-icon"></i>
                     </div>
