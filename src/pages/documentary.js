@@ -64,7 +64,7 @@ const Documentary = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

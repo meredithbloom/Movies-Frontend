@@ -64,7 +64,7 @@ const Comedy = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

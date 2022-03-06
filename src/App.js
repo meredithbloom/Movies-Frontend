@@ -14,6 +14,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import PopularShows from './components/popularShows'
 import TopRatedShows from './components/topRatedShows'
 import DailyShows from './components/dailyShows'
+import MoviesByGenre from './components/moviesByGenre'
 import HomePage from './pages/home'
 import Action from './pages/action'
 import Adventure from './pages/adventure'
@@ -26,7 +27,9 @@ import Horror from './pages/horror'
 import Romance from './pages/romance'
 import Thriller from './pages/thriller'
 import UserProfile from './pages/userProfile'
-import MoviesByGenre from './components/moviesByGenre'
+import CreateAccount from './pages/createaccount'
+
+import AllMovies from './pages/all-movies'
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -258,6 +261,8 @@ const App = () => {
       <div ClassName="content">
       <Routes>
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/newaccount" element={<CreateAccount/>}/>
+        <Route path="/movies" element={<AllMovies/>}/>
         <Route path="/action" element={<Action/>}/>
         <Route path="/adventure" element={<Adventure/>}/>
         <Route path="/comedy" element={<Comedy/>}/>

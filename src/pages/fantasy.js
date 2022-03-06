@@ -64,7 +64,7 @@ const Fantasy = () => {
 
   useEffect(() => {
     searchByGenre()
-  })
+  }, [])
 
   return (
     <>

@@ -17,6 +17,7 @@ import Search from '../components/search'
 import MoviesByGenre from '../components/moviesByGenre'
 
 
+
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
@@ -248,7 +249,7 @@ const HomePage = () => {
       <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
     </div>
       <div className='head-button-container d-flex align-items-center'>
-        <button className="signup">Sign Up</button>
+        <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
         <button className="login">Log In</button>
         <Link to="/profile"><i class="bi bi-person user"></i></Link>
         <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
@@ -257,6 +258,7 @@ const HomePage = () => {
         </div>
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+      <Link to="/movies">All Movies</Link>
       <form onSubmit={handleSearch}>
       <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
       <input type="submit" value="search" id="submit-button"/>
