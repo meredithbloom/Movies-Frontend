@@ -275,11 +275,13 @@ const HomePage = () => {
     <div className='start-image'>
       <h3>Spider-Man</h3>
       <p>No Way Home</p>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-half yellow "></i>
+      <div className="stars">
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-half yellow "></i>
+      </div>
     </div>
     <div className="movie-section">
     <div className="row mt-4 mb-4">

@@ -57,10 +57,13 @@ header{
   font-weight: 100;
   margin-left: 5rem;
 }
+.stars {
+  margin-left: 4rem;
+}
 .yellow{
   color: #ffd000;
   font-size: 25px;
-  margin-left: 5rem;
+  margin-left: 1rem;
 }
 .title{
   font-size: 3rem;
