@@ -32,9 +32,9 @@ const AllMovies = () => {
         method: 'post',
         url: '/favorites',
         baseURL:'http://localhost:3000',
-        data:{
-
-      }
+        data:[
+          movie
+        ]
       })
       console.log(movie);
     }
