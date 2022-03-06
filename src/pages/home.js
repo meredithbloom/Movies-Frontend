@@ -281,6 +281,7 @@ const HomePage = () => {
       <i class="bi bi-star-fill yellow "></i>
       <i class="bi bi-star-half yellow "></i>
     </div>
+    <div className="movie-section">
     <div className="row mt-4 mb-4">
       <MovieType heading={searchString}/>
       </div>
@@ -345,7 +346,7 @@ const HomePage = () => {
         <DailyShows dailyShows={dailyShows}/>
       </div>
     </div>
-
+    </div>
     </>
   )
 }

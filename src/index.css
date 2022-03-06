@@ -16,8 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:#111;
-  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 36%, rgba(0,0,0,0.5777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
+  background:black;
   height: 100%;
   color: white;
   font-family: 'Montserrat', serif;
@@ -32,24 +31,36 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15vh;
+  margin-bottom: 8vh;
 }
 .start-image{
   /* background: black; */
-  margin-bottom: 20vh;
-  margin-left: 10vw;
+  background:#111;
+  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 36%, rgba(0,0,0,0.5777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top:0;
+  z-index: -1;
+  /* margin-bottom: 20vh;
+  margin-left: 10vw; */
   font-family: 'Montserrat', serif;
 }
 .start-image > h3{
+  margin-top: 20rem;
   font-size: 100px;
+  margin-left: 5rem;
 }
 .start-image > p {
   font-size: 40px;
   font-weight: 100;
+  margin-left: 5rem;
 }
 .yellow{
   color: #ffd000;
   font-size: 25px;
+  margin-left: 5rem;
 }
 .title{
   font-size: 3rem;
@@ -153,8 +164,11 @@ header{
 #submit-button:active{
   transform: scale(1);
 }
+.movie-section {
+  margin-top: 60vh;
+}
 .movies {
-  margin-bottom: 5vh;
+  margin-bottom: 10vh;
 }
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
@@ -171,6 +185,11 @@ header{
   font-size: 35px;
   margin: 10px 0 0 20px;
   border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
+}
+.movie-heading2 {
+  font-size: 10rem;
+  margin: 0 0 0 20px;
   font-family: 'Montserrat', serif;
 }
 .movie-title{
@@ -252,4 +271,7 @@ header{
   font-size: 30px;
   font-family: 'Montserrat', serif;
   box-shadow: 0 3px 8px rgb(0 0 0/.9);
+}
+#overlay-genres{
+  width: 100%;
 }
