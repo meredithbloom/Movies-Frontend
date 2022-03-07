@@ -19,8 +19,6 @@ import GenreNavBar from '../components/genreNavMenu'
 import AuthContext from '../context/AuthProvider'
 
 
-
-
 const HomePage = () => {
   const { setAuth } = useContext(AuthContext)
   const [trendingMovies, setTrendingMovies] = useState([])
@@ -38,6 +36,80 @@ const HomePage = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+
+
+  //user authentication
+  const [toggleLogin, setToggleLogin] = useState(true)
+  const [toggleError, setToggleError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [toggleLogout, setToggleLogout] = useState(false)
+  const [currentUser, setCurrentUser] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  //creating a user - is passed as props to login form route
+  const handleNewUser = (newUser) => {
+    axios({
+      method: 'post',
+      url: '/users/createaccount',
+      baseURL: 'http://localhost:3003',
+      data: newUser 
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setToggleError(false)
+        setErrorMessage('')
+        setCurrentUser(response.data)
+        setLoggedIn(true)
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(true)
+      }
+    })
+  }
+
+  const handleLogin = (userObj) => {
+    console.log(userObj)
+    axios({
+      method: 'put',
+      url: '/users/login',
+      baseURL: 'http://localhost:3003',
+      data: userObj
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setCurrentUser(response.data)
+        setLoggedIn(true)  
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(response.data)
+      }
+    })
+  }
+
+  //logout - returns user state to default
+  const handleLogout = () => {
+    setCurrentUser({})
+    handleToggleLogout()
+  }
+  
+  //for conditional rendering of login form/buttons up top
+  const handleToggleForm = () => {
+    setToggleError(false)
+    if (toggleLogin === true) {
+      setToggleLogin(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
+    //conditional rendering
+  const handleToggleLogout = () => {
+    if (toggleLogout) {
+      setToggleLogout(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
 
   //filtering by genre
   const allGenres =[
@@ -171,6 +243,7 @@ const HomePage = () => {
       setPopularShows(response.data.results)
     })
   };
+
   const getTopRatedShows = () => {
     axios({
       url: '/tv/top_rated',
@@ -184,6 +257,7 @@ const HomePage = () => {
       setTopRatedShows(response.data.results)
     })
   };
+
   const getDailyShows = () => {
     axios({
       url: '/tv/airing_today',
@@ -197,6 +271,7 @@ const HomePage = () => {
       setDailyShows(response.data.results)
     })
   };
+
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
@@ -253,8 +328,8 @@ const HomePage = () => {
           <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
         </div>
         <div className='head-button-container d-flex align-items-center'>
-          <Link to="/newaccount">Sign Up</Link>
-          <Link to="/login">Log In</Link>
+          <Link to="/newaccount" state={handleNewUser}>Sign Up</Link>
+          <Link to="/login" state={handleLogin}>Log In</Link>
           <Link to="/profile"><i class="bi bi-person user"></i></Link>
           <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
