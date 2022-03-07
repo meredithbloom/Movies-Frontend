@@ -184,6 +184,10 @@ header{
   overflow-x: auto;
   flex-wrap: nowrap;
 }
+.scroll {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
 .movie-heading {
   font-size: 35px;
   margin: 10px 0 0 20px;
@@ -283,10 +287,14 @@ header{
   background: rgb(0 0 0 / .9);
   width:100%;
   transition: 0.5s ease;
-  opacity: .6;
+  opacity: 0;
   bottom:0;
   padding: 20px;
   background: black;
+  transition: all .5s ease-out;
+}
+.overlay2:hover{
+  opacity: .8;
 }
 .filled {
   color: red;
