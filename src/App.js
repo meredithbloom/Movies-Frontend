@@ -355,6 +355,7 @@ const App = () => {
   return(
     <>
       <Routes>
+
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
         <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
