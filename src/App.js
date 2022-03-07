@@ -59,7 +59,7 @@ const App = () => {
   const [toggleLogout, setToggleLogout] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false)
-  
+
   if (loggedIn) {
     console.log('current user is named ', currentUser.name, ' and has username ', currentUser.username)
   } else {
@@ -71,14 +71,14 @@ const App = () => {
     axios({
       method: 'post',
       url: '/users/createaccount',
-      baseURL: 'http://localhost:3003',
-      data: newUser 
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
+      data: newUser
     }).then((response) => {
       if (response.data.username) {
         axios({
           method: 'get',
           url: '/users/:id',
-          baseURL: 'http://localhost:3003'
+          baseURL: 'https://powerful-garden-94854.herokuapp.com'
         })
         console.log(response)
         setToggleError(false)
@@ -98,7 +98,7 @@ const App = () => {
     axios({
       method: 'put',
       url: '/users/login',
-      baseURL: 'http://localhost:3003',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
       if (response.data.username) {
@@ -114,14 +114,14 @@ const App = () => {
     //showCurrentUser()
   }
 
-  
+
 
   //logout - returns user state to default
   const handleLogout = () => {
     setCurrentUser({})
     handleToggleLogout()
   }
-  
+
   //for conditional rendering of login form/buttons up top
   const handleToggleForm = () => {
     setToggleError(false)
@@ -355,6 +355,7 @@ const App = () => {
   return(
     <>
       <Routes>
+
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
         <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
@@ -370,7 +371,7 @@ const App = () => {
         <Route path="/romance" element={<Romance currentUser={currentUser}/>}/>
         <Route path="/thriller" element={<Thriller currentUser={currentUser}/>}/>
 
-        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/> 
+        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/>
       </Routes>
     </>
   )

@@ -4,32 +4,33 @@ import MovieType from '../components/headingTitle'
 import DailyShows from '../components/dailyShows'
 import TrendingMovies from '../components/trendingmovies'
 import axios from 'axios'
+import GenreNavBar from '../components/genreNavMenu'
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
   const [watchList, setWatchList] = useState([])
   const [search, setSearch] = useState([])
   const [searchString, setSearchString] = useState('')
-  const [name, setName] = useState('')
+  const [currentUserInfo, setCurrentUserInfo] = useState({})
   const [favoriteGenre, setFavoriteGenre] = useState('')
   const [streamingProviders, setStreamingProviders] = useState('')
   const [favoriteMovie, setFavoriteMovie] = useState('')
-  const [userInfo, setUserInfo] = useState('')
+
 
   const getUserInfo = (props) => {
     axios({
       method: 'get',
-      url: '/user/:id',
-      baseURL:'https://powerful-garden-94854.herokuapp.com',
-      params{
-
+      url: 'users/:id',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com/',
+      params: {
+        _id: props.currentUser._id
       }
     }).then((response) => {
-      setUserInfo(response.data);
-        })
-    }
+      setCurrentUserInfo(response.data)
+    })
+  }
 
   const getFavorites = () => {
       axios({
@@ -102,9 +103,6 @@ const UserProfile = () => {
     }
   }
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  }
   const handleFavoriteGenre = (event) => {
     setFavoriteGenre(event.target.value);
   }
@@ -120,14 +118,12 @@ const UserProfile = () => {
     axios.put(
       'https://powerful-garden-94854.herokuapp.com/users/_:id',
       {
-        name:name,
-        favoriteGenre:favoriteGenre,
+        favoriteGenre: favoriteGenre,
         streamingProviders:streamingProviders,
         favoriteMovie:favoriteMovie
       }
     ).then(() => {
       axios.get('https://powerful-garden-94854.herokuapp.com/users/_:id').then((response) => {
-        setName(name)
         setFavoriteGenre(favoriteGenre)
         setStreamingProviders(streamingProviders)
         setFavoriteMovie(favoriteMovie)
@@ -156,26 +152,15 @@ const UserProfile = () => {
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
       <Link to="/movies">All Movies</Link>
-      <h2>Search By Genre</h2>
-        <Link to="/action">Action</Link>
-        <Link to="/adventure">Adventure</Link>
-        <Link to="/comedy">Comedy</Link>
-        <Link to="/documentary">Documentary</Link>
-        <Link to="/drama">Drama</Link>
-        <Link to="/family">Family</Link>
-        <Link to="/fantasy">Fantasy</Link>
-        <Link to="/horror">Horror</Link>
-        <Link to="/romance">Romance</Link>
-        <Link to="/thriller">Thriller</Link>
-      </div>
+      <GenreNavBar />
       <div className="profile-back-image">
         <h1 className="text-center " id="profile-welcome">Welcome To Your Profile!</h1>
       </div>
       <div className="container d-flex align-items-center justify-content-between user-container">
         <img className="user-image" src='/userimage.png'/>
         <div className="content-box">
-        <p>Name: {name}</p>
-        <p>UserName:</p>
+        <p>Name: {currentUserInfo.name}</p>
+        <p>UserName:{currentUserInfo.username}</p>
         <p>Favorite Genre: {favoriteGenre}</p>
         <p>Streaming Providers: {streamingProviders}</p>
         <p>Favorite Movie: {favoriteMovie}</p>
@@ -243,7 +228,6 @@ const UserProfile = () => {
           <h2>Update Your Profile</h2>
         </div>
         <form onSubmit={handleUserSubmitForm}>
-          <label>Favorite Genere:</label><br/>
           <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
           <label>Streaming Providers:</label><br/>
           <input className="update" type='text' onChange={handleStreamingProviders}/><br/>
@@ -252,6 +236,7 @@ const UserProfile = () => {
           <input className="submit-button mt-4 " type='submit' value='Update Profile'/>
         </form>
       </div>
+    </div>
     </>
   )
 }
