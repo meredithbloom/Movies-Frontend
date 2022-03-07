@@ -9,10 +9,12 @@ import GenreNavBar from '../components/genreNavMenu'
 
 
 const Login = (props) => {
+
     //global context 
     // const { setAuth } = useAuth()
-    const Navigate = useNavigate()
 
+    const Navigate = useNavigate()
+    
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [toggleError, setToggleError] = useState(false)
@@ -78,7 +80,7 @@ const Login = (props) => {
                 ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-                    <form onSubmit={triggerLogin} className="inputForm">
+                    <form className="inputForm">
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input
