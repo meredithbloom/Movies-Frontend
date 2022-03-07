@@ -28,6 +28,7 @@ import Romance from './pages/romance'
 import Thriller from './pages/thriller'
 import UserProfile from './pages/userProfile'
 import CreateAccount from './pages/createaccount'
+import Login from './pages/login'
 
 import AllMovies from './pages/all-movies'
 
@@ -262,6 +263,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/movies" element={<AllMovies/>}/>
         <Route path="/action" element={<Action/>}/>
         <Route path="/adventure" element={<Adventure/>}/>
@@ -277,7 +279,7 @@ const App = () => {
       </Routes>
       </div>
 
-      </BrowserRouter>
+    </BrowserRouter>
     </>
   )
 }
