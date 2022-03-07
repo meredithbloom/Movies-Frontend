@@ -68,6 +68,7 @@ const App = () => {
 
   //creating a user - is passed as props to login form route
   const handleNewUser = (newUser) => {
+    console.log(newUser);
     axios({
       method: 'post',
       url: '/users/createaccount',
@@ -94,7 +95,7 @@ const App = () => {
   }
 
   const handleLogin = (userObj) => {
-    //console.log(userObj)
+    // console.log(userObj)
     axios({
       method: 'put',
       url: '/users/login',
