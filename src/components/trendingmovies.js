@@ -3,6 +3,7 @@ import axios from 'axios'
 const TrendingMovies = (props) => {
 
   const handleMovieAdd = (movie) => {
+
     axios({
       method: 'post',
       url: '/favorites',
@@ -43,10 +44,15 @@ const TrendingMovies = (props) => {
                         <i onClick={event => handleWatchListAdd(movie)}class="bi bi-plus-circle-fill plus-icon"></i>
                         <i class="bi bi-check-circle-fill check-icon"></i>
                       </div>
+
                     </div>
+
                 </div>
+
             )
+
         })
+
     )
 }
 
