@@ -2,6 +2,31 @@ import axios from 'axios'
 
 
 const PopularMovies = (props) => {
+
+  const handleMovieAdd = (movie) => {
+    axios({
+      method: 'post',
+      url: '/favorites',
+      baseURL:'https://powerful-garden-94854.herokuapp.com',
+      data:[
+        movie
+      ]
+    })
+    console.log(movie);
+  }
+
+  const handleWatchListAdd = (movie) => {
+    axios({
+      method: 'post',
+      url: '/watchlist',
+      baseURL:'https://powerful-garden-94854.herokuapp.com',
+      data:[
+        movie
+      ]
+    })
+    console.log(movie);
+  }
+
     return(
         props.popularMovies.map((movie) => {
             let img = movie.poster_path
@@ -15,8 +40,8 @@ const PopularMovies = (props) => {
                       <p className="year">Year:{movie.release_date.substring(0,4)}</p>
                       </div>
                       <div className="d-flex flex-column justify-content-around">
-                        <i class="bi bi-heart-fill heart-icon"></i>
-                        <i class="bi bi-plus-circle-fill plus-icon"></i>
+                        <i onClick={event => handleMovieAdd(movie)} class="bi bi-heart-fill heart-icon"></i>
+                        <i onClick={event => handleWatchListAdd(movie)}class="bi bi-plus-circle-fill plus-icon"></i>
                         <i class="bi bi-check-circle-fill check-icon"></i>
                       </div>
                     </div>

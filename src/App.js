@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
@@ -15,6 +15,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import PopularShows from './components/popularShows'
 import TopRatedShows from './components/topRatedShows'
 import DailyShows from './components/dailyShows'
+import MoviesByGenre from './components/moviesByGenre'
+
+//links
 import HomePage from './pages/home'
 import Action from './pages/action'
 import Adventure from './pages/adventure'
@@ -27,9 +30,13 @@ import Horror from './pages/horror'
 import Romance from './pages/romance'
 import Thriller from './pages/thriller'
 import UserProfile from './pages/userProfile'
+import CreateAccount from './pages/createaccount'
+import Login from './pages/login'
 
+import AllMovies from './pages/all-movies'
 
 const App = () => {
+  const Navigate = useNavigate()
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState([])
@@ -46,6 +53,98 @@ const App = () => {
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
 
+  //user authentication
+  const [toggleLogin, setToggleLogin] = useState(true)
+  const [toggleError, setToggleError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [toggleLogout, setToggleLogout] = useState(false)
+  const [currentUser, setCurrentUser] = useState([])
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  if (loggedIn) {
+    console.log('current user is named ', currentUser.name, ' and has username ', currentUser.username)
+  } else {
+    console.log('no one is logged in')
+  }
+
+  //creating a user - is passed as props to login form route
+  const handleNewUser = (newUser) => {
+    console.log(newUser);
+    axios({
+      method: 'post',
+      url: '/users/createaccount',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
+      data: newUser
+    }).then((response) => {
+      if (response.data) {
+        axios({
+          method: 'get',
+          url: '/users/:id',
+          baseURL: 'http://localhost:3003'
+        })
+        console.log(response)
+        setToggleError(false)
+        setErrorMessage('')
+        setCurrentUser(response.data)
+        setLoggedIn(true)
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(true)
+      }
+    })
+    //console.log(currentUser)
+  }
+
+  const handleLogin = (userObj) => {
+    console.log(userObj)
+    axios({
+      method: 'put',
+      url: '/users/login',
+      baseURL: 'http://localhost:3003',
+      data: userObj
+    }).then((response) => {
+      if (response.data) {
+        // console.log(response.data)
+        setLoggedIn(true)
+        setCurrentUser(response.data)
+        Navigate('/profile')
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(response.data)
+      }
+    })
+    //showCurrentUser()
+  }
+
+
+
+  //logout - returns user state to default
+  const handleLogout = () => {
+    setCurrentUser({})
+    handleToggleLogout()
+  }
+
+  //for conditional rendering of login form/buttons up top
+  const handleToggleForm = () => {
+    setToggleError(false)
+    if (toggleLogin === true) {
+      setToggleLogin(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
+    //conditional rendering
+  const handleToggleLogout = () => {
+    if (toggleLogout) {
+      setToggleLogout(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
+
+  //how much of this do we even need in app? since home seems to be the root/closest common ancestor
   //filtering by genre
   const allGenres =[
     {
@@ -116,7 +215,7 @@ const App = () => {
     })
   }
 
-  
+
   const getTrendingMovies = () => {
     axios({
       url: '/trending/movie/week',
@@ -128,6 +227,7 @@ const App = () => {
     }).then((response) => {
       setTrendingMovies(response.data.results)
     })
+
   };
 
   const getUpcomingMovies = () => {
@@ -202,6 +302,7 @@ const App = () => {
       setPopularShows(response.data.results)
     })
   };
+
   const getTopRatedShows = () => {
     axios({
       url: '/tv/top_rated',
@@ -215,6 +316,7 @@ const App = () => {
       setTopRatedShows(response.data.results)
     })
   };
+
   const getDailyShows = () => {
     axios({
       url: '/tv/airing_today',
@@ -249,31 +351,30 @@ const App = () => {
     getTopRatedShows()
     getDailyShows()
     searchByGenre()
-
   }, [])
 
 
   return(
     <>
-    <BrowserRouter>
-      <div ClassName="content">
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/action" element={<Action/>}/>
-        <Route path="/adventure" element={<Adventure/>}/>
-        <Route path="/comedy" element={<Comedy/>}/>
-        <Route path="/documentary" element={<Documentary/>}/>
-        <Route path="/drama" element={<Drama/>}/>
-        <Route path="/family" element={<Family/>}/>
-        <Route path="/fantasy" element={<Fantasy/>}/>
-        <Route path="/horror" element={<Horror/>}/>
-        <Route path="/romance" element={<Romance/>}/>
-        <Route path="/thriller" element={<Thriller/>}/>
-        <Route path="/profile" element={<UserProfile/>}/>
-      </Routes>
-      </div>
 
-      </BrowserRouter>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
+        <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
+        <Route path="/movies" element={<AllMovies currentUser={currentUser}/>}/>
+        <Route path="/action" element={<Action currentUser={currentUser}/>}/>
+        <Route path="/adventure" element={<Adventure currentUser={currentUser}/>}/>
+        <Route path="/comedy" element={<Comedy currentUser={currentUser}/>}/>
+        <Route path="/documentary" element={<Documentary currentUser={currentUser}/>}/>
+        <Route path="/drama" element={<Drama currentUser={currentUser}/>}/>
+        <Route path="/family" element={<Family currentUser={currentUser}/>}/>
+        <Route path="/fantasy" element={<Fantasy currentUser={currentUser}/>}/>
+        <Route path="/horror" element={<Horror currentUser={currentUser}/>}/>
+        <Route path="/romance" element={<Romance currentUser={currentUser}/>}/>
+        <Route path="/thriller" element={<Thriller currentUser={currentUser}/>}/>
+
+        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/>
+      </Routes>
     </>
   )
 }

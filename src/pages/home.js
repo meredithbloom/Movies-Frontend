@@ -14,13 +14,14 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
-import MoviesByGenre from '../components/moviesByGenre'
+import GenreNavBar from '../components/genreNavMenu'
+import Header from '../components/headernav'
 
 
-const HomePage = () => {
+
+const HomePage = (props) => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
-  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
@@ -33,7 +34,82 @@ const HomePage = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+
+
+
+  //user authentication
+  const [toggleLogin, setToggleLogin] = useState(true)
+  const [toggleError, setToggleError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [toggleLogout, setToggleLogout] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  //creating a user - is passed as props to login form route
+  const handleNewUser = (newUser) => {
+    axios({
+      method: 'post',
+      url: '/users/createaccount',
+      baseURL: 'http://localhost:3003',
+      data: newUser 
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setToggleError(false)
+        setErrorMessage('')
+        setCurrentUser(response.data)
+        setLoggedIn(true)
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(true)
+      }
+    })
+  }
+
+  const handleLogin = (userObj) => {
+    console.log(userObj)
+    axios({
+      method: 'put',
+      url: '/users/login',
+      baseURL: 'http://localhost:3003',
+      data: userObj
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setCurrentUser(response.data)
+        setLoggedIn(true)  
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(response.data)
+      }
+    })
+  }
+
+  //logout - returns user state to default
+  const handleLogout = () => {
+    setCurrentUser({})
+    handleToggleLogout()
+  }
   
+  //for conditional rendering of login form/buttons up top
+  const handleToggleForm = () => {
+    setToggleError(false)
+    if (toggleLogin === true) {
+      setToggleLogin(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
+    //conditional rendering
+  const handleToggleLogout = () => {
+    if (toggleLogout) {
+      setToggleLogout(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
   //filtering by genre
   const allGenres =[
     {
@@ -192,7 +268,6 @@ const HomePage = () => {
       setDailyShows(response.data.results)
     })
   };
-  
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
@@ -215,7 +290,6 @@ const HomePage = () => {
       //console.log(moviesByGenre)
     })
   }
-
 
 
   const setMenuOpacity = (event) => {
@@ -245,45 +319,47 @@ const HomePage = () => {
   return(
     <>
 
-    <header>
-    <div>
-      <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
-    </div>
-      <div className='head-button-container d-flex align-items-center'>
-        <button className="signup">Sign Up</button>
-        <button className="login">Log In</button>
-        <Link to="/profile"><i class="bi bi-person user"></i></Link>
+      <header>
+        <div>
+            <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
+        </div>
+        <div className='head-button-container d-flex align-items-center'>
+            {props.isLoggedIn ?
+                <>
+                    <Link to="/profile"><i class="bi bi-person user"></i></Link>
+                    <button className="logout">Log Out</button>
+                </>
+                    :
+                <>
+                    <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
+                    <Link to="/login"><button className="login">Log In</button></Link>
+                </>    
+                }
+        </div>
         <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
-        </div>
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+      <Link to="/movies">All Movies</Link>
       <form onSubmit={handleSearch}>
       <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
       <input type="submit" value="search" id="submit-button"/>
       </form>
-      <h2>Search By Genre</h2>
-        <Link to="/action">Action</Link>
-        <Link to="/adventure">Adventure</Link>
-        <Link to="/comedy">Comedy</Link>
-        <Link to="/documentary">Documentary</Link>
-        <Link to="/drama">Drama</Link>
-        <Link to="/family">Family</Link>
-        <Link to="/fantasy">Fantasy</Link>
-        <Link to="/horror">Horror</Link>
-        <Link to="/romance">Romance</Link>
-        <Link to="/thriller">Thriller</Link>
+        <GenreNavBar/>
       </div>
     <div className='start-image'>
       <h3>Spider-Man</h3>
       <p>No Way Home</p>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-fill yellow "></i>
-      <i class="bi bi-star-half yellow "></i>
+      <div className="stars">
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-half yellow "></i>
+      </div>
     </div>
+    <div className="movie-section">
     <div className="row mt-4 mb-4">
       <MovieType heading={searchString}/>
       </div>
@@ -348,8 +424,9 @@ const HomePage = () => {
         <DailyShows dailyShows={dailyShows}/>
       </div>
     </div>
-
+    </div>
     </>
+
   )
 }
 

@@ -16,8 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:#111;
-  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 36%, rgba(0,0,0,0.5777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
+  background:black;
   height: 100%;
   color: white;
   font-family: 'Montserrat', serif;
@@ -31,25 +30,40 @@ header{
   padding: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25vh;
+  align-items: flex-start;
+  margin-bottom: 8vh;
 }
 .start-image{
   /* background: black; */
-  margin-bottom: 20vh;
-  margin-left: 10vw;
+  background:#111;
+  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 36%, rgba(0,0,0,0.5777485994397759) 79%, rgba(0,0,0,1) 88%), url('https://images.unsplash.com/photo-1534375971785-5c1826f739d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat top center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top:0;
+  z-index: -1;
+  /* margin-bottom: 20vh;
+  margin-left: 10vw; */
   font-family: 'Montserrat', serif;
 }
 .start-image > h3{
+  margin-top: 20rem;
   font-size: 100px;
+  margin-left: 5rem;
 }
 .start-image > p {
   font-size: 40px;
   font-weight: 100;
+  margin-left: 5rem;
+}
+.stars {
+  margin-left: 4rem;
 }
 .yellow{
   color: #ffd000;
   font-size: 25px;
+  margin-left: 1rem;
 }
 .title{
   font-size: 3rem;
@@ -87,6 +101,16 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+.text-input{
+  width: 20rem;
+  margin: 2vh auto;
+  padding: 4px;
+  border-radius: 10px;
+}
+.formContainer{
+  border: 1px solid white;
+  padding: 6vh;
+}
 .logo{
   width: 20rem;
 }
@@ -110,11 +134,11 @@ header{
   font-size: 30px;
   right:0;
   top: 8rem;
-  height: 100%;
+  height: 120%;
   position: absolute;
   z-index:0;
-  background: rgb(131,58,180);
-  background: linear-gradient(rgba(131,58,180,0) 0%, rgba(0,0,0,1) 6%, rgba(0,0,0,1) 54%, rgba(0,0,0,1) 72%, rgba(252,176,69,0) 95%);
+  background: rgb(0,0,0);
+  background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 11%, rgba(0,0,0,1) 89%, rgba(0,0,0,0) 100%);
   opacity: 0;
   transition: all .5s ease;
 }
@@ -153,8 +177,11 @@ header{
 #submit-button:active{
   transform: scale(1);
 }
+.movie-section {
+  margin-top: 60vh;
+}
 .movies {
-  margin-bottom: 5vh;
+  margin-bottom: 10vh;
 }
 .movies > .row::-webkit-scrollbar{
   background-color: #222;
@@ -167,10 +194,19 @@ header{
   overflow-x: auto;
   flex-wrap: nowrap;
 }
+.scroll {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
 .movie-heading {
   font-size: 35px;
   margin: 10px 0 0 20px;
   border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
+}
+.movie-heading2 {
+  font-size: 10rem;
+  margin: 0 0 0 20px;
   font-family: 'Montserrat', serif;
 }
 .movie-title{
@@ -224,4 +260,191 @@ header{
 .user, .house {
   font-size: 40px;
   color: white;
+}
+.profile-back-image{
+  background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 46%, rgba(0,0,0,0.5777485994397759) 69%, rgba(0,0,0,1) 88%),url('https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 205vh;
+  position: absolute;
+  top:0;
+  z-index: -1;
+}
+.profile-back-image > h1{
+  font-size: 50px;
+  margin-top: 12rem;
+  margin-bottom: 0;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid white;
+  font-family: 'Montserrat', serif;
+}
+.user-image{
+  margin-top: 0;
+}
+.content-box{
+  background: rgb(0 0 0 /.5);
+  width: 50rem;
+  padding-left: 20px;
+  font-size: 30px;
+  font-family: 'Montserrat', serif;
+  box-shadow: 0 3px 8px rgb(0 0 0/.9);
+}
+#overlay-genres{
+  width: 100%;
+}
+p {
+  color: white;
+}
+.update {
+  width: 22rem;
+  padding: 5px;
+  border-radius: 10px;
+}
+label{
+  font-size: 18px;
+  margin: 1vh 0;
+}
+.submit-button{
+  background: rgb(255,0,204);
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
+  border:none;
+  font-size: 20px;
+  padding: 7px;
+  color:white;
+  font-family: 'Montserrat', serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease-out;
+  border-radius: 20px;
+  margin: 10vh 5rem;
+}
+.submit-button:hover{
+  transform: scale(1.08);
+}
+.submit-button:active{
+  transform: scale(1);
+}
+.overlay2 {
+  position: absolute;
+  background: rgb(0 0 0 / .9);
+  width:100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom:0;
+  padding: 20px;
+  background: black;
+  transition: all .5s ease-out;
+}
+.overlay2:hover{
+  opacity: .8;
+}
+.filled {
+  color: red;
+}
+.filledPlus {
+  color:#8b0ffc;
+}
+.user-movie{
+  position: relative;
+}
+.delete-button {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right:1px;
+  opacity: .1;
+}
+.delete-button:hover{
+  opacity: 1;
+}
+@media (max-width: 1250px){
+  .user-container{
+    flex-direction: column;
+  }
+}
+@media (max-width: 950px) {
+  .login, .signup{
+    font-size: 18px;
+    width: 7rem;
+  }
+  .head-button-container{
+    width: 10rem;
+    flex-direction: column;
+  }
+  .signup{
+    margin-bottom: 10px;
+  }
+  .nav-list{
+    padding: 40px;
+    font-size: 18px;
+    top: 12rem;
+  }
+  .nav-list > a {
+    font-size: 28px;
+  }
+  .nav-list > a:hover{
+    text-decoration: overline;
+  }
+  .start-image > h3{
+    font-size: 60px;
+  }
+  .start-image > p {
+    font-size: 30px;
+  }
+  .yellow{
+    font-size: 18px;
+    margin-left: .8rem;
+  }
+  .logo{
+    width: 15rem;
+  }
+  .content-box{
+    width: 100%;
+    font-size: 18px;
+  }
+  .user-image{
+    margin-top: 5vh;
+    width:100%;
+  }
+  #profile-welcome{
+    font-size: 30px;
+  }
+}
+@media (max-width: 450px) {
+  .logo{
+    width: 10rem;
+  }
+  .login, .signup{
+    font-size: 15px;
+    width: 5.5rem;
+  }
+  .head-button-container{
+    width: 10rem;
+    flex-direction: column;
+  }
+  .signup{
+    margin-bottom: 10px;
+  }
+  .search-box {
+    margin: 10px;
+    padding: 2px 3px;
+    width: 11rem;
+  }
+  #submit-button {
+    padding: 2px 8px;
+  }
+  .start-image > h3{
+    font-size: 40px;
+  }
+  .start-image > p {
+    font-size: 22px;
+  }
+  .yellow{
+    font-size: 15px;
+    margin-left: .5rem;
+  }
+  .stars{
+    margin-left: 4.5rem;
+  }
 }

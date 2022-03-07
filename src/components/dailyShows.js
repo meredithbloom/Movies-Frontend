@@ -1,7 +1,12 @@
 import axios from 'axios'
-
+import {useState} from 'react'
 
 const DailyShows = (props) => {
+
+
+  const pushToFav = (event) => {
+
+  }
     return(
         props.dailyShows.map((show) => {
             let img = show.poster_path
@@ -16,7 +21,7 @@ const DailyShows = (props) => {
                       <p className="year">Year:{show.first_air_date.substring(0,4)}</p>
                       </div>
                       <div className="d-flex flex-column justify-content-around">
-                        <i class="bi bi-heart-fill heart-icon"></i>
+                        <i onClick={pushToFav(show)} class="bi bi-heart-fill heart-icon"></i>
                         <i class="bi bi-plus-circle-fill plus-icon"></i>
                         <i class="bi bi-check-circle-fill check-icon"></i>
                       </div>
