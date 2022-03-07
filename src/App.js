@@ -71,14 +71,14 @@ const App = () => {
     axios({
       method: 'post',
       url: '/users/createaccount',
-      baseURL: 'http://localhost:3003',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: newUser 
     }).then((response) => {
       if (response.data.username) {
         axios({
           method: 'get',
           url: '/users/:id',
-          baseURL: 'http://localhost:3003'
+          baseURL: 'https://powerful-garden-94854.herokuapp.com'
         })
         console.log(response)
         setToggleError(false)
@@ -98,7 +98,7 @@ const App = () => {
     axios({
       method: 'put',
       url: '/users/login',
-      baseURL: 'http://localhost:3003',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
       if (response.data.username) {
@@ -355,6 +355,7 @@ const App = () => {
   return(
     <>
       <Routes>
+
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
         <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
