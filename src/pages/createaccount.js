@@ -18,7 +18,6 @@ const CreateAccount = (props) => {
     const [errorMessage, setErrorMessage] = useState('')
     const [success, setSuccess] = useState(false)
     const [currentUser, setCurrentUser] = useState({})
-
     const [opacity, setOpacity] = useState(0)
     const [zIndex, setzIndex] = useState(0)
 
@@ -71,7 +70,7 @@ const CreateAccount = (props) => {
     //         }
     //     })
     // }
-            
+
     return (
         <>
             <header>

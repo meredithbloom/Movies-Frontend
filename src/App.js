@@ -75,7 +75,7 @@ const App = () => {
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: newUser
     }).then((response) => {
-      if (response.data) {
+      if (response) {
         axios({
           method: 'get',
           url: '/users/:id',
