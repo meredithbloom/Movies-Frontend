@@ -13,6 +13,7 @@ const UserProfile = () => {
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
   const [watchList, setWatchList] = useState([])
+  const [user, setUser] = useState({})
 
 
 
