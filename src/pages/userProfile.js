@@ -16,7 +16,20 @@ const UserProfile = () => {
   const [favoriteGenre, setFavoriteGenre] = useState('')
   const [streamingProviders, setStreamingProviders] = useState('')
   const [favoriteMovie, setFavoriteMovie] = useState('')
+  const [userInfo, setUserInfo] = useState('')
 
+  const getUserInfo = (props) => {
+    axios({
+      method: 'get',
+      url: '/user/:id',
+      baseURL:'https://powerful-garden-94854.herokuapp.com',
+      params{
+
+      }
+    }).then((response) => {
+      setUserInfo(response.data);
+        })
+    }
 
   const getFavorites = () => {
       axios({
@@ -230,8 +243,6 @@ const UserProfile = () => {
           <h2>Update Your Profile</h2>
         </div>
         <form onSubmit={handleUserSubmitForm}>
-          <label>Name:</label><br/>
-          <input className="update" type='text' onChange={handleNameChange} required/><br/>
           <label>Favorite Genere:</label><br/>
           <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
           <label>Streaming Providers:</label><br/>
