@@ -101,6 +101,16 @@ header{
 .signup:hover{
   transform: scale(1.08);
 }
+.text-input{
+  width: 20rem;
+  margin: 2vh auto;
+  padding: 4px;
+  border-radius: 10px;
+}
+.formContainer{
+  border: 1px solid white;
+  padding: 6vh;
+}
 .logo{
   width: 20rem;
 }

@@ -88,7 +88,7 @@ const CreateAccount = () => {
                 {success ? (
                     <h1>Welcome, {username}!</h1>
                 ) : (
-                    <section className="new-user-form formContainer">
+                    <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
                         <form onSubmit={handleNewUser} className="input-form">
                             <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
@@ -104,7 +104,7 @@ const CreateAccount = () => {
                             null
                         }
                         <br/><br/>
-                        <input type="submit" value="Register" className="submit-btn"/>
+                        <input type="submit" value="Register" className="submit-btn signup"/>
                         </form>
                     </section>
                 )}

@@ -82,7 +82,7 @@ const Login = () => {
                 {loggedIn ? (
                     <Navigate to="/profile"/>
                 ) : (
-                <section className="formContainer">
+                <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
                     <form onSubmit={handleLogin} className="inputForm">
                         <label htmlFor="username">Username: </label>
@@ -113,7 +113,7 @@ const Login = () => {
                         null
                         }
                         <br/><br/>
-                        <input type="submit" value="Login" className="submit-btn"/>
+                        <input type="submit" value="Login" className="submit-btn login"/>
                     </form>
                 </section>
                 )}
