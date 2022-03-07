@@ -15,6 +15,7 @@ import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
 import MoviesByGenre from '../components/moviesByGenre'
+import GenreNavBar from '../components/genreNavMenu'
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([])

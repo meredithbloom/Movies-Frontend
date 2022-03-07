@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import RequireAuth from './components/RequireAuth'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
@@ -98,12 +97,16 @@ const App = () => {
         setErrorMessage(response.data)
         setToggleError(response.data)
       }
-      console.log(loggedIn)
     })
   }
 
   const showCurrentUser = () => {
     console.log(currentUser)
+    if (loggedIn) {
+      console.log(currentUser.username, 'is logged in')
+    } else {
+      console.log('no one is logged in')
+    }
   }
 
   //logout - returns user state to default
@@ -340,7 +343,6 @@ const App = () => {
     getDailyShows()
     searchByGenre()
     showCurrentUser()
-
   }, [])
 
 

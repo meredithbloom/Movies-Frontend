@@ -19,7 +19,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'http://localhost:3000'
+          baseURL:'http://localhost:3003'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -30,7 +30,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/watchlist',
-          baseURL:'http://localhost:3000'
+          baseURL:'http://localhost:3003'
       }).then((response) => {
           setWatchList(response.data)
           console.log(response.data);
