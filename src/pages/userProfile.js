@@ -18,19 +18,19 @@ const UserProfile = (props) => {
   const [favoriteGenre, setFavoriteGenre] = useState('')
   const [streamingProviders, setStreamingProviders] = useState('')
   const [favoriteMovie, setFavoriteMovie] = useState('')
+
   const [isLoggedIn, setIsLoggedIn] = useState(true)
-  
-  
+
   const getUserInfo = (props) => {
     axios({
       method: 'get',
-      url: 'users/:id',
-      baseURL: 'https://powerful-garden-94854.herokuapp.com/',
+      url: '/users/:id',
+      baseURL: 'http://localhost:3000',
       params: {
         _id: props.currentUser._id
       }
     }).then((response) => {
-      setCurrentUserInfo(response.data)
+      console.log(response.data)
     })
   }
 
@@ -38,7 +38,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'https://powerful-garden-94854.herokuapp.com'
+          baseURL:'http://localhost:3000'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -164,8 +164,10 @@ const UserProfile = (props) => {
         </svg>
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+
         <Link to="/movies">All Movies</Link>
         <GenreNavBar />
+
       </div>
       <div className="profile-back-image">
         <h1 className="text-center " id="profile-welcome">Welcome To Your Profile!</h1>
@@ -173,8 +175,10 @@ const UserProfile = (props) => {
       <div className="container d-flex align-items-center justify-content-between user-container">
         <img className="user-image" src='/userimage.png'/>
         <div className="content-box">
+
         <p>Name: {props.currentUser.name}</p>
         <p>UserName: {props.currentUser.username}</p>
+
         <p>Favorite Genre: {favoriteGenre}</p>
         <p>Streaming Providers: {streamingProviders}</p>
         <p>Favorite Movie: {favoriteMovie}</p>
@@ -242,8 +246,29 @@ const UserProfile = (props) => {
           <h2>Update Your Profile</h2>
         </div>
         <form onSubmit={handleUserSubmitForm}>
-          <label className="update">Favorite Genre: </label><br/>
-          <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
+
+          <label>Favorite Genre:</label><br/>
+          <select className="update" type='text' onChange={handleFavoriteGenre}>
+          <option>Select One</option>
+          <option>Action</option>
+          <option>Adventure</option>
+          <option>Comedy</option>
+          <option>Documentary</option>
+          <option>Drama</option>
+          <option>Family</option>
+          <option>Fantasy</option>
+          <option>Horror</option>
+          <option>Romance</option>
+          <option>Thriller</option>
+          <option>SiFi</option>
+          <option>Western</option>
+          <option>Musical</option>
+          <option>War</option>
+          <option>Animation</option>
+          <option>Mystery</option>
+          </select>
+          <br/>
+
           <label>Streaming Providers:</label><br/>
           <input className="update" type='text' onChange={handleStreamingProviders}/><br/>
           <label>Favorite Movie:</label><br/>
