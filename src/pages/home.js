@@ -1,41 +1,26 @@
-import { useState, useEffect } from 'react'
-import RequireAuth from './components/RequireAuth'
+import {useState, useEffect, useContext} from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
-import './App.css'
-import TrendingMovies from './components/trendingmovies'
-import UpcomingMovies from './components/upcoming'
+import TrendingMovies from '../components/trendingmovies'
+import UpcomingMovies from '../components/upcoming'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import MovieType from './components/headingTitle'
-import TopRated from './components/topRated'
-import PopularMovies from './components/popular'
+import MovieType from '../components/headingTitle'
+import TopRated from '../components/topRated'
+import PopularMovies from '../components/popular'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import PopularShows from './components/popularShows'
-import TopRatedShows from './components/topRatedShows'
-import DailyShows from './components/dailyShows'
-import MoviesByGenre from './components/moviesByGenre'
+import PopularShows from '../components/popularShows'
+import TopRatedShows from '../components/topRatedShows'
+import DailyShows from '../components/dailyShows'
+import Search from '../components/search'
+import MoviesByGenre from '../components/moviesByGenre'
+import GenreNavBar from '../components/genreNavMenu'
+import AuthContext from '../context/AuthProvider'
 
-//links
-import HomePage from './pages/home'
-import Action from './pages/action'
-import Adventure from './pages/adventure'
-import Comedy from './pages/comedy'
-import Documentary from './pages/documentary'
-import Drama from './pages/drama'
-import Family from './pages/family'
-import Fantasy from './pages/fantasy'
-import Horror from './pages/horror'
-import Romance from './pages/romance'
-import Thriller from './pages/thriller'
-import UserProfile from './pages/userProfile'
-import CreateAccount from './pages/createaccount'
-import Login from './pages/login'
 
-import AllMovies from './pages/all-movies'
-
-const App = () => {
+const HomePage = () => {
+  const { setAuth } = useContext(AuthContext)
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState([])
@@ -51,6 +36,7 @@ const App = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+
 
   //user authentication
   const [toggleLogin, setToggleLogin] = useState(true)
@@ -125,8 +111,6 @@ const App = () => {
     }
   }
 
-
-  //how much of this do we even need in app? since home seems to be the root/closest common ancestor
   //filtering by genre
   const allGenres =[
     {
@@ -174,30 +158,6 @@ const App = () => {
   const [genre, setGenre] = useState({})
   const [moviesByGenre, setMoviesByGenre] = useState([])
 
-  //event handler for genre buttons
-  const setGenreHandler = (event, index) => {
-    let selectedGenre = allGenres[index]
-    setGenre(selectedGenre)
-    searchByGenre()
-  }
-
-  //searches database by genre id, sets movies sorted by genre
-  const searchByGenre = () => {
-    axios({
-      url: '/discover/movie',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
-        language: 'en-US',
-        with_genres: genre.id
-    }}).then((response) => {
-      setMoviesByGenre(response.data.results)
-      //console.log(moviesByGenre)
-    })
-  }
-
-
   const getTrendingMovies = () => {
     axios({
       url: '/trending/movie/week',
@@ -209,7 +169,6 @@ const App = () => {
     }).then((response) => {
       setTrendingMovies(response.data.results)
     })
-
   };
 
   const getUpcomingMovies = () => {
@@ -313,6 +272,30 @@ const App = () => {
     })
   };
 
+  //event handler for genre buttons
+  const setGenreHandler = (event, index) => {
+    let selectedGenre = allGenres[index]
+    setGenre(selectedGenre)
+    searchByGenre()
+  }
+
+  //searches database by genre id, sets movies sorted by genre
+  const searchByGenre = () => {
+    axios({
+      url: '/discover/movie',
+      method: 'get',
+      baseURL: 'https://api.themoviedb.org/3',
+      params: {
+        api_key: process.env.REACT_APP_TMDB_KEY,
+        language: 'en-US',
+        with_genres: genre.id
+    }}).then((response) => {
+      setMoviesByGenre(response.data.results)
+      //console.log(moviesByGenre)
+    })
+  }
+
+
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
@@ -339,26 +322,107 @@ const App = () => {
 
   return(
     <>
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
-        <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
-        <Route path="/movies" element={<AllMovies currentUser={currentUser}/>}/>
-        <Route path="/action" element={<Action currentUser={currentUser}/>}/>
-        <Route path="/adventure" element={<Adventure currentUser={currentUser}/>}/>
-        <Route path="/comedy" element={<Comedy currentUser={currentUser}/>}/>
-        <Route path="/documentary" element={<Documentary currentUser={currentUser}/>}/>
-        <Route path="/drama" element={<Drama currentUser={currentUser}/>}/>
-        <Route path="/family" element={<Family currentUser={currentUser}/>}/>
-        <Route path="/fantasy" element={<Fantasy currentUser={currentUser}/>}/>
-        <Route path="/horror" element={<Horror currentUser={currentUser}/>}/>
-        <Route path="/romance" element={<Romance currentUser={currentUser}/>}/>
-        <Route path="/thriller" element={<Thriller currentUser={currentUser}/>}/>
 
-        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/> 
-      </Routes>
+      <header>
+        <div>
+          <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
+        </div>
+        <div className='head-button-container d-flex align-items-center'>
+          <Link to="/newaccount" state={handleNewUser}>Sign Up</Link>
+          <Link to="/login" state={handleLogin}>Log In</Link>
+          <Link to="/profile"><i class="bi bi-person user"></i></Link>
+          <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          </div>
+        </header>
+        <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+          <Link to="/movies">All Movies</Link>
+          <form onSubmit={handleSearch}>
+          <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
+          <input type="submit" value="search" id="submit-button"/>
+          </form>
+          <GenreNavBar/>
+        </div>
+        <div className='start-image'>
+        <h3>Spider-Man</h3>
+        <p>No Way Home</p>
+        <div className="stars">
+          <i class="bi bi-star-fill yellow "></i>
+          <i class="bi bi-star-fill yellow "></i>
+          <i class="bi bi-star-fill yellow "></i>
+          <i class="bi bi-star-fill yellow "></i>
+          <i class="bi bi-star-half yellow "></i>
+        </div>
+      </div>
+      <div className="movie-section">
+      <div className="row mt-4 mb-4">
+        <MovieType heading={searchString}/>
+        </div>
+        <div className="container-fluid movies">
+          <div className="row">
+            <Search search={search}/>
+          </div>
+        </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Trending Movies'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <TrendingMovies trendingMovies={trendingMovies}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Upcoming Movies'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <UpcomingMovies upcomingMovies={upcomingMovies}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Top Rated Movies'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <TopRated topRated={topRated}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Popular Movies'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <PopularMovies popularMovies={popularMovies}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Popular Shows'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <PopularShows popularShows={popularShows}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Top Rated Shows'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <TopRatedShows topRatedShows={topRatedShows}/>
+        </div>
+      </div>
+      <div className="row mt-4 mb-4">
+        <MovieType heading='Shows Airing Today'/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <DailyShows dailyShows={dailyShows}/>
+        </div>
+      </div>
+      </div>
     </>
   )
 }
 
-export default App;
+export default HomePage

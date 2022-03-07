@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const UpcomingMovies = (props) => {
+const Search = (props) => {
 
   const handleMovieAdd = (movie) => {
     axios({
@@ -28,9 +28,9 @@ const UpcomingMovies = (props) => {
   }
 
     return(
-        props.upcomingMovies.map((movie) => {
+        props.search.map((movie) => {
             let img = movie.poster_path
-            let full = 'http://image.tmdb.org/t/p/w185' + img;
+            let full = 'http://image.tmdb.org/t/p/w200' + img;
             return(
                 <div key={movie.id} className="image-container d-flex justify-content-start m-3 col">
                     <img src= {full}/>
@@ -51,4 +51,4 @@ const UpcomingMovies = (props) => {
     )
 }
 
-export default UpcomingMovies
+export default Search
