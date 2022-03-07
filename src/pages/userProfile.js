@@ -24,8 +24,8 @@ const UserProfile = (props) => {
   const getUserInfo = (props) => {
     axios({
       method: 'get',
-      url: '/users/:id',
-      baseURL: 'http://localhost:3000',
+      url: '/users/_:id',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       params: {
         _id: props.currentUser._id
       }
@@ -38,7 +38,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'http://localhost:3000'
+          baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -126,7 +126,8 @@ const UserProfile = (props) => {
         favoriteMovie:favoriteMovie
       }
     ).then(() => {
-      axios.get('https://powerful-garden-94854.herokuapp.com/users/_:id').then((response) => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/users/:_id').then((response) => {
+
         setFavoriteGenre(favoriteGenre)
         setStreamingProviders(streamingProviders)
         setFavoriteMovie(favoriteMovie)
@@ -156,7 +157,7 @@ const UserProfile = (props) => {
                 <>
                     <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
                     <Link to="/login"><button className="login">Log In</button></Link>
-                </>    
+                </>
                 }
         </div>
         <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">

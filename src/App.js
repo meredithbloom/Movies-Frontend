@@ -78,8 +78,8 @@ const App = () => {
       if (response) {
         axios({
           method: 'get',
-          url: '/users/:id',
-          baseURL: 'http://localhost:3003'
+          url: '/users/_:id',
+          baseURL: 'https://powerful-garden-94854.herokuapp.com'
         })
         console.log(response)
         setToggleError(false)
@@ -99,7 +99,7 @@ const App = () => {
     axios({
       method: 'put',
       url: '/users/login',
-      baseURL: 'http://localhost:3003',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
       if (response.data) {
