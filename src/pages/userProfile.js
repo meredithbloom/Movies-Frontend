@@ -153,6 +153,7 @@ const UserProfile = (props) => {
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
       <Link to="/movies">All Movies</Link>
       <GenreNavBar />
+      </div>
       <div className="profile-back-image">
         <h1 className="text-center " id="profile-welcome">Welcome To Your Profile!</h1>
       </div>
@@ -236,7 +237,6 @@ const UserProfile = (props) => {
           <input className="submit-button mt-4 " type='submit' value='Update Profile'/>
         </form>
       </div>
-    </div>
     </>
   )
 }
