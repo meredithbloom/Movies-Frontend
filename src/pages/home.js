@@ -14,14 +14,13 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
-import MoviesByGenre from '../components/moviesByGenre'
+import GenreNavBar from '../components/genreNavMenu'
 
 
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
-  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
@@ -34,6 +33,81 @@ const HomePage = () => {
   const [topRatedShows, setTopRatedShows] = useState([])
   const [dailyShows, setDailyShows] = useState([])
   const [search, setSearch] = useState([])
+
+
+
+  //user authentication
+  const [toggleLogin, setToggleLogin] = useState(true)
+  const [toggleError, setToggleError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [toggleLogout, setToggleLogout] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  //creating a user - is passed as props to login form route
+  const handleNewUser = (newUser) => {
+    axios({
+      method: 'post',
+      url: '/users/createaccount',
+      baseURL: 'http://localhost:3003',
+      data: newUser 
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setToggleError(false)
+        setErrorMessage('')
+        setCurrentUser(response.data)
+        setLoggedIn(true)
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(true)
+      }
+    })
+  }
+
+  const handleLogin = (userObj) => {
+    console.log(userObj)
+    axios({
+      method: 'put',
+      url: '/users/login',
+      baseURL: 'http://localhost:3003',
+      data: userObj
+    }).then((response) => {
+      if (response.data.username) {
+        console.log(response)
+        setCurrentUser(response.data)
+        setLoggedIn(true)  
+      } else {
+        setErrorMessage(response.data)
+        setToggleError(response.data)
+      }
+    })
+  }
+
+  //logout - returns user state to default
+  const handleLogout = () => {
+    setCurrentUser({})
+    handleToggleLogout()
+  }
+  
+  //for conditional rendering of login form/buttons up top
+  const handleToggleForm = () => {
+    setToggleError(false)
+    if (toggleLogin === true) {
+      setToggleLogin(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
+
+    //conditional rendering
+  const handleToggleLogout = () => {
+    if (toggleLogout) {
+      setToggleLogout(false)
+    } else {
+      setToggleLogout(true)
+    }
+  }
 
   //filtering by genre
   const allGenres =[

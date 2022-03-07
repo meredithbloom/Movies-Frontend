@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import RequireAuth from './components/RequireAuth'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
@@ -36,6 +35,7 @@ import Login from './pages/login'
 import AllMovies from './pages/all-movies'
 
 const App = () => {
+  const Navigate = useNavigate()
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState([])
@@ -57,8 +57,14 @@ const App = () => {
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [toggleLogout, setToggleLogout] = useState(false)
-  const [currentUser, setCurrentUser] = useState(false)
+  const [currentUser, setCurrentUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false)
+  
+  if (loggedIn) {
+    console.log('current user is named ', currentUser.name, ' and has username ', currentUser.username)
+  } else {
+    console.log('no one is logged in')
+  }
 
   //creating a user - is passed as props to login form route
   const handleNewUser = (newUser) => {
@@ -69,6 +75,11 @@ const App = () => {
       data: newUser 
     }).then((response) => {
       if (response.data.username) {
+        axios({
+          method: 'get',
+          url: '/users/:id',
+          baseURL: 'http://localhost:3003'
+        })
         console.log(response)
         setToggleError(false)
         setErrorMessage('')
@@ -83,7 +94,7 @@ const App = () => {
   }
 
   const handleLogin = (userObj) => {
-    console.log(userObj)
+    //console.log(userObj)
     axios({
       method: 'put',
       url: '/users/login',
@@ -92,19 +103,18 @@ const App = () => {
     }).then((response) => {
       if (response.data.username) {
         console.log(response)
+        setLoggedIn(true)
         setCurrentUser(response.data)
-        setLoggedIn(true)  
+        Navigate('/profile')
       } else {
         setErrorMessage(response.data)
         setToggleError(response.data)
       }
-      console.log(loggedIn)
     })
+    //showCurrentUser()
   }
 
-  const showCurrentUser = () => {
-    console.log(currentUser)
-  }
+  
 
   //logout - returns user state to default
   const handleLogout = () => {
@@ -339,8 +349,6 @@ const App = () => {
     getTopRatedShows()
     getDailyShows()
     searchByGenre()
-    showCurrentUser()
-
   }, [])
 
 
