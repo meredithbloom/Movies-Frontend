@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-const AllMovies = () => {
+const AllMovies = (props) => {
     const [opacity, setOpacity] = useState(0)
     const [zIndex, setzIndex] = useState(0)
     const [recommended, setRecommended] = useState([])

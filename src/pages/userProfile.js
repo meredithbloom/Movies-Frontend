@@ -3,13 +3,15 @@ import {useState, useEffect} from 'react'
 import MovieType from '../components/headingTitle'
 import DailyShows from '../components/dailyShows'
 import TrendingMovies from '../components/trendingmovies'
+import GenreNavBar from '../components/genreNavMenu'
 import axios from 'axios'
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
   const [watchList, setWatchList] = useState([])
+  const [user, setUser] = useState({})
   const [search, setSearch] = useState([])
   const [searchString, setSearchString] = useState('')
 

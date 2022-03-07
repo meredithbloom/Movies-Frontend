@@ -1,5 +1,5 @@
-import {useState, useEffect, useContext } from 'react'
-import AuthContext from '../context/AuthProvider'
+import {useState, useEffect } from 'react'
+import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
@@ -8,49 +8,69 @@ import { propTypes } from 'react-bootstrap/esm/Image'
 import GenreNavBar from '../components/genreNavMenu'
 
 
-const Login = () => {
-    //global context
-    const { setAuth } = useContext(AuthContext)
+const Login = (props) => {
+    //global context 
+    const { setAuth } = useAuth()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [toggleError, setToggleError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [currentUser, setCurrentUser] = useState({})
-    const [toggleLogout, setToggleLogout] = useState(true)
+    const [toggleLogout, setToggleLogout] = useState(false)
+    const [toggleLogin, setToggleLogin] = useState(true)
     const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedOut, setLoggedOut] = useState(true)
 
     const [opacity, setOpacity] = useState(0)
     const [zIndex, setzIndex] = useState(0)
 
 
 
-    const handleLogin = (event) => {
+    // const handleLogin = (event) => {
+    //     event.preventDefault()
+    //     axios({
+    //         method: 'put',
+    //         url: '/users/login',
+    //         baseURL: 'http://localhost:3003',
+    //         data: {
+    //             username,
+    //             password
+    //         }
+    //     })
+    //     .then((response) => {
+    //         if (response.data.username) {
+    //             console.log(response)
+    //             setCurrentUser(response.data)
+    //             setAuth({username, password})
+    //             setUsername('')
+    //             setPassword('')
+    //             setLoggedIn(true)
+    //         } else {
+    //             setErrorMessage(response.data)
+    //             setToggleError(true)
+    //         }
+    //     })
+    // }
+    
+
+    const triggerLogin = (event) => {
         event.preventDefault()
-        axios({
-            method: 'put',
-            url: '/users/login',
-            baseURL: 'http://localhost:3003',
-            data: {
-                username,
-                password
-            }
-        })
-        .then((response) => {
-            if (response.data.username) {
-                console.log(response)
-                setCurrentUser(response.data)
-                setAuth({username, password})
-                setUsername('')
-                setPassword('')
-                setLoggedIn(true)
-            } else {
-                setErrorMessage(response.data)
-                setToggleError(true)
-            }
-        })
+        let userObj = {
+            username,
+            password
+        }
+        props.handleLogin(userObj)
     }
 
+
+    // const handleToggleLogOut = () => {
+    //     if (toggleLogout) {
+    //         setToggleLogout(true)
+    //     } else {
+    //         setToggleLogout(false)
+    //     }
+    // }
 
     const setMenuOpacity = (event) => {
         if (opacity == 1) {
@@ -84,7 +104,7 @@ const Login = () => {
                 ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-                    <form onSubmit={handleLogin} className="inputForm">
+                    <form onSubmit={triggerLogin} className="inputForm">
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input

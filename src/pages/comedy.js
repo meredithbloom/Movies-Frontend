@@ -9,7 +9,7 @@ import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import GenreNavBar from '../components/genreNavMenu'
 
-const Comedy = () => {
+const Comedy = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
@@ -21,7 +21,7 @@ const Comedy = () => {
   })
   const [moviesByGenre, setMoviesByGenre] = useState([])
 
-  const searchByGenre = () => {
+  const searchByGenre = (props) => {
     axios({
       url: '/discover/movie',
       method: 'get',

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 
-const GenreNavBar = () => {
+const GenreNavBar = (props) => {
     return(
         <>
             <h2>Search By Genre</h2>

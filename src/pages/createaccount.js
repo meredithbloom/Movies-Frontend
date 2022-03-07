@@ -7,7 +7,7 @@ import { propTypes } from 'react-bootstrap/esm/Image'
 import GenreNavBar from '../components/genreNavMenu'
 
 
-const CreateAccount = () => {
+const CreateAccount = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -34,34 +34,44 @@ const CreateAccount = () => {
     }
 
 
-    const handleNewUser = (event) => {
+    const triggerNewUser = (event) => {
         event.preventDefault()
-        axios({
-            method: 'post',
-            url: '/users/createaccount',
-            baseURL: 'http://localhost:3003',
-            data: {
-                name: name,
-                email: email,
-                username: username,
-                password: password,
-                profPic: profPic
-            }
-        })
-        .then((response) => {
-            if (response.data.username) {
-                console.log(response)
-                setToggleError(false)
-                setErrorMessage('')
-                setCurrentUser(response.data)
-                setSuccess(true)
-            } else {
-                setErrorMessage(response.data)
-                setToggleError(true)
-            }
-        })
+        let newUser = {
+            name: name,
+            email: email,
+            username: username,
+            password: password
+        }
+        props.handleNewUser(newUser)
     }
 
+    // const handleNewUser = (event) => {
+    //     event.preventDefault()
+    //     axios({
+    //         method: 'post',
+    //         url: '/users/createaccount',
+    //         baseURL: 'http://localhost:3003',
+    //         data: {
+    //             name: name,
+    //             email: email,
+    //             username: username,
+    //             password: password
+    //         }
+    //     })
+    //     .then((response) => {
+    //         if (response.data.username) {
+    //             console.log(response)
+    //             setToggleError(false)
+    //             setErrorMessage('')
+    //             setCurrentUser(response.data)
+    //             setSuccess(true)
+    //         } else {
+    //             setErrorMessage(response.data)
+    //             setToggleError(true)
+    //         }
+    //     })
+    // }
+            
     return (
         <>
             <header>
@@ -90,7 +100,7 @@ const CreateAccount = () => {
                 ) : (
                     <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
-                        <form onSubmit={handleNewUser} className="input-form">
+                        <form onSubmit={triggerNewUser} className="input-form">
                             <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
                             <br/><br/>
                             <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
