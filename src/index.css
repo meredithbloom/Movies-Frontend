@@ -30,7 +30,7 @@ header{
   padding: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 8vh;
 }
 .start-image{
@@ -184,6 +184,10 @@ header{
   overflow-x: auto;
   flex-wrap: nowrap;
 }
+.scroll {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
 .movie-heading {
   font-size: 35px;
   margin: 10px 0 0 20px;
@@ -251,7 +255,7 @@ header{
   background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 46%, rgba(0,0,0,0.5777485994397759) 69%, rgba(0,0,0,1) 88%),url('https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  height: 180vh;
   position: absolute;
   top:0;
   z-index: -1;
@@ -278,7 +282,134 @@ header{
 #overlay-genres{
   width: 100%;
 }
+<<<<<<< HEAD
 
 p {
   color: white;
 }
+=======
+.overlay2 {
+  position: absolute;
+  background: rgb(0 0 0 / .9);
+  width:100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom:0;
+  padding: 20px;
+  background: black;
+  transition: all .5s ease-out;
+}
+.overlay2:hover{
+  opacity: .8;
+}
+.filled {
+  color: red;
+}
+.filledPlus {
+  color:#8b0ffc;
+}
+.user-movie{
+  position: relative;
+}
+.delete-button {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right:1px;
+  opacity: .1;
+}
+.delete-button:hover{
+  opacity: 1;
+}
+@media (max-width: 1250px){
+  .user-container{
+    flex-direction: column;
+  }
+}
+@media (max-width: 950px) {
+  .login, .signup{
+    font-size: 18px;
+    width: 7rem;
+  }
+  .head-button-container{
+    width: 10rem;
+    flex-direction: column;
+  }
+  .signup{
+    margin-bottom: 10px;
+  }
+  .nav-list{
+    padding: 40px;
+    font-size: 18px;
+    top: 12rem;
+  }
+  .nav-list > a {
+    font-size: 28px;
+  }
+  .nav-list > a:hover{
+    text-decoration: overline;
+  }
+  .start-image > h3{
+    font-size: 60px;
+  }
+  .start-image > p {
+    font-size: 30px;
+  }
+  .yellow{
+    font-size: 18px;
+    margin-left: .8rem;
+  }
+  .logo{
+    width: 15rem;
+  }
+  .content-box{
+    width: 100%;
+    font-size: 18px;
+  }
+  .user-image{
+    margin-top: 5vh;
+    width:100%;
+  }
+  #profile-welcome{
+    font-size: 30px;
+  }
+}
+@media (max-width: 450px) {
+  .logo{
+    width: 10rem;
+  }
+  .login, .signup{
+    font-size: 15px;
+    width: 5.5rem;
+  }
+  .head-button-container{
+    width: 10rem;
+    flex-direction: column;
+  }
+  .signup{
+    margin-bottom: 10px;
+  }
+  .search-box {
+    margin: 10px;
+    padding: 2px 3px;
+    width: 11rem;
+  }
+  #submit-button {
+    padding: 2px 8px;
+  }
+  .start-image > h3{
+    font-size: 40px;
+  }
+  .start-image > p {
+    font-size: 22px;
+  }
+  .yellow{
+    font-size: 15px;
+    margin-left: .5rem;
+  }
+  .stars{
+    margin-left: 4.5rem;
+  }
+}
+>>>>>>> de4e263a525a669ec9773fe4a668a89f157b7ce1

@@ -220,6 +220,7 @@ const HomePage = () => {
     })
   }
 
+
   const setMenuOpacity = (event) => {
     if (opacity == 1) {
       setOpacity(0)
@@ -247,6 +248,7 @@ const HomePage = () => {
   return(
     <>
 
+<<<<<<< HEAD
       <header>
         <div>
           <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
@@ -302,6 +304,19 @@ const HomePage = () => {
       <div className="container-fluid movies">
         <div className="row">
           <UpcomingMovies upcomingMovies={upcomingMovies}/>
+=======
+    <header>
+    <div>
+      <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
+    </div>
+      <div className='head-button-container d-flex align-items-end'>
+        <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
+        <button className="login">Log In</button>
+        <Link to="/profile"><i class="bi bi-person user"></i></Link>
+        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+>>>>>>> de4e263a525a669ec9773fe4a668a89f157b7ce1
         </div>
       </div>
       <div className="row mt-4 mb-4">
@@ -346,6 +361,7 @@ const HomePage = () => {
       </div>
       </div>
     </>
+
   )
 }
 
