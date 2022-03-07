@@ -9,7 +9,7 @@ import GenreNavBar from '../components/genreNavMenu'
 
 
 const Login = (props) => {
-    //global context 
+    //global context
     const { setAuth } = useAuth()
 
     const [username, setUsername] = useState('')
@@ -25,14 +25,23 @@ const Login = (props) => {
     const [opacity, setOpacity] = useState(0)
     const [zIndex, setzIndex] = useState(0)
 
-
-
+    // const getCurrentUser = (event) => {
+    //   axios({
+    //     method: 'get',
+    //     url: '/users/_:id',
+    //     baseURL: 'https://powerful-garden-94854.herokuapp.com'
+    //   }).then((response) => {
+    //     console.log({username,password});
+    //   })
+    // }
+    //
+    //
     // const handleLogin = (event) => {
     //     event.preventDefault()
     //     axios({
     //         method: 'put',
     //         url: '/users/login',
-    //         baseURL: 'http://localhost:3003',
+    //         baseURL: 'https://powerful-garden-94854.herokuapp.com',
     //         data: {
     //             username,
     //             password
@@ -52,16 +61,16 @@ const Login = (props) => {
     //         }
     //     })
     // }
-    
-
-    const triggerLogin = (event) => {
-        event.preventDefault()
-        let userObj = {
-            username,
-            password
-        }
-        props.handleLogin(userObj)
-    }
+    //
+    //
+    // const triggerLogin = (event) => {
+    //     event.preventDefault()
+    //     let userObj = {
+    //         username,
+    //         password
+    //     }
+    //     props.handleLogin(userObj)
+    // }
 
 
     // const handleToggleLogOut = () => {
@@ -104,7 +113,7 @@ const Login = (props) => {
                 ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-                    <form onSubmit={triggerLogin} className="inputForm">
+                    <form className="inputForm">
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input

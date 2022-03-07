@@ -265,7 +265,7 @@ header{
   background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 46%, rgba(0,0,0,0.5777485994397759) 69%, rgba(0,0,0,1) 88%),url('https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 180vh;
+  height: 205vh;
   position: absolute;
   top:0;
   z-index: -1;
@@ -294,6 +294,35 @@ header{
 }
 p {
   color: white;
+}
+.update {
+  width: 22rem;
+  padding: 5px;
+  border-radius: 10px;
+}
+label{
+  font-size: 18px;
+  margin: 1vh 0;
+}
+.submit-button{
+  background: rgb(255,0,204);
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
+  border:none;
+  font-size: 20px;
+  padding: 7px;
+  color:white;
+  font-family: 'Montserrat', serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease-out;
+  border-radius: 20px;
+  margin: 10vh 5rem;
+}
+.submit-button:hover{
+  transform: scale(1.08);
+}
+.submit-button:active{
+  transform: scale(1);
 }
 .overlay2 {
   position: absolute;

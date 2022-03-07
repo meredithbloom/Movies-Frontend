@@ -3,23 +3,26 @@ import {useState, useEffect} from 'react'
 import MovieType from '../components/headingTitle'
 import DailyShows from '../components/dailyShows'
 import TrendingMovies from '../components/trendingmovies'
-import GenreNavBar from '../components/genreNavMenu'
 import axios from 'axios'
 
-const UserProfile = (props) => {
+const UserProfile = () => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
   const [watchList, setWatchList] = useState([])
-  const [user, setUser] = useState({})
   const [search, setSearch] = useState([])
   const [searchString, setSearchString] = useState('')
+  const [name, setName] = useState('')
+  const [favoriteGenre, setFavoriteGenre] = useState('')
+  const [streamingProviders, setStreamingProviders] = useState('')
+  const [favoriteMovie, setFavoriteMovie] = useState('')
+
 
   const getFavorites = () => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'http://localhost:3000'
+          baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -30,27 +33,12 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/watchlist',
-          baseURL:'http://localhost:3000'
+          baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setWatchList(response.data)
           console.log(response.data);
       })
   }
-  const handleSearch = (event) => {
-    event.preventDefault()
-    // setSearchString(event.target.value);
-    axios({
-      url: '/search/movie',
-      method: 'get',
-      baseURL: 'https://api.themoviedb.org/3',
-      params: {
-        api_key: process.env.REACT_APP_TMDB_KEY,
-        language: 'en-US',
-        query: searchString
-      }
-    }).then((response) => {
-      setSearch(response.data.results)
-    })}
 
     const handleMovieAdd = (movie) => {
       axios({
@@ -101,6 +89,39 @@ const UserProfile = (props) => {
     }
   }
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  }
+  const handleFavoriteGenre = (event) => {
+    setFavoriteGenre(event.target.value);
+  }
+  const handleStreamingProviders = (event) => {
+    setStreamingProviders(event.target.value);
+  }
+  const handleFavoriteMovie = (event) => {
+    setFavoriteMovie(event.target.value);
+  }
+
+  const handleUserSubmitForm = (event) => {
+    event.preventDefault()
+    axios.put(
+      'https://powerful-garden-94854.herokuapp.com/users/_:id',
+      {
+        name:name,
+        favoriteGenre:favoriteGenre,
+        streamingProviders:streamingProviders,
+        favoriteMovie:favoriteMovie
+      }
+    ).then(() => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/users/_:id').then((response) => {
+        setName(name)
+        setFavoriteGenre(favoriteGenre)
+        setStreamingProviders(streamingProviders)
+        setFavoriteMovie(favoriteMovie)
+      })
+    })
+  }
+
   useEffect(() => {
     getFavorites()
     getWatchList()
@@ -140,10 +161,11 @@ const UserProfile = (props) => {
       <div className="container d-flex align-items-center justify-content-between user-container">
         <img className="user-image" src='/userimage.png'/>
         <div className="content-box">
+        <p>Name: {name}</p>
         <p>UserName:</p>
-        <p>Favorite Genre:</p>
-        <p>Streaming Providers:</p>
-        <p>Favorite Movie:</p>
+        <p>Favorite Genre: {favoriteGenre}</p>
+        <p>Streaming Providers: {streamingProviders}</p>
+        <p>Favorite Movie: {favoriteMovie}</p>
         </div>
       </div>
       <div className="row mt-4 mb-4">
@@ -161,7 +183,7 @@ const UserProfile = (props) => {
                     <div className ='overlay2 d-flex flex-row align-items-start justify-content-between'>
                     <div>
                       <p className='movie-title text-left'>{movie.title}</p>
-                      <p className="year">Year:{movie.release_date.substring(0,4)}</p>
+                      <p className="year">Year:{movie.release_date}</p>
                       </div>
                       <div className="d-flex flex-column justify-content-around">
                         <i class="bi bi-heart-fill heart-icon filled"></i>
@@ -189,7 +211,7 @@ const UserProfile = (props) => {
                     <div className ='overlay2 d-flex flex-row align-items-start justify-content-between'>
                     <div>
                       <p className='movie-title text-left'>{movie.title}</p>
-                      <p className="year">Year:{movie.release_date.substring(0,4)}</p>
+                      <p className="year">Year:{movie.release_date}</p>
                       </div>
                       <div className="d-flex flex-column justify-content-around">
                         <i onClick={event => handleMovieAdd(movie)} class="bi bi-heart-fill heart-icon"></i>
@@ -201,6 +223,23 @@ const UserProfile = (props) => {
             )
         })}
         </div>
+      </div>
+      <div className="form-container container d-flex flex-column
+      align-items-center">
+        <div className="form-title">
+          <h2>Update Your Profile</h2>
+        </div>
+        <form onSubmit={handleUserSubmitForm}>
+          <label>Name:</label><br/>
+          <input className="update" type='text' onChange={handleNameChange} required/><br/>
+          <label>Favorite Genere:</label><br/>
+          <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
+          <label>Streaming Providers:</label><br/>
+          <input className="update" type='text' onChange={handleStreamingProviders}/><br/>
+          <label>Favorite Movie:</label><br/>
+          <input className="update" type='text' onChange={handleFavoriteMovie}/><br/>
+          <input className="submit-button mt-4 " type='submit' value='Update Profile'/>
+        </form>
       </div>
     </>
   )
