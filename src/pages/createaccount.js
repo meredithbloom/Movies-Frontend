@@ -90,16 +90,20 @@ const CreateAccount = () => {
                 <h1 className="formTitle">Create an Account</h1>
                 <form onSubmit={handleNewUser} className="input-form">
                     <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
+                    <br/><br/>
                     <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
+                    <br/><br/>
                     <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>
+                    <br/><br/>
                     <input type="password" placeholder="password" className="text-input" onChange={(event) => {setPassword(event.target.value)}}/>
-                    <input type="text" placeholder="profile picture" onChange={(event) => {setProfPic(event.target.value)}}/>
+            
                     
                     {toggleError ?
                     <h5 className="error-msg">{errorMessage}</h5>
                     :
                     null
                 }
+                <br/><br/>
                 <input type="submit" value="Register" className="submit-btn"/>
                 </form>
             </div>
