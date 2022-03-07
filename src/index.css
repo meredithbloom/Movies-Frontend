@@ -281,6 +281,21 @@ header{
 .user-image{
   margin-top: 0;
 }
+.logout{
+  background: rgb(255,0,204);
+  background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
+  border:none;
+  font-size: 20px;
+  padding: 5px 8px;
+  color:white;
+  font-family: 'Montserrat', serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease-out;
+}
+.logout:hover{
+  transform: scale(1.08);
+}
 .content-box{
   background: rgb(0 0 0 /.5);
   width: 50rem;

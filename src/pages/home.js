@@ -51,7 +51,7 @@ const HomePage = (props) => {
       method: 'post',
       url: '/users/createaccount',
       baseURL: 'http://localhost:3003',
-      data: newUser 
+      data: newUser
     }).then((response) => {
       if (response.data.username) {
         console.log(response)
@@ -77,7 +77,7 @@ const HomePage = (props) => {
       if (response.data.username) {
         console.log(response)
         setCurrentUser(response.data)
-        setLoggedIn(true)  
+        setLoggedIn(true)
       } else {
         setErrorMessage(response.data)
         setToggleError(response.data)
@@ -90,7 +90,7 @@ const HomePage = (props) => {
     setCurrentUser({})
     handleToggleLogout()
   }
-  
+
   //for conditional rendering of login form/buttons up top
   const handleToggleForm = () => {
     setToggleError(false)
@@ -333,12 +333,13 @@ const HomePage = (props) => {
                 <>
                     <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
                     <Link to="/login"><button className="login">Log In</button></Link>
-                </>    
+                </>
                 }
-        </div>
-        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
+                <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+              </div>
+
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
       <Link to="/movies">All Movies</Link>
