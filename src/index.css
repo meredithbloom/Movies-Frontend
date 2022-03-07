@@ -299,6 +299,9 @@ header{
 .filled {
   color: red;
 }
+.filledPlus {
+  color:#8b0ffc;
+}
 .user-movie{
   position: relative;
 }
@@ -312,14 +315,6 @@ header{
 }
 .delete-button:hover{
   opacity: 1;
-}
-.bookmark{
-  position: absolute;
-  top:-8px;
-  left: -4px;
-  font-size: 30px;
-  color: white;
-  opacity: 0;
 }
 @media (max-width: 1250px){
   .user-container{

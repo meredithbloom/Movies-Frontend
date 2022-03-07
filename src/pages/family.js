@@ -55,7 +55,7 @@ const Family = () => {
       axios({
         method: 'post',
         url: '/favorites',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]
@@ -67,7 +67,7 @@ const Family = () => {
       axios({
         method: 'post',
         url: '/watchlist',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]

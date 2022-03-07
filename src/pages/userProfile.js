@@ -54,7 +54,7 @@ const UserProfile = () => {
       axios({
         method: 'post',
         url: '/favorites',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]
@@ -66,7 +66,7 @@ const UserProfile = () => {
       axios({
         method: 'post',
         url: '/watchlist',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]
@@ -75,15 +75,15 @@ const UserProfile = () => {
     }
 
   const handleFavoriteDelete = (movie) => {
-    axios.delete(`http://localhost:3000/favorites/${movie._id}`).then(() => {
-      axios.get('http://localhost:3000/favorites').then((response) => {
+    axios.delete(`http://https://powerful-garden-94854.herokuapp.com/favorites/${movie._id}`).then(() => {
+      axios.get('http://https://powerful-garden-94854.herokuapp.com/favorites').then((response) => {
         setFavorites(response.data)
       })
     })
   }
   const handleWatchListDelete = (movie) => {
-    axios.delete(`http://localhost:3000/watchlist/${movie._id}`).then(() => {
-      axios.get('http://localhost:3000/watchlist').then((response) => {
+    axios.delete(`http://https://powerful-garden-94854.herokuapp.com/watchlist/${movie._id}`).then(() => {
+      axios.get('http://https://powerful-garden-94854.herokuapp.com/watchlist').then((response) => {
         setWatchList(response.data)
       })
     })
