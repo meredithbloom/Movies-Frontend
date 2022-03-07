@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext } from 'react'
+import AuthContext from '../context/AuthProvider'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
@@ -7,13 +8,16 @@ import { propTypes } from 'react-bootstrap/esm/Image'
 
 
 const Login = () => {
+    //global context 
+    const { setAuth } = useContext(AuthContext)
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [toggleError, setToggleError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [currentUser, setCurrentUser] = useState({})
-    const [toggleLogin, setToggleLogin] = useState(false)
     const [toggleLogout, setToggleLogout] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const [opacity, setOpacity] = useState(0)
     const [zIndex, setzIndex] = useState(0)
@@ -27,35 +31,25 @@ const Login = () => {
             url: '/users/login',
             baseURL: 'http://localhost:3003',
             data: {
-                username: username,
-                password: password
+                username,
+                password
             }
         })
         .then((response) => {
             if (response.data.username) {
                 console.log(response)
-                setToggleError(false)
-                setErrorMessage('')
                 setCurrentUser(response.data)
-                setToggleLogin(true)
-                
+                setAuth({username, password})
+                setUsername('')
+                setPassword('')
+                setLoggedIn(true)
             } else {
                 setErrorMessage(response.data)
                 setToggleError(true)
             }
         })
-        console.log(currentUser.username)
     }
     
-
-    // const triggerLogin = (event) => {
-    //     event.preventDefault()
-    //     let userObj = {
-    //         username: username,
-    //         password: password
-    //     }
-    // }
-
 
     const setMenuOpacity = (event) => {
         if (opacity == 1) {
@@ -81,6 +75,7 @@ const Login = () => {
                 </div>
             </header>
             <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+                <Link to="/movies">All Movies</Link>
                 <h2>Search By Genre</h2>
                 <Link to="/action">Action</Link>
                 <Link to="/adventure">Adventure</Link>
@@ -93,21 +88,49 @@ const Login = () => {
                 <Link to="/romance">Romance</Link>
                 <Link to="/thriller">Thriller</Link>
             </div>
-            <div className="formContainer">
-                <h1 className='form-title'>Login</h1>
-                <form onSubmit={handleLogin} className="inputForm">
-                    <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>
-                    <input type="password" placeholder="password" className="text-input" onChange={(event) => {setPassword(event.target.value)}}/>
+            <>
+                {loggedIn ? (
+                    <section>
+                        <h1>You are logged in!</h1>
+                        <br/>
+                        <p>
+                            <a href="#">Go to Home</a>
+                        </p>
+                    </section>
+                ) : (
+                <section className="formContainer">
+                    <h1 className='form-title'>Login</h1>
+                    <form onSubmit={handleLogin} className="inputForm">
+                        <label htmlFor="username">Username: </label>
+                        <input
+                            type="text"
+                            id="username"
+                            className="text-input" 
+                            onChange={(event) => {setUsername(event.target.value)}}
+                            value={username}
+                            required
+                        />
+                        <label htmlFor="password">Password: </label>
+                        <input
+                            type="password"
+                            id="password" 
+                            className="text-input" 
+                            onChange={(event) => {setPassword(event.target.value)}}
+                            value={password}
+                            required
+                        />
 
-                    {toggleError ?
-                    <h5 className="error-msg">{errorMessage}</h5>
-                    :
-                    null
-                    }
+                        {toggleError ?
+                        <h5 className="error-msg">{errorMessage}</h5>
+                        :
+                        null
+                        }
 
-                    <input type="submit" value="Login" className="submit-btn"/>    
-                </form>
-            </div>
+                        <input type="submit" value="Login" className="submit-btn"/>    
+                    </form>
+                </section>
+                )}
+            </>
         </>
     )
 

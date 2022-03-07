@@ -73,6 +73,7 @@ const CreateAccount = () => {
                 </div>
             </header>
             <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+                <Link to="/movies">All Movies</Link>
                 <h2>Search By Genre</h2>
                 <Link to="/action">Action</Link>
                 <Link to="/adventure">Adventure</Link>

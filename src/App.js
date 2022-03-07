@@ -258,8 +258,6 @@ const App = () => {
 
   return(
     <>
-    <BrowserRouter>
-      <div ClassName="content">
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount/>}/>
@@ -277,9 +275,6 @@ const App = () => {
         <Route path="/thriller" element={<Thriller/>}/>
         <Route path="/profile" element={<UserProfile/>}/>
       </Routes>
-      </div>
-
-    </BrowserRouter>
     </>
   )
 }

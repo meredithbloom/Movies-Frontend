@@ -15,6 +15,7 @@ import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
 import MoviesByGenre from '../components/moviesByGenre'
+import AuthContext from '../context/AuthProvider'
 
 
 
