@@ -7,8 +7,6 @@ import MovieType from '../components/headingTitle'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import GenreNavBar from '../components/genreNavMenu'
-import AuthContext from '../context/AuthProvider'
 
 const AllMovies = (props) => {
     const [opacity, setOpacity] = useState(0)
@@ -33,7 +31,7 @@ const AllMovies = (props) => {
       axios({
         method: 'post',
         url: '/favorites',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]

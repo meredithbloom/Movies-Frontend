@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
@@ -15,12 +15,8 @@ import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
 import MoviesByGenre from '../components/moviesByGenre'
-import GenreNavBar from '../components/genreNavMenu'
-import AuthContext from '../context/AuthProvider'
-
 
 const HomePage = () => {
-  const { setAuth } = useContext(AuthContext)
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState([])
@@ -355,15 +351,15 @@ const HomePage = () => {
           <i class="bi bi-star-half yellow "></i>
         </div>
       </div>
-      <div className="movie-section">
+    <div className="movie-section">
       <div className="row mt-4 mb-4">
         <MovieType heading={searchString}/>
+      </div>
+      <div className="container-fluid movies">
+        <div className="row">
+          <Search search={search}/>
         </div>
-        <div className="container-fluid movies">
-          <div className="row">
-            <Search search={search}/>
-          </div>
-        </div>
+      </div>
       <div className="row mt-4 mb-4">
         <MovieType heading='Trending Movies'/>
       </div>
@@ -420,8 +416,9 @@ const HomePage = () => {
           <DailyShows dailyShows={dailyShows}/>
         </div>
       </div>
-      </div>
+    </div>
     </>
+
   )
 }
 

@@ -5,7 +5,7 @@ const DailyShows = (props) => {
 
 
   const pushToFav = (event) => {
-    
+
   }
     return(
         props.dailyShows.map((show) => {

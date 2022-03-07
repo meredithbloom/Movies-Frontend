@@ -3,10 +3,11 @@ import axios from 'axios'
 const TrendingMovies = (props) => {
 
   const handleMovieAdd = (movie) => {
+
     axios({
       method: 'post',
       url: '/favorites',
-      baseURL:'http://localhost:3000',
+      baseURL:'https://powerful-garden-94854.herokuapp.com',
       data:[
         movie
       ]
@@ -18,7 +19,7 @@ const TrendingMovies = (props) => {
     axios({
       method: 'post',
       url: '/watchlist',
-      baseURL:'http://localhost:3000',
+      baseURL:'https://powerful-garden-94854.herokuapp.com',
       data:[
         movie
       ]
@@ -43,10 +44,15 @@ const TrendingMovies = (props) => {
                         <i onClick={event => handleWatchListAdd(movie)}class="bi bi-plus-circle-fill plus-icon"></i>
                         <i class="bi bi-check-circle-fill check-icon"></i>
                       </div>
+
                     </div>
+
                 </div>
+
             )
+
         })
+
     )
 }
 

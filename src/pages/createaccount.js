@@ -83,7 +83,7 @@ const CreateAccount = (props) => {
                         {success ? (
                             <Link to="/profile"><i class="bi bi-person user"></i></Link>
                         ) : (
-                            <Link to="/login">Log In</Link>
+                            <Link to="/login"><button className="login">Log In</button></Link>
                         )}
                     </>
                     <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
@@ -98,7 +98,7 @@ const CreateAccount = (props) => {
                 {success ? (
                     <h1>Welcome, {username}!</h1>
                 ) : (
-                    <section className="new-user-form formContainer">
+                    <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
                         <form onSubmit={triggerNewUser} className="input-form">
                             <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
@@ -114,10 +114,10 @@ const CreateAccount = (props) => {
                             null
                         }
                         <br/><br/>
-                        <input type="submit" value="Register" className="submit-btn"/>
+                        <input type="submit" value="Register" className="submit-btn signup"/>
                         </form>
                     </section>
-                )}     
+                )}
             </>
         </>
     )

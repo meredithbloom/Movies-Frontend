@@ -6,10 +6,7 @@ import TrendingMovies from '../components/trendingmovies'
 import GenreNavBar from '../components/genreNavMenu'
 import axios from 'axios'
 
-
-
-//needs some current user state? 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
@@ -59,7 +56,7 @@ const UserProfile = () => {
       axios({
         method: 'post',
         url: '/favorites',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]
@@ -71,7 +68,7 @@ const UserProfile = () => {
       axios({
         method: 'post',
         url: '/watchlist',
-        baseURL:'http://localhost:3000',
+        baseURL:'https://powerful-garden-94854.herokuapp.com',
         data:[
           movie
         ]
@@ -80,15 +77,15 @@ const UserProfile = () => {
     }
 
   const handleFavoriteDelete = (movie) => {
-    axios.delete(`http://localhost:3000/favorites/${movie._id}`).then(() => {
-      axios.get('http://localhost:3000/favorites').then((response) => {
+    axios.delete(`https://powerful-garden-94854.herokuapp.com/favorites/${movie._id}`).then(() => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/favorites').then((response) => {
         setFavorites(response.data)
       })
     })
   }
   const handleWatchListDelete = (movie) => {
-    axios.delete(`http://localhost:3000/watchlist/${movie._id}`).then(() => {
-      axios.get('http://localhost:3000/watchlist').then((response) => {
+    axios.delete(`https://powerful-garden-94854.herokuapp.com/watchlist/${movie._id}`).then(() => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/watchlist').then((response) => {
         setWatchList(response.data)
       })
     })
@@ -116,9 +113,9 @@ const UserProfile = () => {
     <div>
       <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
     </div>
-      <div className='head-button-container d-flex align-items-center justify-content-end'>
+      <div className='head-button-container d-flex align-items-end justify-content-end'>
         <Link to="/"><i class="bi bi-house house"></i></Link>
-        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
         </div>
@@ -138,9 +135,9 @@ const UserProfile = () => {
         <Link to="/thriller">Thriller</Link>
       </div>
       <div className="profile-back-image">
-        <h1 className="text-center">Welcome To Your Profile!</h1>
+        <h1 className="text-center " id="profile-welcome">Welcome To Your Profile!</h1>
       </div>
-      <div className="container d-flex align-items-center justify-content-between">
+      <div className="container d-flex align-items-center justify-content-between user-container">
         <img className="user-image" src='/userimage.png'/>
         <div className="content-box">
         <p>UserName:</p>
