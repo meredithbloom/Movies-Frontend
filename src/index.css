@@ -251,7 +251,7 @@ header{
   background:linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7945553221288515) 46%, rgba(0,0,0,0.5777485994397759) 69%, rgba(0,0,0,1) 88%),url('https://images.unsplash.com/photo-1606579335925-ea67bcbd09c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80') no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  height: 180vh;
   position: absolute;
   top:0;
   z-index: -1;
@@ -277,4 +277,39 @@ header{
 }
 #overlay-genres{
   width: 100%;
+}
+.overlay2 {
+  position: absolute;
+  background: rgb(0 0 0 / .9);
+  width:100%;
+  transition: 0.5s ease;
+  opacity: .6;
+  bottom:0;
+  padding: 20px;
+  background: black;
+}
+.filled {
+  color: red;
+}
+.user-movie{
+  position: relative;
+}
+.delete-button {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right:1px;
+  opacity: .1;
+}
+.delete-button:hover{
+  opacity: 1;
+}
+.bookmark{
+  position: absolute;
+  top:-8px;
+  left: -4px;
+  font-size: 30px;
+  color: white;
+  opacity: 0;
 }
