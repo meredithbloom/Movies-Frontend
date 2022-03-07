@@ -299,6 +299,9 @@ header{
 .filled {
   color: red;
 }
+.filledPlus {
+  color:#8b0ffc;
+}
 .user-movie{
   position: relative;
 }
@@ -309,6 +312,7 @@ header{
   position: absolute;
   right:1px;
   opacity: .1;
+  transition: all .3s ease-out;
 }
 .delete-button:hover{
   opacity: 1;

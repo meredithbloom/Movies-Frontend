@@ -23,6 +23,17 @@ const UserProfile = () => {
           console.log(response.data);
       })
   }
+
+  const getWatchList = () => {
+      axios({
+          method: 'get',
+          url: '/watchlist',
+          baseURL:'http://localhost:3000'
+      }).then((response) => {
+          setWatchList(response.data)
+          console.log(response.data);
+      })
+  }
   const handleSearch = (event) => {
     event.preventDefault()
     // setSearchString(event.target.value);
@@ -39,10 +50,41 @@ const UserProfile = () => {
       setSearch(response.data.results)
     })}
 
-  const handleDelete = (movie) => {
+    const handleMovieAdd = (movie) => {
+      axios({
+        method: 'post',
+        url: '/favorites',
+        baseURL:'http://localhost:3000',
+        data:[
+          movie
+        ]
+      })
+      console.log(movie);
+    }
+
+    const handleWatchListAdd = (movie) => {
+      axios({
+        method: 'post',
+        url: '/watchlist',
+        baseURL:'http://localhost:3000',
+        data:[
+          movie
+        ]
+      })
+      console.log(movie);
+    }
+
+  const handleFavoriteDelete = (movie) => {
     axios.delete(`http://localhost:3000/favorites/${movie._id}`).then(() => {
       axios.get('http://localhost:3000/favorites').then((response) => {
         setFavorites(response.data)
+      })
+    })
+  }
+  const handleWatchListDelete = (movie) => {
+    axios.delete(`http://localhost:3000/watchlist/${movie._id}`).then(() => {
+      axios.get('http://localhost:3000/watchlist').then((response) => {
+        setWatchList(response.data)
       })
     })
   }
@@ -59,7 +101,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     getFavorites()
-
+    getWatchList()
   }, [])
 
 
@@ -117,7 +159,7 @@ const UserProfile = () => {
             return(
                 <div key={movie.id} className="image-container d-flex justify-content-start m-3 ">
                     <img src= {full}/>
-                    <button onClick={(event) => {handleDelete(movie)}} className="delete-button">X</button>
+                    <button onClick={(event) => {handleFavoriteDelete(movie)}} className="delete-button">X</button>
                     <div className ='overlay2 d-flex flex-row align-items-start justify-content-between'>
                     <div>
                       <p className='movie-title text-left'>{movie.title}</p>
@@ -125,7 +167,7 @@ const UserProfile = () => {
                       </div>
                       <div className="d-flex flex-column justify-content-around">
                         <i class="bi bi-heart-fill heart-icon filled"></i>
-                        <i class="bi bi-plus-circle-fill plus-icon"></i>
+                        <i onClick={event => handleWatchListAdd(movie)}class="bi bi-plus-circle-fill plus-icon"></i>
                         <i class="bi bi-check-circle-fill check-icon"></i>
                       </div>
                     </div>
@@ -138,7 +180,29 @@ const UserProfile = () => {
         <MovieType heading='Want To Watch List'/>
       </div>
       <div className="container-fluid movies">
-        {watchList}
+      <div className=" d-flex justify-content-start align-items-start scroll">
+        {watchList.map((movie) => {
+            let img = movie.poster_path
+            let full = 'http://image.tmdb.org/t/p/w200' + img;
+            return(
+                <div key={movie.id} className="image-container d-flex justify-content-start m-3 ">
+                    <img src= {full}/>
+                    <button onClick={(event) => {handleWatchListDelete(movie)}} className="delete-button">X</button>
+                    <div className ='overlay2 d-flex flex-row align-items-start justify-content-between'>
+                    <div>
+                      <p className='movie-title text-left'>{movie.title}</p>
+                      <p className="year">Year:{movie.release_date.substring(0,4)}</p>
+                      </div>
+                      <div className="d-flex flex-column justify-content-around">
+                        <i onClick={event => handleMovieAdd(movie)} class="bi bi-heart-fill heart-icon"></i>
+                        <i class="bi bi-plus-circle-fill plus-icon filledPlus"></i>
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                      </div>
+                    </div>
+                </div>
+            )
+        })}
+        </div>
       </div>
     </>
   )
