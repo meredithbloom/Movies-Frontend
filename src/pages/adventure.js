@@ -10,7 +10,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import GenreNavBar from '../components/genreNavMenu'
 
 
-const Action = () => {
+const Adventure = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
@@ -137,4 +137,4 @@ const Action = () => {
   )
 }
 
-export default Action
+export default Adventure

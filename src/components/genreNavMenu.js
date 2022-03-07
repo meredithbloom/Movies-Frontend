@@ -5,7 +5,7 @@ const GenreNavBar = (props) => {
     return(
         <>
             <h2>Search By Genre</h2>
-            <Link to="/action" state={{}}>Action</Link>
+            <Link to="/action">Action</Link>
             <Link to="/adventure">Adventure</Link>
             <Link to="/comedy">Comedy</Link>
             <Link to="/documentary">Documentary</Link>

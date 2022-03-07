@@ -79,6 +79,7 @@ const App = () => {
         setToggleError(true)
       }
     })
+    //console.log(currentUser)
   }
 
   const handleLogin = (userObj) => {
@@ -97,7 +98,12 @@ const App = () => {
         setErrorMessage(response.data)
         setToggleError(response.data)
       }
+      console.log(loggedIn)
     })
+  }
+
+  const showCurrentUser = () => {
+    console.log(currentUser)
   }
 
   //logout - returns user state to default
@@ -333,6 +339,7 @@ const App = () => {
     getTopRatedShows()
     getDailyShows()
     searchByGenre()
+    showCurrentUser()
 
   }, [])
 

@@ -22,7 +22,7 @@ const Family = () => {
   })
   const [moviesByGenre, setMoviesByGenre] = useState([])
 
-  const searchByGenre = () => {
+  const searchByGenre = (props) => {
     axios({
       url: '/discover/movie',
       method: 'get',

@@ -9,7 +9,7 @@ import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import GenreNavBar from '../components/genreNavMenu'
 
-const Action = () => {
+const Action = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])

@@ -10,7 +10,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import GenreNavBar from '../components/genreNavMenu'
 
 
-const Fantasy = () => {
+const Fantasy = (props) => {
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [recommended, setRecommended] = useState([])
