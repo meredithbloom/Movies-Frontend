@@ -15,6 +15,10 @@ const UserProfile = (props) => {
   const [search, setSearch] = useState([])
   const [searchString, setSearchString] = useState('')
   const [currentUserInfo, setCurrentUserInfo] = useState({})
+  const [favoriteGenre, setFavoriteGenre] = useState('')
+  const [streamingProviders, setStreamingProviders] = useState('')
+  const [favoriteMovie, setFavoriteMovie] = useState('')
+  
 
   const getUserInfo = () => {
     axios({
