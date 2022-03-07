@@ -75,15 +75,15 @@ const UserProfile = () => {
     }
 
   const handleFavoriteDelete = (movie) => {
-    axios.delete(`http://https://powerful-garden-94854.herokuapp.com/favorites/${movie._id}`).then(() => {
-      axios.get('http://https://powerful-garden-94854.herokuapp.com/favorites').then((response) => {
+    axios.delete(`https://powerful-garden-94854.herokuapp.com/favorites/${movie._id}`).then(() => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/favorites').then((response) => {
         setFavorites(response.data)
       })
     })
   }
   const handleWatchListDelete = (movie) => {
-    axios.delete(`http://https://powerful-garden-94854.herokuapp.com/watchlist/${movie._id}`).then(() => {
-      axios.get('http://https://powerful-garden-94854.herokuapp.com/watchlist').then((response) => {
+    axios.delete(`https://powerful-garden-94854.herokuapp.com/watchlist/${movie._id}`).then(() => {
+      axios.get('https://powerful-garden-94854.herokuapp.com/watchlist').then((response) => {
         setWatchList(response.data)
       })
     })

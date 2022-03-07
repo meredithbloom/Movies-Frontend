@@ -282,12 +282,9 @@ header{
 #overlay-genres{
   width: 100%;
 }
-<<<<<<< HEAD
-
 p {
   color: white;
 }
-=======
 .overlay2 {
   position: absolute;
   background: rgb(0 0 0 / .9);
@@ -412,4 +409,3 @@ p {
     margin-left: 4.5rem;
   }
 }
->>>>>>> de4e263a525a669ec9773fe4a668a89f157b7ce1

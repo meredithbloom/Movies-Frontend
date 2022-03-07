@@ -44,7 +44,7 @@ const CreateAccount = () => {
                 name: name,
                 email: email,
                 username: username,
-                password: password, 
+                password: password,
                 profPic: profPic
             }
         })
@@ -61,7 +61,7 @@ const CreateAccount = () => {
             }
         })
     }
-            
+
     return (
         <>
             <header>
@@ -73,7 +73,7 @@ const CreateAccount = () => {
                         {success ? (
                             <Link to="/profile"><i class="bi bi-person user"></i></Link>
                         ) : (
-                            <Link to="/login">Log In</Link>
+                            <Link to="/login"><button className="login">Log In</button></Link>
                         )}
                     </>
                     <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
@@ -107,7 +107,7 @@ const CreateAccount = () => {
                         <input type="submit" value="Register" className="submit-btn"/>
                         </form>
                     </section>
-                )}     
+                )}
             </>
         </>
     )
