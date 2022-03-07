@@ -16,7 +16,17 @@ const UserProfile = () => {
   const [favoriteGenre, setFavoriteGenre] = useState('')
   const [streamingProviders, setStreamingProviders] = useState('')
   const [favoriteMovie, setFavoriteMovie] = useState('')
+  const [userInfo, setUserInfo] = useState('')
 
+  const getUserInfo = () => {
+    axios({
+      method: 'get',
+      url: '/user/:id',
+      baseURL:'https://powerful-garden-94854.herokuapp.com'
+    }).then((response) => {
+      setUserInfo(response.data);
+        })
+    }
 
   const getFavorites = () => {
       axios({
