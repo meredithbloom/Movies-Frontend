@@ -68,13 +68,14 @@ const App = () => {
 
   //creating a user - is passed as props to login form route
   const handleNewUser = (newUser) => {
+    console.log(newUser);
     axios({
       method: 'post',
       url: '/users/createaccount',
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: newUser
     }).then((response) => {
-      if (response.data.username) {
+      if (response.data) {
         axios({
           method: 'get',
           url: '/users/:id',
@@ -94,15 +95,15 @@ const App = () => {
   }
 
   const handleLogin = (userObj) => {
-    //console.log(userObj)
+    console.log(userObj)
     axios({
       method: 'put',
       url: '/users/login',
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
-      if (response.data.username) {
-        console.log(response)
+      if (response.data) {
+        // console.log(response.data)
         setLoggedIn(true)
         setCurrentUser(response.data)
         Navigate('/profile')
