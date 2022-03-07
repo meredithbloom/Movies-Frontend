@@ -57,7 +57,7 @@ const App = () => {
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [toggleLogout, setToggleLogout] = useState(false)
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
 
   if (loggedIn) {
