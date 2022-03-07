@@ -275,7 +275,7 @@ const App = () => {
         <Route path="/romance" element={<Romance/>}/>
         <Route path="/thriller" element={<Thriller/>}/>
 
-        
+
         <Route path="/profile" element={<UserProfile/>}/>
       </Routes>
     </>
