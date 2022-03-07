@@ -3,6 +3,8 @@ import {useState} from 'react'
 import MovieType from '../components/headingTitle'
 import DailyShows from '../components/dailyShows'
 import TrendingMovies from '../components/trendingmovies'
+import GenreNavBar from '../components/genreNavMenu'
+
 
 
 //needs some current user state? 

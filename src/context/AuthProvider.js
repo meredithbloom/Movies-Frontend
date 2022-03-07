@@ -6,6 +6,7 @@ import { createContext, useState } from 'react'
 
 const AuthContext = createContext({})
 
+// children represent the components nested inside of the auth provider
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({})
 

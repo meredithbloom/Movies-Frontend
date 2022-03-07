@@ -6,7 +6,11 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// allows us to nest all our other routes inside AuthProvider (context), giving global access to user information
 import { AuthProvider } from './context/AuthProvider'
+
+
 
 ReactDOM.render(
   <React.StrictMode>

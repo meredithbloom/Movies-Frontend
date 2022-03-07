@@ -3,8 +3,9 @@ import AuthContext from '../context/AuthProvider'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
 import { propTypes } from 'react-bootstrap/esm/Image'
+import GenreNavBar from '../components/genreNavMenu'
 
 
 const Login = () => {
@@ -75,28 +76,11 @@ const Login = () => {
                 </div>
             </header>
             <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-                <Link to="/movies">All Movies</Link>
-                <h2>Search By Genre</h2>
-                <Link to="/action">Action</Link>
-                <Link to="/adventure">Adventure</Link>
-                <Link to="/comedy">Comedy</Link>
-                <Link to="/documentary">Documentary</Link>
-                <Link to="/drama">Drama</Link>
-                <Link to="/family">Family</Link>
-                <Link to="/fantasy">Fantasy</Link>
-                <Link to="/horror">Horror</Link>
-                <Link to="/romance">Romance</Link>
-                <Link to="/thriller">Thriller</Link>
+                <GenreNavBar/>
             </div>
             <>
                 {loggedIn ? (
-                    <section>
-                        <h1>You are logged in!</h1>
-                        <br/>
-                        <p>
-                            <a href="#">Go to Home</a>
-                        </p>
-                    </section>
+                    <Navigate to="/profile"/>
                 ) : (
                 <section className="formContainer">
                     <h1 className='form-title'>Login</h1>
