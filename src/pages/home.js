@@ -15,10 +15,11 @@ import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
 import GenreNavBar from '../components/genreNavMenu'
+import Header from '../components/headernav'
 
 
 
-const HomePage = () => {
+const HomePage = (props) => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [topRated, setTopRated] = useState([])
@@ -318,18 +319,26 @@ const HomePage = () => {
   return(
     <>
 
-    <header>
-    <div>
-      <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
-    </div>
-      <div className='head-button-container d-flex align-items-end'>
-      <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
-      <Link to="/login"><button className="login">Log In</button></Link>
-        <Link to="/profile"><i class="bi bi-person user"></i></Link>
-        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+      <header>
+        <div>
+            <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
+        </div>
+        <div className='head-button-container d-flex align-items-center'>
+            {props.isLoggedIn ?
+                <>
+                    <Link to="/profile"><i class="bi bi-person user"></i></Link>
+                    <button className="logout">Log Out</button>
+                </>
+                    :
+                <>
+                    <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
+                    <Link to="/login"><button className="login">Log In</button></Link>
+                </>    
+                }
+        </div>
+        <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
-        </div>
       </header>
       <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
       <Link to="/movies">All Movies</Link>
@@ -337,17 +346,7 @@ const HomePage = () => {
       <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
       <input type="submit" value="search" id="submit-button"/>
       </form>
-      <h2>Search By Genre</h2>
-        <Link to="/action">Action</Link>
-        <Link to="/adventure">Adventure</Link>
-        <Link to="/comedy">Comedy</Link>
-        <Link to="/documentary">Documentary</Link>
-        <Link to="/drama">Drama</Link>
-        <Link to="/family">Family</Link>
-        <Link to="/fantasy">Fantasy</Link>
-        <Link to="/horror">Horror</Link>
-        <Link to="/romance">Romance</Link>
-        <Link to="/thriller">Thriller</Link>
+        <GenreNavBar/>
       </div>
     <div className='start-image'>
       <h3>Spider-Man</h3>
