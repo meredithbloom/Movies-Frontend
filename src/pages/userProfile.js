@@ -229,7 +229,8 @@ const UserProfile = (props) => {
         <div className="form-title">
           <h2>Update Your Profile</h2>
         </div>
-        <form onSubmit={handleUserSubmitForm}>     
+        <form onSubmit={handleUserSubmitForm}>
+          <label className="update">Favorite Genre: </label><br/>
           <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
           <label>Streaming Providers:</label><br/>
           <input className="update" type='text' onChange={handleStreamingProviders}/><br/>

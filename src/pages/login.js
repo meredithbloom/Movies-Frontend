@@ -80,7 +80,7 @@ const Login = (props) => {
                 ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-                    <form className="inputForm">
+                    <form className="inputForm" onSubmit={triggerLogin}>
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input

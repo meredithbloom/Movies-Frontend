@@ -45,6 +45,8 @@ const CreateAccount = (props) => {
         props.handleNewUser(newUser)
     }
 
+
+
     // const handleNewUser = (event) => {
     //     event.preventDefault()
     //     axios({
@@ -80,7 +82,7 @@ const CreateAccount = (props) => {
                 </div>
                 <div className='head-button-container d-flex align-items-center'>
                     <>
-                        {success ? (
+                        {props.loggedIn ? (
                             <Link to="/profile"><i class="bi bi-person user"></i></Link>
                         ) : (
                             <Link to="/login"><button className="login">Log In</button></Link>
