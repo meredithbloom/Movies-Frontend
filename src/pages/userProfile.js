@@ -19,8 +19,8 @@ const UserProfile = (props) => {
   const getUserInfo = () => {
     axios({
       method: 'get',
-      url: '/:id',
-      baseURL: 'http://localhost:3003',
+      url: 'users/:id',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com/',
       params: {
         _id: props.currentUser._id
       }
@@ -33,7 +33,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'http://localhost:3003'
+          baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -44,7 +44,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/watchlist',
-          baseURL:'http://localhost:3003'
+          baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setWatchList(response.data)
           console.log(response.data);

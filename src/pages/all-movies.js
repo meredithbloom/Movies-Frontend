@@ -22,7 +22,7 @@ const AllMovies = (props) => {
         axios({
             method: 'get',
             url: '/movies',
-            baseURL:'http://localhost:3003'
+            baseURL:'https://powerful-garden-94854.herokuapp.com'
         }).then((response) => {
             setAllMovies(response.data)
         })

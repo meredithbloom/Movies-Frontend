@@ -10,7 +10,7 @@ import GenreNavBar from '../components/genreNavMenu'
 
 const Login = (props) => {
     //global context 
-    const { setAuth } = useAuth()
+    // const { setAuth } = useAuth()
     const Navigate = useNavigate()
 
     const [username, setUsername] = useState('')
