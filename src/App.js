@@ -119,7 +119,7 @@ const App = () => {
     })
   }
 
-  
+
   const getTrendingMovies = () => {
     axios({
       url: '/trending/movie/week',
@@ -131,6 +131,7 @@ const App = () => {
     }).then((response) => {
       setTrendingMovies(response.data.results)
     })
+
   };
 
   const getUpcomingMovies = () => {
