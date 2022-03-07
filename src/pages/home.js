@@ -14,13 +14,11 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
-import MoviesByGenre from '../components/moviesByGenre'
 import GenreNavBar from '../components/genreNavMenu'
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
-  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
@@ -40,7 +38,7 @@ const HomePage = () => {
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [toggleLogout, setToggleLogout] = useState(false)
-  const [currentUser, setCurrentUser] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
 
   //creating a user - is passed as props to login form route
