@@ -22,13 +22,13 @@ const UserProfile = (props) => {
   const getUserInfo = (props) => {
     axios({
       method: 'get',
-      url: 'users/:id',
-      baseURL: 'https://powerful-garden-94854.herokuapp.com/',
+      url: '/users/:id',
+      baseURL: 'http://localhost:3000',
       params: {
         _id: props.currentUser._id
       }
     }).then((response) => {
-      setCurrentUserInfo(response.data)
+      console.log(response.data)
     })
   }
 
@@ -36,7 +36,7 @@ const UserProfile = (props) => {
       axios({
           method: 'get',
           url: '/favorites',
-          baseURL:'https://powerful-garden-94854.herokuapp.com'
+          baseURL:'http://localhost:3000'
       }).then((response) => {
           setFavorites(response.data)
           console.log(response.data);
@@ -102,6 +102,7 @@ const UserProfile = (props) => {
       setzIndex(2)
     }
   }
+
 
   const handleFavoriteGenre = (event) => {
     setFavoriteGenre(event.target.value);
@@ -229,7 +230,27 @@ const UserProfile = (props) => {
           <h2>Update Your Profile</h2>
         </div>
         <form onSubmit={handleUserSubmitForm}>
-          <input className="update" type='text' onChange={handleFavoriteGenre}/><br/>
+          <label>Favorite Genre:</label><br/>
+          <select className="update" type='text' onChange={handleFavoriteGenre}>
+          <option>Select One</option>
+          <option>Action</option>
+          <option>Adventure</option>
+          <option>Comedy</option>
+          <option>Documentary</option>
+          <option>Drama</option>
+          <option>Family</option>
+          <option>Fantasy</option>
+          <option>Horror</option>
+          <option>Romance</option>
+          <option>Thriller</option>
+          <option>SiFi</option>
+          <option>Western</option>
+          <option>Musical</option>
+          <option>War</option>
+          <option>Animation</option>
+          <option>Mystery</option>
+          </select>
+          <br/>
           <label>Streaming Providers:</label><br/>
           <input className="update" type='text' onChange={handleStreamingProviders}/><br/>
           <label>Favorite Movie:</label><br/>

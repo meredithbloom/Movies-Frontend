@@ -75,9 +75,6 @@ const Login = (props) => {
                 <GenreNavBar/>
             </div>
             <>
-                {loggedIn ? (
-                    <Navigate to="/profile"/>
-                ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
                     <form onSubmit={triggerLogin}className="inputForm">

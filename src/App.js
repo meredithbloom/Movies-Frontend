@@ -75,7 +75,7 @@ const App = () => {
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: newUser
     }).then((response) => {
-      if (response.data.username) {
+      if (response.data) {
         axios({
           method: 'get',
           url: '/users/:id',
@@ -95,15 +95,15 @@ const App = () => {
   }
 
   const handleLogin = (userObj) => {
-    // console.log(userObj)
+    console.log(userObj)
     axios({
       method: 'put',
       url: '/users/login',
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
-      if (response.data.username) {
-        console.log(response)
+      if (response.data) {
+        // console.log(response.data)
         setLoggedIn(true)
         setCurrentUser(response.data)
         Navigate('/profile')
