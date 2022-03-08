@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from '../components/search'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import GenreNavBar from '../components/genreNavMenu'
+import Header from '../components/headernav'
 
 
 const Adventure = (props) => {
