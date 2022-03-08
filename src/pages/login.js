@@ -98,7 +98,7 @@ const Login = (props) => {
             <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
                 <GenreNavBar/>
             </div>
-            <>
+            <div>
                 {loggedIn ? (
                     <Navigate to="/profile"/>
                 ) : (
@@ -136,9 +136,8 @@ const Login = (props) => {
                         <input type="submit" value="Login" className="submit-btn login"/>
                     </form>
                 </section>
-            </>
+                )  }
+            </div>
         </>
-    )
-}
-
+      )}
 export default Login
