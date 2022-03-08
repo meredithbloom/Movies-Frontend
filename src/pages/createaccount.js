@@ -5,6 +5,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { propTypes } from 'react-bootstrap/esm/Image'
 import GenreNavBar from '../components/genreNavMenu'
+import Dropdown from 'react-bootstrap/Dropdown'
+
 
 
 const CreateAccount = (props) => {
@@ -12,6 +14,9 @@ const CreateAccount = (props) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [favoriteGenre, setFavoriteGenre] = useState('')
+    const [streamingProviders, setStreamingProviders] = useState('')
+    const [favoriteMovie, setFavoriteMovie] = useState('')
     const [profPic, setProfPic] = useState('https://www.kindpng.com/picc/m/107-1079551_cinema-vector-popcorn-with-cartoon-film-3d-clipart.png')
 
     const [toggleError, setToggleError] = useState(false)
@@ -38,39 +43,17 @@ const CreateAccount = (props) => {
             name: name,
             email: email,
             username: username,
-            password: password
+            password: password, 
+            favoriteGenre: favoriteGenre,
+            streamingProviders: streamingProviders,
+            favoriteMovie: favoriteMovie
         }
         props.handleNewUser(newUser)
     }
 
-
-
-    // const handleNewUser = (event) => {
-    //     event.preventDefault()
-    //     axios({
-    //         method: 'post',
-    //         url: '/users/createaccount',
-    //         baseURL: 'http://localhost:3003',
-    //         data: {
-    //             name: name,
-    //             email: email,
-    //             username: username,
-    //             password: password
-    //         }
-    //     })
-    //     .then((response) => {
-    //         if (response.data.username) {
-    //             console.log(response)
-    //             setToggleError(false)
-    //             setErrorMessage('')
-    //             setCurrentUser(response.data)
-    //             setSuccess(true)
-    //         } else {
-    //             setErrorMessage(response.data)
-    //             setToggleError(true)
-    //         }
-    //     })
-    // }
+    const handleSelect = (event) => {
+        setFavoriteGenre(event.target.value)
+    }
 
     return (
         <>
@@ -100,14 +83,29 @@ const CreateAccount = (props) => {
                 ) : (
                     <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
-                        <form onSubmit={triggerNewUser} className="input-form">
+                            <form onSubmit={triggerNewUser} className="input-form">
+                                
                             <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
-                            <br/><br/>
+                                <br /><br />
+                                
                             <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
-                            <br/><br/>
+                                <br /><br />
+                                
                             <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>
-                            <br/><br/>
-                            <input type="password" placeholder="password" className="text-input" onChange={(event) => {setPassword(event.target.value)}}/>
+                                <br /><br />
+                                
+                            <input type="password" placeholder="password" className="text-input" onChange={(event) => { setPassword(event.target.value) }} />
+                                <br /><br />
+                                
+        
+                            <input type="text" placeholder="favorite genre" className="text-input" onChange={(event) => { setFavoriteGenre(event.target.value) }} />
+                            <br/>
+                                
+                            <input type="text" placeholder="streaming providers" className="text-input" onChange={(event) => { setStreamingProviders(event.target.value) }} />
+                            <br />
+                                
+                             <input type="text" placeholder="favorite movie" className="text-input" onChange={(event) => { setFavoriteMovie(event.target.value) }} />
+                            <br/>
                             {toggleError ?
                             <h5 className="error-msg">{errorMessage}</h5>
                             :
