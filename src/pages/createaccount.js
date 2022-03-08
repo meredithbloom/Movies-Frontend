@@ -84,21 +84,16 @@ const CreateAccount = (props) => {
                 ) : (
                     <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
-                            <form onSubmit={triggerNewUser} className="input-form">
+                            <form onSubmit={triggerNewUser} className="input-form d-flex flex-column">
 
-                            <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
-                                <br /><br />
-
+                            <input type="text" placeholder="name" className="text-input user-input" onChange={(event) => {setName(event.target.value)}}/>
+                            <br/>
                             <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
-                                <br /><br />
-
+                            <br/>
                             <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>
-                                <br /><br />
-
+                            <br/>
                             <input type="password" placeholder="password" className="text-input" onChange={(event) => { setPassword(event.target.value) }} />
-                                <br /><br />
-
-
+                            <br/>
                             <input type="text" placeholder="favorite genre" className="text-input" onChange={(event) => { setFavoriteGenre(event.target.value) }} />
                             <br/>
 
@@ -113,7 +108,7 @@ const CreateAccount = (props) => {
                             null
                         }
                         <br/><br/>
-                        <input type="submit" value="Register" className="submit-btn signup"/>
+                        <input type="submit" value="Register" className="submit-btn signup text-input"/>
                         </form>
                     </section>
                 )}

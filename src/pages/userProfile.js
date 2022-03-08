@@ -273,7 +273,6 @@ const UserProfile = (props) => {
           <input className="update" type='text' value={streamingProviders} onChange={(event) => { setStreamingProviders(event.target.value) }}/><br/>
           <label>Favorite Movie:</label><br/>
             <input className="update" type='text' value={favoriteMovie} onChange={(event) => { setFavoriteMovie(event.target.value) }}/><br/>
-
           <input className="submit-button mt-4 " type='submit' value='Update Profile' />
         </form>
 

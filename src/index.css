@@ -281,6 +281,7 @@ header{
 .user-image{
   margin-top: 0;
 }
+
 .logout{
   background: rgb(255,0,204);
   background: linear-gradient(51deg, rgba(255,0,0,1), rgba(104,0,255,1));
