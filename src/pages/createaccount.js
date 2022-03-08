@@ -43,7 +43,7 @@ const CreateAccount = (props) => {
             name: name,
             email: email,
             username: username,
-            password: password, 
+            password: password,
             favoriteGenre: favoriteGenre,
             streamingProviders: streamingProviders,
             favoriteMovie: favoriteMovie
@@ -64,11 +64,12 @@ const CreateAccount = (props) => {
                 <div className='head-button-container d-flex align-items-center'>
                     <>
                         {props.loggedIn ? (
-                            <Link to="/profile"><i class="bi bi-person user"></i></Link>
+                            <Link to="/"><i class="bi bi-house user"></i></Link>
                         ) : (
                             <Link to="/login"><button className="login">Log In</button></Link>
                         )}
                     </>
+                    <Link to="/"><i class="bi bi-house user"></i></Link>
                     <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
@@ -84,26 +85,26 @@ const CreateAccount = (props) => {
                     <section className="new-user-form formContainer container d-flex flex-column justify-content-center align-items-center">
                         <h1 className="formTitle">Create an Account</h1>
                             <form onSubmit={triggerNewUser} className="input-form">
-                                
+
                             <input type="text" placeholder="name" className="text-input" onChange={(event) => {setName(event.target.value)}}/>
                                 <br /><br />
-                                
+
                             <input type="text" placeholder="email" className="text-input" onChange={(event) => {setEmail(event.target.value)}}/>
                                 <br /><br />
-                                
+
                             <input type="text" placeholder="username" className="text-input" onChange={(event) => {setUsername(event.target.value)}}/>
                                 <br /><br />
-                                
+
                             <input type="password" placeholder="password" className="text-input" onChange={(event) => { setPassword(event.target.value) }} />
                                 <br /><br />
-                                
-        
+
+
                             <input type="text" placeholder="favorite genre" className="text-input" onChange={(event) => { setFavoriteGenre(event.target.value) }} />
                             <br/>
-                                
+
                             <input type="text" placeholder="streaming providers" className="text-input" onChange={(event) => { setStreamingProviders(event.target.value) }} />
                             <br />
-                                
+
                              <input type="text" placeholder="favorite movie" className="text-input" onChange={(event) => { setFavoriteMovie(event.target.value) }} />
                             <br/>
                             {toggleError ?
