@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import MovieType from '../components/headingTitle'
 import DailyShows from '../components/dailyShows'
@@ -8,16 +8,21 @@ import Header from '../components/headernav'
 import GenreNavBar from '../components/genreNavMenu'
 
 const UserProfile = (props) => {
+  const Navigate = useNavigate()
   const [opacity, setOpacity] = useState(0)
   const [zIndex, setzIndex] = useState(0)
   const [favorites, setFavorites] = useState([])
   const [watchList, setWatchList] = useState([])
   const [search, setSearch] = useState([])
   const [searchString, setSearchString] = useState('')
-  const [currentUserInfo, setCurrentUserInfo] = useState({})
-  const [favoriteGenre, setFavoriteGenre] = useState('')
-  const [streamingProviders, setStreamingProviders] = useState('')
-  const [favoriteMovie, setFavoriteMovie] = useState('')
+  const [currentUserInfo, setCurrentUserInfo] = useState(props.currentUser)
+  const [name, setName] = useState(props.currentUser.name)
+  const [email, setEmail] = useState(props.currentUser.email)
+  const [username, setUsername] = useState(props.currentUser.name)
+
+  const [favoriteGenre, setFavoriteGenre] = useState(props.currentUser.favoriteGenre)
+  const [streamingProviders, setStreamingProviders] = useState(props.currentUser.streamingProviders)
+  const [favoriteMovie, setFavoriteMovie] = useState(props.currentUser.favoriteMovie)
 
   const [isLoggedIn, setIsLoggedIn] = useState(true)
 
@@ -34,6 +39,16 @@ const UserProfile = (props) => {
     })
   }
 
+  useEffect(() =>
+    axios
+      .get(`https://powerful-garden-94854.herokuapp.com/users/${props.currentUser._id}`)
+      .then((response) => {
+        setCurrentUserInfo(response.data)
+      })
+  )
+
+
+
   const getFavorites = () => {
       axios({
           method: 'get',
@@ -41,7 +56,7 @@ const UserProfile = (props) => {
           baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setFavorites(response.data)
-          console.log(response.data);
+          //console.log(response.data);
       })
   }
 
@@ -52,7 +67,7 @@ const UserProfile = (props) => {
           baseURL:'https://powerful-garden-94854.herokuapp.com'
       }).then((response) => {
           setWatchList(response.data)
-          console.log(response.data);
+          //console.log(response.data);
       })
   }
 
@@ -105,10 +120,6 @@ const UserProfile = (props) => {
     }
   }
 
-
-  const handleFavoriteGenre = (event) => {
-    setFavoriteGenre(event.target.value);
-  }
   const handleStreamingProviders = (event) => {
     setStreamingProviders(event.target.value);
   }
@@ -116,21 +127,37 @@ const UserProfile = (props) => {
     setFavoriteMovie(event.target.value);
   }
 
-  const handleUserSubmitForm = (event) => {
+  const handleFavoriteGenreChange = (event) => {
+    setFavoriteGenre(event.target.value)
+  }
+
+
+
+  const handleDeleteAccount = (event) => {
+    axios.delete(`https://powerful-garden-94854.herokuapp.com/users/${props.currentUser._id}`)
+      .then((response) => {
+        console.log('account deleted')
+        Navigate('/')
+      })
+  }
+
+
+  const handleUserUpdateForm = (event) => {
     event.preventDefault()
     axios.put(
-      'https://powerful-garden-94854.herokuapp.com/users/_:id',
+      `https://powerful-garden-94854.herokuapp.com/users/${props.currentUser._id}`,
       {
+        name: name,
+        email: email,
+        username: username,
+        password: props.currentUser.password,
         favoriteGenre: favoriteGenre,
-        streamingProviders:streamingProviders,
-        favoriteMovie:favoriteMovie
+        streamingProviders: streamingProviders,
+        favoriteMovie: favoriteMovie
       }
     ).then(() => {
       axios.get('https://powerful-garden-94854.herokuapp.com/users/:_id').then((response) => {
-
-        setFavoriteGenre(favoriteGenre)
-        setStreamingProviders(streamingProviders)
-        setFavoriteMovie(favoriteMovie)
+        console.log(response)
       })
     })
   }
@@ -144,48 +171,38 @@ const UserProfile = (props) => {
   return(
     <>
       <header>
-        <div>
-            <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
-        </div>
-        <div className='head-button-container d-flex align-items-center'>
-            {isLoggedIn ?
-                <>
-                    <Link to="/"><i class="bi bi-house user"></i></Link>
-                    <button className="logout">Log Out</button>
-                </>
-                    :
-                <>
-                    <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
-                    <Link to="/login"><button className="login">Log In</button></Link>
-                </>
-                }
-                <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-        </div>
-
-      </header>
-      <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-
-        <Link to="/movies">All Movies</Link>
-        <GenreNavBar />
-
+      <div>
+        <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
       </div>
+        <div className='head-button-container d-flex align-items-center'>
+          <Link to="/login"><button className="signup">Log-Out</button></Link>
+  
+          <Link to="/profile"><i class="bi bi-person user"></i></Link>
+          <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          </div>
+        </header>
+        <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+          <Link to="/movies">All Movies</Link>
+          <GenreNavBar/>
+        </div>
       <div className="profile-back-image">
-        <h1 className="text-center " id="profile-welcome">Welcome To Your Profile!</h1>
+        <h1 className="text-center " id="profile-welcome">Welcome To Your Profile, {props.currentUser.username}!</h1>
       </div>
       <div className="container d-flex align-items-center justify-content-between user-container">
         <img className="user-image" src='/userimage.png'/>
         <div className="content-box">
 
-        <p>Name: {props.currentUser.name}</p>
-        <p>UserName: {props.currentUser.username}</p>
+        <p>Name: {currentUserInfo.name}</p>
+        <p>UserName: {currentUserInfo.username}</p>
 
-        <p>Favorite Genre: {favoriteGenre}</p>
-        <p>Streaming Providers: {streamingProviders}</p>
-        <p>Favorite Movie: {favoriteMovie}</p>
+        <p>Favorite Genre: {currentUserInfo.favoriteGenre}</p>
+        <p>Streaming Providers: {currentUserInfo.streamingProviders}</p>
+        <p>Favorite Movie: {currentUserInfo.favoriteMovie}</p>
         </div>
       </div>
+
       <div className="row mt-4 mb-4">
         <MovieType heading='Favorites'/>
       </div>
@@ -214,6 +231,7 @@ const UserProfile = (props) => {
         })}
         </div>
       </div>
+
       <div className="row mt-4 mb-4">
         <MovieType heading='Want To Watch List'/>
       </div>
@@ -247,36 +265,20 @@ const UserProfile = (props) => {
         <div className="form-title">
           <h2>Update Your Profile</h2>
         </div>
-        <form onSubmit={handleUserSubmitForm}>
+        <form onSubmit={handleUserUpdateForm}>
 
           <label>Favorite Genre:</label><br/>
-          <select className="update" type='text' onChange={handleFavoriteGenre}>
-          <option>Select One</option>
-          <option>Action</option>
-          <option>Adventure</option>
-          <option>Comedy</option>
-          <option>Documentary</option>
-          <option>Drama</option>
-          <option>Family</option>
-          <option>Fantasy</option>
-          <option>Horror</option>
-          <option>Romance</option>
-          <option>Thriller</option>
-          <option>SiFi</option>
-          <option>Western</option>
-          <option>Musical</option>
-          <option>War</option>
-          <option>Animation</option>
-          <option>Mystery</option>
-          </select>
-          <br/>
-
+          <input type="text" placeholder="favorite genre" value={favoriteGenre} className="text-input" onChange={(event) => { setFavoriteGenre(event.target.value) }} /><br/>
           <label>Streaming Providers:</label><br/>
-          <input className="update" type='text' onChange={handleStreamingProviders}/><br/>
+          <input className="update" type='text' value={streamingProviders} onChange={(event) => { setStreamingProviders(event.target.value) }}/><br/>
           <label>Favorite Movie:</label><br/>
-          <input className="update" type='text' onChange={handleFavoriteMovie}/><br/>
-          <input className="submit-button mt-4 " type='submit' value='Update Profile'/>
+            <input className="update" type='text' value={favoriteMovie} onChange={(event) => { setFavoriteMovie(event.target.value) }}/><br/>
+          
+          <input className="submit-button mt-4 " type='submit' value='Update Profile' />
         </form>
+
+        <button className="submit-button mt-4" onClick={ (event) => { handleDeleteAccount(props.currentUser._id) } }>Delete your account</button>
+
       </div>
     </>
   )
