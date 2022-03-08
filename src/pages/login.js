@@ -3,17 +3,14 @@ import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
 import { propTypes } from 'react-bootstrap/esm/Image'
 import GenreNavBar from '../components/genreNavMenu'
 
 
 const Login = (props) => {
-
     //global context
-    // const { setAuth } = useAuth()
-
-    const Navigate = useNavigate()
+    const { setAuth } = useAuth()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -29,13 +26,40 @@ const Login = (props) => {
     const [zIndex, setzIndex] = useState(0)
 
 
+
+    // const handleLogin = (event) => {
+    //     event.preventDefault()
+    //     axios({
+    //         method: 'put',
+    //         url: '/users/login',
+    //         baseURL: 'http://localhost:3003',
+    //         data: {
+    //             username,
+    //             password
+    //         }
+    //     })
+    //     .then((response) => {
+    //         if (response.data.username) {
+    //             console.log(response)
+    //             setCurrentUser(response.data)
+    //             setAuth({username, password})
+    //             setUsername('')
+    //             setPassword('')
+    //             setLoggedIn(true)
+    //         } else {
+    //             setErrorMessage(response.data)
+    //             setToggleError(true)
+    //         }
+    //     })
+    // }
+
+
     const triggerLogin = (event) => {
         event.preventDefault()
         let userObj = {
             username,
             password
         }
-        console.log(userObj)
         props.handleLogin(userObj)
     }
 
@@ -75,12 +99,12 @@ const Login = (props) => {
                 <GenreNavBar/>
             </div>
             <>
+                {loggedIn ? (
+                    <Navigate to="/profile"/>
+                ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-
-                    <form className="inputForm" onSubmit={triggerLogin}>
-
-
+                    <form onSubmit={triggerLogin} className="inputForm">
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input
