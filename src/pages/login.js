@@ -3,17 +3,14 @@ import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom'
 import { propTypes } from 'react-bootstrap/esm/Image'
 import GenreNavBar from '../components/genreNavMenu'
 
 
 const Login = (props) => {
-
     //global context
-    // const { setAuth } = useAuth()
-
-    const Navigate = useNavigate()
+    const { setAuth } = useAuth()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -29,13 +26,40 @@ const Login = (props) => {
     const [zIndex, setzIndex] = useState(0)
 
 
+
+    // const handleLogin = (event) => {
+    //     event.preventDefault()
+    //     axios({
+    //         method: 'put',
+    //         url: '/users/login',
+    //         baseURL: 'http://localhost:3003',
+    //         data: {
+    //             username,
+    //             password
+    //         }
+    //     })
+    //     .then((response) => {
+    //         if (response.data.username) {
+    //             console.log(response)
+    //             setCurrentUser(response.data)
+    //             setAuth({username, password})
+    //             setUsername('')
+    //             setPassword('')
+    //             setLoggedIn(true)
+    //         } else {
+    //             setErrorMessage(response.data)
+    //             setToggleError(true)
+    //         }
+    //     })
+    // }
+
+
     const triggerLogin = (event) => {
         event.preventDefault()
         let userObj = {
             username,
             password
         }
-        console.log(userObj)
         props.handleLogin(userObj)
     }
 
@@ -64,8 +88,9 @@ const Login = (props) => {
                 <div>
                     <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
                 </div>
-                <div className='head-button-container d-flex align-items-center'>
+                <div className='head-button-container d-flex align-items-center'> 
                     <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
+                    <Link to="/"><i class="bi bi-house user"></i></Link>
                     <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
@@ -74,13 +99,13 @@ const Login = (props) => {
             <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
                 <GenreNavBar/>
             </div>
-            <>
+            <div>
+                {loggedIn ? (
+                    <Navigate to="/profile"/>
+                ) : (
                 <section className="formContainer container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='form-title'>Login</h1>
-
-                    <form className="inputForm" onSubmit={triggerLogin}>
-
-
+                    <form onSubmit={triggerLogin} className="inputForm">
                         <label htmlFor="username">Username: </label>
                         <br/>
                         <input
@@ -112,9 +137,8 @@ const Login = (props) => {
                         <input type="submit" value="Login" className="submit-btn login"/>
                     </form>
                 </section>
-            </>
+                )  }
+            </div>
         </>
-    )
-}
-
+      )}
 export default Login
