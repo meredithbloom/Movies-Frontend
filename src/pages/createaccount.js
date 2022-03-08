@@ -61,7 +61,7 @@ const CreateAccount = (props) => {
                 <div>
                     <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
                 </div>
-                <div className='head-button-container d-flex align-items-center'>
+                <div className='head-button-container d-flex align-items-end'>
                     <>
                         {props.loggedIn ? (
                             <Link to="/"><i class="bi bi-house user"></i></Link>

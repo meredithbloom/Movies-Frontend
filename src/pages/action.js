@@ -96,7 +96,7 @@ const Action = (props) => {
             <div>
                 <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
             </div>
-            <div className='head-button-container d-flex align-items-center'>
+            <div className='head-button-container d-flex align-items-end'>
                 <Link to="/newaccount"><button className="signup">Sign Up</button></Link>
                 <Link to="/login"><button className="login">Log In</button></Link>
                 <Link to="/profile"><i class="bi bi-person user"></i></Link>

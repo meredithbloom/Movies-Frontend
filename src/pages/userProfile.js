@@ -174,7 +174,7 @@ const UserProfile = (props) => {
       <div>
         <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
       </div>
-        <div className='head-button-container d-flex align-items-center'>
+        <div className='head-button-container d-flex align-items-end'>
           <Link to="/login"><button className="signup">Log-Out</button></Link>
 
           <Link to="/"><i class="bi bi-house user"></i></Link>
@@ -265,15 +265,20 @@ const UserProfile = (props) => {
         <div className="form-title">
           <h2>Update Your Profile</h2>
         </div>
-        <form onSubmit={handleUserUpdateForm}>
-
-          <label>Favorite Genre:</label><br/>
-          <input type="text" placeholder="favorite genre" value={favoriteGenre} className="text-input" onChange={(event) => { setFavoriteGenre(event.target.value) }} /><br/>
-          <label>Streaming Providers:</label><br/>
-          <input className="update" type='text' value={streamingProviders} onChange={(event) => { setStreamingProviders(event.target.value) }}/><br/>
-          <label>Favorite Movie:</label><br/>
-            <input className="update" type='text' value={favoriteMovie} onChange={(event) => { setFavoriteMovie(event.target.value) }}/><br/>
-          <input className="submit-button mt-4 " type='submit' value='Update Profile' />
+        <form className="container d-flex flex-column justify-content-center align-items-center"onSubmit={handleUserUpdateForm}>
+          <div className="d-flex flex-column mt-4">
+          <label>Favorite Genre:</label>
+          <input type="text" placeholder="Ex...comedy" value={favoriteGenre} className="update" onChange={(event) => { setFavoriteGenre(event.target.value) }} /><br/>
+          </div>
+          <div className="d-flex flex-column">
+          <label>Streaming Providers:</label>
+          <input className="update" placeholder="Ex...netflix, hulu" type='text' value={streamingProviders} onChange={(event) => { setStreamingProviders(event.target.value) }}/><br/>
+          </div>
+          <div className="d-flex flex-column">
+          <label>Favorite Movie:</label>
+            <input className="update" placeholder="Ex...jaws" type='text' value={favoriteMovie} onChange={(event) => { setFavoriteMovie(event.target.value) }}/><br/>
+            </div>
+          <input className="submit-button mt-5 text-input " type='submit' value='Update Profile' />
         </form>
 
         <button className="submit-button mt-4" onClick={ (event) => { handleDeleteAccount(props.currentUser._id) } }>Delete your account</button>
