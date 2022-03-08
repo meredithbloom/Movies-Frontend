@@ -31,7 +31,7 @@ const Header = (props) => {
                 </div>
                 <div className='head-button-container d-flex align-items-center'>
 
-                    {props.isLoggedIn ?
+                    {props.isAuthenticated ?
                         <>
                             <Link to="/profile"><i class="bi bi-person user"></i></Link>
                             <Link to="/logout"><button className="logout">Log Out</button></Link>

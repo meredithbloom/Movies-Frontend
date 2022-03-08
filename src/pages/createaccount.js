@@ -32,7 +32,6 @@ const CreateAccount = (props) => {
         }
     }
 
-
     const triggerNewUser = (event) => {
         event.preventDefault()
         let newUser = {

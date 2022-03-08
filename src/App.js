@@ -33,6 +33,7 @@ import CreateAccount from './pages/createaccount'
 import Login from './pages/login'
 
 import AllMovies from './pages/all-movies'
+import { Next } from 'react-bootstrap/esm/PageItem'
 
 const App = () => {
   const Navigate = useNavigate()
@@ -59,12 +60,15 @@ const App = () => {
   const [toggleLogout, setToggleLogout] = useState(false)
   const [currentUser, setCurrentUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  const [isAuthenticated, setAuthenticated] = useState(false)
 
   if (loggedIn) {
     console.log('current user is named ', currentUser.name, ' and has username ', currentUser.username)
   } else {
     console.log('no one is logged in')
   }
+
+
 
   //creating a user - is passed as props to login form route
   const handleNewUser = (newUser) => {
@@ -75,17 +79,13 @@ const App = () => {
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: newUser
     }).then((response) => {
-      if (response) {
-        axios({
-          method: 'get',
-          url: '/users/_:id',
-          baseURL: 'https://powerful-garden-94854.herokuapp.com'
-        })
+      if (response.data.username) {
         console.log(response)
         setToggleError(false)
         setErrorMessage('')
         setCurrentUser(response.data)
         setLoggedIn(true)
+        Navigate('/login')
       } else {
         setErrorMessage(response.data)
         setToggleError(true)
@@ -102,9 +102,9 @@ const App = () => {
       baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
-      if (response.data) {
+      if (response.data.username) {
         // console.log(response.data)
-        setLoggedIn(true)
+        setAuthenticated(true)
         setCurrentUser(response.data)
         Navigate('/profile')
       } else {
@@ -116,9 +116,9 @@ const App = () => {
   }
 
 
-
   //logout - returns user state to default
   const handleLogout = () => {
+    setAuthenticated(false)
     setCurrentUser({})
     handleToggleLogout()
   }

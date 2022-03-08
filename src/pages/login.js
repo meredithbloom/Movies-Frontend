@@ -112,14 +112,9 @@ const Login = (props) => {
                         <input type="submit" value="Login" className="submit-btn login"/>
                     </form>
                 </section>
-                )}
             </>
         </>
     )
-
-
-
-
 }
 
 export default Login
