@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react'
-import RequireAuth from './components/RequireAuth'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
-import Navbar from 'react-bootstrap/Navbar'
+// import Navbar from 'react-bootstrap/Navbar'
 import './App.css'
-import TrendingMovies from './components/trendingmovies'
-import UpcomingMovies from './components/upcoming'
+// import TrendingMovies from './components/trendingmovies'
+// import UpcomingMovies from './components/upcoming'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import MovieType from './components/headingTitle'
-import TopRated from './components/topRated'
-import PopularMovies from './components/popular'
+// import MovieType from './components/headingTitle'
+// import TopRated from './components/topRated'
+// import PopularMovies from './components/popular'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import PopularShows from './components/popularShows'
-import TopRatedShows from './components/topRatedShows'
-import DailyShows from './components/dailyShows'
-import MoviesByGenre from './components/moviesByGenre'
+// import PopularShows from './components/popularShows'
+// import TopRatedShows from './components/topRatedShows'
+// import DailyShows from './components/dailyShows'
+// import MoviesByGenre from './components/moviesByGenre'
 
 //links
 import HomePage from './pages/home'
@@ -34,8 +33,10 @@ import CreateAccount from './pages/createaccount'
 import Login from './pages/login'
 
 import AllMovies from './pages/all-movies'
+import { Next } from 'react-bootstrap/esm/PageItem'
 
 const App = () => {
+  const Navigate = useNavigate()
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState([])
@@ -57,16 +58,26 @@ const App = () => {
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [toggleLogout, setToggleLogout] = useState(false)
-  const [currentUser, setCurrentUser] = useState(false)
+  const [currentUser, setCurrentUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  const [isAuthenticated, setAuthenticated] = useState(false)
+
+  if (loggedIn) {
+    console.log('current user is named ', currentUser.name, ' and has username ', currentUser.username)
+  } else {
+    console.log('no one is logged in')
+  }
+
+
 
   //creating a user - is passed as props to login form route
   const handleNewUser = (newUser) => {
+    console.log(newUser);
     axios({
       method: 'post',
       url: '/users/createaccount',
-      baseURL: 'http://localhost:3003',
-      data: newUser 
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
+      data: newUser
     }).then((response) => {
       if (response.data.username) {
         console.log(response)
@@ -74,11 +85,13 @@ const App = () => {
         setErrorMessage('')
         setCurrentUser(response.data)
         setLoggedIn(true)
+        Navigate('/login')
       } else {
         setErrorMessage(response.data)
         setToggleError(true)
       }
     })
+    //console.log(currentUser)
   }
 
   const handleLogin = (userObj) => {
@@ -86,26 +99,30 @@ const App = () => {
     axios({
       method: 'put',
       url: '/users/login',
-      baseURL: 'http://localhost:3003',
+      baseURL: 'https://powerful-garden-94854.herokuapp.com',
       data: userObj
     }).then((response) => {
       if (response.data.username) {
-        console.log(response)
+        // console.log(response.data)
+        setAuthenticated(true)
         setCurrentUser(response.data)
-        setLoggedIn(true)  
+        Navigate('/profile')
       } else {
         setErrorMessage(response.data)
         setToggleError(response.data)
       }
     })
+    //showCurrentUser()
   }
+
 
   //logout - returns user state to default
   const handleLogout = () => {
+    setAuthenticated(false)
     setCurrentUser({})
     handleToggleLogout()
   }
-  
+
   //for conditional rendering of login form/buttons up top
   const handleToggleForm = () => {
     setToggleError(false)
@@ -333,13 +350,13 @@ const App = () => {
     getTopRatedShows()
     getDailyShows()
     searchByGenre()
-
   }, [])
 
 
   return(
     <>
       <Routes>
+
         <Route path="/" element={<HomePage/>}/>
         <Route path="/newaccount" element={<CreateAccount handleNewUser={handleNewUser}/>}/>
         <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
@@ -355,7 +372,7 @@ const App = () => {
         <Route path="/romance" element={<Romance currentUser={currentUser}/>}/>
         <Route path="/thriller" element={<Thriller currentUser={currentUser}/>}/>
 
-        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/> 
+        <Route path="/profile" element={<UserProfile currentUser={currentUser}/>}/>
       </Routes>
     </>
   )

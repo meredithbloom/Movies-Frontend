@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 // import bootstrap from 'bootstrap'
@@ -14,16 +14,14 @@ import PopularShows from '../components/popularShows'
 import TopRatedShows from '../components/topRatedShows'
 import DailyShows from '../components/dailyShows'
 import Search from '../components/search'
-import MoviesByGenre from '../components/moviesByGenre'
 import GenreNavBar from '../components/genreNavMenu'
-import AuthContext from '../context/AuthProvider'
+import Header from '../components/headernav'
 
 
-const HomePage = () => {
-  const { setAuth } = useContext(AuthContext)
+
+const HomePage = (props) => {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
-  const [selectedMovie, setSelectedMovie] = useState([])
   const [topRated, setTopRated] = useState([])
   const [recommended, setRecommended] = useState([])
   const [favorites, setFavorites] = useState([])
@@ -38,12 +36,13 @@ const HomePage = () => {
   const [search, setSearch] = useState([])
 
 
+
   //user authentication
   const [toggleLogin, setToggleLogin] = useState(true)
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [toggleLogout, setToggleLogout] = useState(false)
-  const [currentUser, setCurrentUser] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
 
   //creating a user - is passed as props to login form route
@@ -52,7 +51,7 @@ const HomePage = () => {
       method: 'post',
       url: '/users/createaccount',
       baseURL: 'http://localhost:3003',
-      data: newUser 
+      data: newUser
     }).then((response) => {
       if (response.data.username) {
         console.log(response)
@@ -78,7 +77,7 @@ const HomePage = () => {
       if (response.data.username) {
         console.log(response)
         setCurrentUser(response.data)
-        setLoggedIn(true)  
+        setLoggedIn(true)
       } else {
         setErrorMessage(response.data)
         setToggleError(response.data)
@@ -91,7 +90,7 @@ const HomePage = () => {
     setCurrentUser({})
     handleToggleLogout()
   }
-  
+
   //for conditional rendering of login form/buttons up top
   const handleToggleForm = () => {
     setToggleError(false)
@@ -243,7 +242,6 @@ const HomePage = () => {
       setPopularShows(response.data.results)
     })
   };
-
   const getTopRatedShows = () => {
     axios({
       url: '/tv/top_rated',
@@ -257,7 +255,6 @@ const HomePage = () => {
       setTopRatedShows(response.data.results)
     })
   };
-
   const getDailyShows = () => {
     axios({
       url: '/tv/airing_today',
@@ -271,7 +268,6 @@ const HomePage = () => {
       setDailyShows(response.data.results)
     })
   };
-
   //event handler for genre buttons
   const setGenreHandler = (event, index) => {
     let selectedGenre = allGenres[index]
@@ -325,103 +321,113 @@ const HomePage = () => {
 
       <header>
         <div>
-          <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
+            <Link to="/"><img className='logo' src='/SeenLogo.png' /></Link>
         </div>
-        <div className='head-button-container d-flex align-items-center'>
-          <Link to="/newaccount" state={handleNewUser}>Sign Up</Link>
-          <Link to="/login" state={handleLogin}>Log In</Link>
-          <Link to="/profile"><i class="bi bi-person user"></i></Link>
-          <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg>
-          </div>
-        </header>
-        <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
-          <Link to="/movies">All Movies</Link>
-          <form onSubmit={handleSearch}>
-          <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
-          <input type="submit" value="search" id="submit-button"/>
-          </form>
-          <GenreNavBar/>
-        </div>
-        <div className='start-image'>
-        <h3>Spider-Man</h3>
-        <p>No Way Home</p>
-        <div className="stars">
-          <i class="bi bi-star-fill yellow "></i>
-          <i class="bi bi-star-fill yellow "></i>
-          <i class="bi bi-star-fill yellow "></i>
-          <i class="bi bi-star-fill yellow "></i>
-          <i class="bi bi-star-half yellow "></i>
-        </div>
+        <div className='head-button-container d-flex align-items-end'>
+            {props.isLoggedIn ?
+                <>
+                    <Link to="/profile"><i class="bi bi-person user"></i></Link>
+                    <button className="logout">Log Out</button>
+                </>
+                    :
+                <>
+                    <Link to="/newaccount"><button className="signup mb-1">Sign Up</button></Link>
+                    <Link to="/login"><button className="login mb-1">Log In</button></Link>
+                </>
+                }
+                <svg onClick={setMenuOpacity} className="nav-list"  xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" className="bi bi-search drop dropdown-toggle" id="navbarDropdown" role="button" viewBox="0 0 16 16" data-toggle="dropdown">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+              </div>
+
+      </header>
+      <div style={{opacity, zIndex}} className="d-flex flex-column  align-items-end nav-list">
+      <Link to="/movies">All Movies</Link>
+      <form onSubmit={handleSearch}>
+      <input onChange={event => setSearchString(event.target.value)} className='search-box'value={searchString} placeholder='Search for a movie..'/>
+      <input type="submit" value="search" id="submit-button"/>
+      </form>
+        <GenreNavBar/>
       </div>
-      <div className="movie-section">
-      <div className="row mt-4 mb-4">
-        <MovieType heading={searchString}/>
-        </div>
-        <div className="container-fluid movies">
-          <div className="row">
-            <Search search={search}/>
-          </div>
-        </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Trending Movies'/>
+    <div className='start-image'>
+      <h3>Spider-Man</h3>
+      <p>No Way Home</p>
+      <div className="stars">
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-fill yellow "></i>
+        <i class="bi bi-star-half yellow "></i>
+      </div>
+    </div>
+    <div className="movie-section">
+    <div className="row mt-4 mb-4">
+      <MovieType heading={searchString}/>
       </div>
       <div className="container-fluid movies">
         <div className="row">
-          <TrendingMovies trendingMovies={trendingMovies}/>
+          <Search search={search}/>
         </div>
       </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Upcoming Movies'/>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Trending Movies'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <TrendingMovies trendingMovies={trendingMovies}/>
       </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <UpcomingMovies upcomingMovies={upcomingMovies}/>
-        </div>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Upcoming Movies'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <UpcomingMovies upcomingMovies={upcomingMovies}/>
       </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated Movies'/>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Top Rated Movies'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <TopRated topRated={topRated}/>
       </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TopRated topRated={topRated}/>
-        </div>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Popular Movies'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <PopularMovies popularMovies={popularMovies}/>
       </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Popular Movies'/>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Popular Shows'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <PopularShows popularShows={popularShows}/>
       </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularMovies popularMovies={popularMovies}/>
-        </div>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Top Rated Shows'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <TopRatedShows topRatedShows={topRatedShows}/>
       </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Popular Shows'/>
+    </div>
+    <div className="row mt-4 mb-4">
+      <MovieType heading='Shows Airing Today'/>
+    </div>
+    <div className="container-fluid movies">
+      <div className="row">
+        <DailyShows dailyShows={dailyShows}/>
       </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <PopularShows popularShows={popularShows}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Top Rated Shows'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <TopRatedShows topRatedShows={topRatedShows}/>
-        </div>
-      </div>
-      <div className="row mt-4 mb-4">
-        <MovieType heading='Shows Airing Today'/>
-      </div>
-      <div className="container-fluid movies">
-        <div className="row">
-          <DailyShows dailyShows={dailyShows}/>
-        </div>
-      </div>
-      </div>
+    </div>
+    </div>
     </>
+
   )
 }
 
